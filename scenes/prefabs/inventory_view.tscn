@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://d2nvj6e0wv6g4"]
+
+[ext_resource type="Script" uid="uid://c1gxxuw8755ti" path="res://scripts/inventory/InventoryView.cs" id="1_8usr3"]
+[ext_resource type="PackedScene" uid="uid://cicfnwej5isvs" path="res://scenes/prefabs/backpack_body.tscn" id="2_xwodj"]
+[ext_resource type="Script" uid="uid://dgcrxedl7apxi" path="res://scripts/RigidBody2DMouseDrag.cs" id="4_uwy55"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ynj3q"]
+distance = -324.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l1ewb"]
+normal = Vector2(0, 1)
+distance = -324.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_d0miv"]
+normal = Vector2(1, 0)
+distance = -576.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_28tt4"]
+normal = Vector2(-1, 0)
+distance = -576.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c8ibf"]
+
+[node name="Backpack" type="Node2D" unique_id=2133021167 node_paths=PackedStringArray("_itemsParent", "_containersParent")]
+script = ExtResource("1_8usr3")
+_itemsParent = NodePath("ItemSpawnOrigin")
+_containersParent = NodePath("Containers")
+
+[node name="HullBody" type="StaticBody2D" parent="." unique_id=349494987]
+position = Vector2(576, 324)
+collision_layer = 16
+collision_mask = 16
+collision_priority = 2.0
+
+[node name="HullCollision1" type="CollisionShape2D" parent="HullBody" unique_id=1579853439]
+shape = SubResource("WorldBoundaryShape2D_ynj3q")
+
+[node name="HullCollision2" type="CollisionShape2D" parent="HullBody" unique_id=1772110148]
+shape = SubResource("WorldBoundaryShape2D_l1ewb")
+
+[node name="HullCollision3" type="CollisionShape2D" parent="HullBody" unique_id=2052829760]
+shape = SubResource("WorldBoundaryShape2D_d0miv")
+
+[node name="HullCollision4" type="CollisionShape2D" parent="HullBody" unique_id=374086068]
+shape = SubResource("WorldBoundaryShape2D_28tt4")
+
+[node name="MouseGrab" type="AnimatableBody2D" parent="." unique_id=1102878927 node_paths=PackedStringArray("_grabPoint")]
+position = Vector2(576, 324)
+collision_layer = 0
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("4_uwy55")
+_layer = 16
+_angularVelScale = 5.0
+_forceScale = 64.0
+_maxForce = 16384.0
+_maxSpeed = 16384.0
+_speedScale = 128.0
+_grabPoint = NodePath("../PinJoint2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseGrab" unique_id=695343732]
+shape = SubResource("CircleShape2D_c8ibf")
+
+[node name="Containers" type="Node2D" parent="." unique_id=1205506108]
+
+[node name="BackpackBody" parent="Containers" unique_id=893580754 instance=ExtResource("2_xwodj")]
+position = Vector2(1024, 388)
+collision_priority = 2.0
+
+[node name="ItemSpawnOrigin" type="Marker2D" parent="." unique_id=411233044]
+position = Vector2(128, 128)
+
+[node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=1949409834]
+softness = 16.0

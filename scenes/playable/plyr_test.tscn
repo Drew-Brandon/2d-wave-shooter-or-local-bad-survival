@@ -1,0 +1,103 @@
+[gd_scene format=4 uid="uid://ut4ynj1rwref"]
+
+[ext_resource type="TileSet" uid="uid://dwjncmyauf74c" path="res://geometry_tile_set.tres" id="1_b1wdv"]
+[ext_resource type="Script" uid="uid://cmojd3c63bqdc" path="res://scripts/plus_variants/TileMapLayerPlus.cs" id="2_8sqgj"]
+[ext_resource type="PackedScene" uid="uid://b3kej3pnf6py6" path="res://scenes/prefabs/player.tscn" id="3_i3uqq"]
+[ext_resource type="Script" uid="uid://b2ayywp0si8g8" path="res://scripts/inventory/DroppedItem.cs" id="4_fbvoy"]
+[ext_resource type="Resource" uid="uid://bdj8n2k2agj75" path="res://item_types/pistol_item.tres" id="5_8sqgj"]
+[ext_resource type="Script" uid="uid://cydimhuxl0q4" path="res://scripts/inventory/item_instance_resources/GunInstanceResource.cs" id="5_m4ixq"]
+[ext_resource type="Texture2D" uid="uid://5vtbxfbx5xml" path="res://textures/ui/pistol.png" id="6_b1wdv"]
+[ext_resource type="Script" uid="uid://wfoxeytt1pe5" path="res://scripts/logic/PrintNode.cs" id="7_vpjem"]
+[ext_resource type="Resource" uid="uid://ddasbuk4fsf4n" path="res://item_types/pistol_ammo.tres" id="8_m4ixq"]
+[ext_resource type="Script" uid="uid://dxhxxjffffwp" path="res://scripts/inventory/item_instance_resources/StackableInstanceResource.cs" id="9_41a63"]
+[ext_resource type="Texture2D" uid="uid://dafk00tcgc4lf" path="res://textures/ui/pistol_ammo.png" id="10_vpjem"]
+
+[sub_resource type="Resource" id="Resource_fbm76"]
+script = ExtResource("5_m4ixq")
+ClipAmmo = 10
+GenericItem = ExtResource("5_8sqgj")
+metadata/_custom_type_script = "uid://cydimhuxl0q4"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xy038"]
+radius = 12.0
+
+[sub_resource type="Resource" id="Resource_a2qau"]
+script = ExtResource("9_41a63")
+Amount = 1
+GenericItem = ExtResource("8_m4ixq")
+metadata/_custom_type_script = "uid://dxhxxjffffwp"
+
+[node name="PlyrTest" type="Node2D" unique_id=786324764]
+
+[node name="TileMapLayerPlus" type="TileMapLayer" parent="." unique_id=1395871754]
+tile_map_data = PackedByteArray("AAD5//r/AAAAAAAAAAD5//v/AAAAAAAAAAD5//z/AAAAAAAAAAD5//3/AAAAAAAAAAD5//7/AAAAAAAAAAD5////AAAAAAAAAAD6//r/AAAAAAEAAAD6//v/AAAAAAEAAAD6//z/AAAAAAAAAAD6//3/AAAAAAAAAAD6//7/AAAAAAAAAAD6////AAAAAAAAAAD7//r/AAAAAAEAAAD7//v/AAAAAAEAAAD7//z/AAAAAAAAAAD7//3/AAAAAAAAAAD7//7/AAAAAAAAAAD7////AAAAAAAAAAD8//r/AAAAAAAAAAD8//v/AAAAAAAAAAD8//z/AAAAAAAAAAD8//3/AAAAAAAAAAD8//7/AAAAAAAAAAD8////AAAAAAAAAAD9//r/AAAAAAAAAAD9//v/AAAAAAAAAAD9//z/AAAAAAAAAAD9//3/AAABAAMAAAD9//7/AAABAAMAAAD9////AAABAAMAAAD+//r/AAAAAAAAAAD+//v/AAAAAAAAAAD+//z/AAAAAAAAAAD+//3/AAABAAMAAAD+//7/AAABAAMAAAD+////AAABAAMAAAD///r/AAAAAAAAAAD///v/AAAAAAAAAAD///z/AAAAAAAAAAD///3/AAABAAMAAAD///7/AAABAAMAAAD/////AAABAAMAAAD5//n/AAAAAAAAAAD6//n/AAAAAAAAAAD7//n/AAAAAAAAAAD8//n/AAAAAAAAAAD9//n/AAAAAAAAAAD+//n/AAAAAAAAAAD///n/AAAAAAAAAAD5/wAAAAAAAAAAAAD5/wEAAAAAAAAAAAD5/wIAAAAAAAAAAAD5/wMAAAAAAAAAAAD5/wQAAAAAAAAAAAD5/wUAAAAAAAAAAAD5/wYAAAAAAAAAAAD6/wAAAAAAAAAAAAD6/wEAAAAAAAAAAAD6/wIAAAAAAAAAAAD6/wMAAAAAAAAAAAD6/wQAAAAAAAEAAAD6/wUAAAAAAAEAAAD6/wYAAAAAAAAAAAD7/wAAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wIAAAAAAAAAAAD7/wMAAAAAAAAAAAD7/wQAAAAAAAEAAAD7/wUAAAAAAAEAAAD7/wYAAAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wUAAAAAAAAAAAD8/wYAAAAAAAAAAAD9/wAAAAABAAMAAAD9/wEAAAABAAMAAAD9/wIAAAABAAMAAAD9/wMAAAAAAAAAAAD9/wQAAAAAAAAAAAD9/wUAAAAAAAAAAAD9/wYAAAAAAAAAAAD+/wAAAAABAAMAAAD+/wEAAAABAAMAAAD+/wIAAAABAAMAAAD+/wMAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wUAAAAAAAAAAAD+/wYAAAAAAAAAAAD//wAAAAABAAMAAAD//wEAAAABAAMAAAD//wIAAAABAAMAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD//wYAAAAAAAAAAAAAAPn/AAAAAAAAAAAAAPr/AAAAAAAAAAAAAPv/AAAAAAAAAAAAAPz/AAAAAAAAAAAAAP3/AAABAAMAAAAAAP7/AAABAAMAAAAAAP//AAABAAMAAAAAAAAAAAABAAMAAAAAAAEAAAABAAMAAAAAAAIAAAABAAMAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAABAPn/AAAAAAAAAAABAPr/AAAAAAAAAAABAPv/AAAAAAAAAAABAPz/AAAAAAAAAAABAP3/AAABAAMAAAABAP7/AAABAAMAAAABAP//AAABAAMAAAABAAAAAAABAAMAAAABAAEAAAABAAMAAAABAAIAAAABAAMAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAACAPn/AAAAAAAAAAACAPr/AAAAAAAAAAACAPv/AAAAAAAAAAACAPz/AAAAAAAAAAACAP3/AAABAAMAAAACAP7/AAABAAMAAAACAP//AAABAAMAAAACAAAAAAABAAMAAAACAAEAAAABAAMAAAACAAIAAAABAAMAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAACAAUAAAAAAAAAAAACAAYAAAAAAAAAAAADAPn/AAAAAAAAAAADAPr/AAAAAAAAAAADAPv/AAAAAAAAAAADAPz/AAAAAAAAAAADAP3/AAAAAAAAAAADAP7/AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAAEAPn/AAAAAAAAAAAEAPr/AAAAAAEAAAAEAPv/AAAAAAEAAAAEAPz/AAAAAAAAAAAEAP3/AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAEAAAAEAAUAAAAAAAEAAAAEAAYAAAAAAAAAAAAFAPn/AAAAAAAAAAAFAPr/AAAAAAEAAAAFAPv/AAAAAAEAAAAFAPz/AAAAAAAAAAAFAP3/AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAEAAAAFAAUAAAAAAAEAAAAFAAYAAAAAAAAAAAAGAPn/AAAAAAAAAAAGAPr/AAAAAAAAAAAGAPv/AAAAAAAAAAAGAPz/AAAAAAAAAAAGAP3/AAAAAAAAAAAGAP7/AAAAAAAAAAAGAP//AAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAD4//j/AAAAAAEAAAD5//j/AAAAAAEAAAD6//j/AAAAAAEAAAD7//j/AAAAAAEAAAD8//j/AAAAAAEAAAD9//j/AAAAAAEAAAD+//j/AAAAAAEAAAD///j/AAAAAAEAAAAAAPj/AAAAAAEAAAABAPj/AAAAAAEAAAACAPj/AAAAAAEAAAADAPj/AAAAAAEAAAAEAPj/AAAAAAEAAAAFAPj/AAAAAAEAAAAGAPj/AAAAAAEAAAAHAPj/AAAAAAEAAAAHAPn/AAAAAAEAAAAHAPr/AAAAAAEAAAAHAPv/AAAAAAEAAAAHAPz/AAAAAAEAAAAHAP3/AAAAAAEAAAAHAP7/AAAAAAEAAAAHAP//AAAAAAEAAAAHAAAAAAAAAAEAAAAHAAEAAAAAAAEAAAAHAAIAAAAAAAEAAAAHAAMAAAAAAAEAAAAHAAQAAAAAAAEAAAAHAAUAAAAAAAEAAAAHAAYAAAAAAAEAAAAHAAcAAAAAAAEAAAD4/wcAAAAAAAEAAAD5/wcAAAAAAAEAAAD6/wcAAAAAAAEAAAD7/wcAAAAAAAEAAAD8/wcAAAAAAAEAAAD9/wcAAAAAAAEAAAD+/wcAAAAAAAEAAAD//wcAAAAAAAEAAAAAAAcAAAAAAAEAAAABAAcAAAAAAAEAAAACAAcAAAAAAAEAAAADAAcAAAAAAAEAAAAEAAcAAAAAAAEAAAAFAAcAAAAAAAEAAAAGAAcAAAAAAAEAAAD4//n/AAAAAAEAAAD4//r/AAAAAAEAAAD4//v/AAAAAAEAAAD4//z/AAAAAAEAAAD4//3/AAAAAAEAAAD4//7/AAAAAAEAAAD4////AAAAAAEAAAD4/wAAAAAAAAEAAAD4/wEAAAAAAAEAAAD4/wIAAAAAAAEAAAD4/wMAAAAAAAEAAAD4/wQAAAAAAAEAAAD4/wUAAAAAAAEAAAD4/wYAAAAAAAEAAAA=")
+tile_set = ExtResource("1_b1wdv")
+script = ExtResource("2_8sqgj")
+metadata/_custom_type_script = "uid://cmojd3c63bqdc"
+
+[node name="Player" parent="." unique_id=870018185 node_paths=PackedStringArray("_tileMap") instance=ExtResource("3_i3uqq")]
+_tileMap = NodePath("../TileMapLayerPlus")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2042001077]
+position = Vector2(160, 0)
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("4_fbvoy")
+_itemInstace = SubResource("Resource_fbm76")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=2105363553]
+texture_filter = 1
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_b1wdv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=79016416]
+shape = SubResource("CircleShape2D_xy038")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1814702318]
+position = Vector2(160, -32)
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("4_fbvoy")
+_itemInstace = SubResource("Resource_a2qau")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2" unique_id=1497764137]
+texture_filter = 1
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("10_vpjem")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=329455163]
+shape = SubResource("CircleShape2D_xy038")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1802582266]
+position = Vector2(128, -32)
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("4_fbvoy")
+_itemInstace = SubResource("Resource_a2qau")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3" unique_id=48750950]
+texture_filter = 1
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("10_vpjem")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=738314769]
+shape = SubResource("CircleShape2D_xy038")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=887481230]
+position = Vector2(192, -32)
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("4_fbvoy")
+_itemInstace = SubResource("Resource_a2qau")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4" unique_id=1566618167]
+texture_filter = 1
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("10_vpjem")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=1116358399]
+shape = SubResource("CircleShape2D_xy038")
+
+[node name="PrintNode" type="Node" parent="." unique_id=1362187645]
+script = ExtResource("7_vpjem")
+metadata/_custom_type_script = "uid://wfoxeytt1pe5"

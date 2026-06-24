@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://b3kej3pnf6py6"]
+
+[ext_resource type="Texture2D" uid="uid://d0jo7c1ifly7y" path="res://textures/humanoids/top_down_blue_human.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://dxddbunewhad2" path="res://scripts/puppets/bodies/PlayerBody2D.cs" id="1_g2els"]
+[ext_resource type="Script" uid="uid://c1skpap2eci1" path="res://scripts/SurfaceAudioLibrary.cs" id="2_dqkch"]
+[ext_resource type="AudioStream" uid="uid://d3brchmbspnhk" path="res://sfx/footsteps_wood.wav" id="2_qlg0r"]
+[ext_resource type="Script" uid="uid://blhr4idq26v1e" path="res://scripts/custom_casting/RayCastInfo.cs" id="2_smehm"]
+[ext_resource type="Script" uid="uid://boxvmg8ei5fa3" path="res://scripts/puppets/controllers/PlayerController.cs" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://bo310u2sukuns" path="res://sfx/footsteps_grass.wav" id="3_tuyoq"]
+[ext_resource type="Script" uid="uid://cdxhnqsw87ey0" path="res://scripts/custom_casting/PointCastInfo.cs" id="3_ur7pv"]
+[ext_resource type="PackedScene" uid="uid://d2nvj6e0wv6g4" path="res://scenes/prefabs/inventory_view.tscn" id="9_ur7pv"]
+[ext_resource type="Script" uid="uid://ccjgqcvs4vvyb" path="res://scripts/inventory/PhysicsInventory.cs" id="10_y4r1p"]
+
+[sub_resource type="Resource" id="Resource_y4r1p"]
+script = ExtResource("2_smehm")
+_collisionMask = 45
+metadata/_custom_type_script = "uid://blhr4idq26v1e"
+
+[sub_resource type="Resource" id="Resource_d2wvv"]
+script = ExtResource("3_ur7pv")
+_collisionMask = 45
+metadata/_custom_type_script = "uid://cdxhnqsw87ey0"
+
+[sub_resource type="Resource" id="Resource_smehm"]
+script = ExtResource("2_dqkch")
+_surfaceTypeName = "surface_type"
+_defAudio = ExtResource("2_qlg0r")
+_surfaceAudio = Dictionary[StringName, AudioStream]({
+&"grass": ExtResource("3_tuyoq"),
+&"wood": ExtResource("2_qlg0r")
+})
+metadata/_custom_type_script = "uid://c1skpap2eci1"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
+radius = 12.0
+
+[node name="Player" type="CharacterBody2D" unique_id=870018185 node_paths=PackedStringArray("_swivel", "_inventoryLayer", "_inventoryView", "_inventory", "_footstepPlayer")]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_g2els")
+_swivel = NodePath("Swivel")
+_mouseCastSight = SubResource("Resource_y4r1p")
+_mouseCastPoint = SubResource("Resource_d2wvv")
+_inventoryLayer = NodePath("CanvasLayer")
+_inventoryView = NodePath("CanvasLayer/Backpack")
+_inventory = NodePath("PlayerInventory")
+_footstepPlayer = NodePath("FootstepPlayer")
+_footstepAudio = SubResource("Resource_smehm")
+
+[node name="Swivel" type="Node2D" parent="." unique_id=30855860]
+
+[node name="PlayerSprite" type="Sprite2D" parent="Swivel" unique_id=1848432402]
+texture_filter = 1
+texture = ExtResource("1_3vyb7")
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="." unique_id=1045529414]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_qhqgy")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1534599888]
+current = true
+
+[node name="FootstepPlayer" type="AudioStreamPlayer2D" parent="." unique_id=2059402555]
+position = Vector2(0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2013863081]
+
+[node name="PlayerController" type="Node" parent="." unique_id=1206320529 node_paths=PackedStringArray("_plyrBody")]
+script = ExtResource("3_qhqgy")
+_plyrBody = NodePath("..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1365234752]
+
+[node name="Backpack" parent="CanvasLayer" unique_id=2133021167 instance=ExtResource("9_ur7pv")]
+process_mode = 4
+visible = false
+
+[node name="PlayerInventory" type="Node" parent="." unique_id=1396264042 node_paths=PackedStringArray("_curContainer")]
+script = ExtResource("10_y4r1p")
+_curContainer = NodePath("../CanvasLayer/Backpack/Containers/BackpackBody")
+
+[editable path="CanvasLayer/Backpack"]

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dmy5p0kksjkst"]
+
+[ext_resource type="Script" uid="uid://ben4qhce7gg2x" path="res://scripts/Car.cs" id="1_1d5yk"]
+[ext_resource type="Texture2D" uid="uid://bna1x4qnijaup" path="res://icon.svg" id="1_pg773"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1d5yk"]
+size = Vector2(128, 64)
+
+[node name="Car" type="RigidBody2D" unique_id=2084586415 node_paths=PackedStringArray("_turnPoint")]
+mass = 1200.0
+gravity_scale = 0.0
+script = ExtResource("1_1d5yk")
+_turnPoint = NodePath("TurnPoint")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2027950665]
+scale = Vector2(1, 0.5)
+texture = ExtResource("1_pg773")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1123968459]
+shape = SubResource("RectangleShape2D_1d5yk")
+
+[node name="TurnPoint" type="Marker2D" parent="." unique_id=1533853260]
+position = Vector2(40, 0)

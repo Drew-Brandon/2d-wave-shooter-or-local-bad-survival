@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bj1hwxpggkgvg"]
+
+[ext_resource type="Script" uid="uid://b6pkmqi6boukw" path="res://scripts/inventory/PhysicsItem.cs" id="1_8am2p"]
+[ext_resource type="Texture2D" uid="uid://dafk00tcgc4lf" path="res://textures/ui/pistol_ammo.png" id="1_ifuc3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8am2p"]
+size = Vector2(32, 20)
+
+[node name="PhysicsAmmo" type="RigidBody2D" unique_id=1815467069]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_8am2p")
+
+[node name="AmmoSprite" type="Sprite2D" parent="." unique_id=1204407599]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("1_ifuc3")
+
+[node name="AmmoCollision" type="CollisionShape2D" parent="." unique_id=1341528442]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_8am2p")

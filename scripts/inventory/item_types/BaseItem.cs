@@ -1,0 +1,50 @@
+using Godot;
+
+/// <summary>
+/// Represents an inventory item that can be used for a multitude of purposes.
+/// </summary>
+[GlobalClass]
+public partial class BaseItem : Resource
+{
+	[Export]
+	private StringName _displayName = "";
+
+	/// <summary>
+	/// The name of this item.
+	/// </summary>
+	public StringName DisplayName { get => _displayName; }
+
+	[Export]
+	private Texture2D _icon;
+
+	/// <summary>
+	/// The icon used for this item.
+	/// </summary>
+	public Texture2D Icon { get => _icon; }
+
+	[Export]
+	private PackedScene _equipScene = null;
+
+	/// <summary>
+	/// The scene to instantaniate when the item is equipped.
+	/// </summary>
+	public PackedScene EquipScene { get => _equipScene; }
+
+	[Export]
+	private PackedScene _physicsScene = null;
+
+	/// <summary>
+	/// The scene to instantaniate when the item needs to placed into an inventory.
+	/// </summary>
+	public PackedScene PhysicsScene { get => _physicsScene; }
+
+	/*public ItemNode Equip(PlayerBody2D plyr)
+	{
+		return plyr.AddUseable(_itemScene);
+	}*/
+
+	public override string ToString()
+	{
+		return _displayName;
+	}
+}
