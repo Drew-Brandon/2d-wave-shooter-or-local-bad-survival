@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://yfivfp1on8v1"]
+
+[ext_resource type="Shader" uid="uid://cfsju7v7076rv" path="res://shaders/top_down_clouds.gdshader" id="1_qpddx"]
+
+[resource]
+shader = ExtResource("1_qpddx")
+shader_parameter/cell_amount = 40
+shader_parameter/period = Vector2(10, 10)

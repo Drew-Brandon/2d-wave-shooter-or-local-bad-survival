@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://mg20hgy2aiet"]
+
+[ext_resource type="Texture2D" uid="uid://b8rr21ipqm100" path="res://textures/props/door.png" id="1_r4m7n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u1fwb"]
+radius = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2n0r6"]
+size = Vector2(32, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r4m7n"]
+polygon = PackedVector2Array(0, -2, 32, -2, 32, 2, 0, 2)
+
+[node name="DoorHingeJoint" type="PinJoint2D" unique_id=1093531598]
+node_a = NodePath("HingeBody")
+node_b = NodePath("DoorBody")
+angular_limit_enabled = true
+angular_limit_lower = -1.7453293
+angular_limit_upper = 1.7453293
+
+[node name="HingeBody" type="StaticBody2D" parent="." unique_id=1101247278]
+
+[node name="HingeCollision" type="CollisionShape2D" parent="HingeBody" unique_id=1607264154]
+shape = SubResource("CircleShape2D_u1fwb")
+
+[node name="DoorBody" type="RigidBody2D" parent="." unique_id=1895619761]
+collision_layer = 64
+collision_mask = 14
+mass = 45.0
+gravity_scale = 0.0
+linear_damp = 1.0
+angular_damp = 1.0
+
+[node name="DoorSprite" type="Sprite2D" parent="DoorBody" unique_id=1940504956]
+position = Vector2(16, 1.1920929e-07)
+texture = ExtResource("1_r4m7n")
+
+[node name="DoorCollision" type="CollisionShape2D" parent="DoorBody" unique_id=2083209383]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_2n0r6")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="DoorBody" unique_id=1776461558]
+occluder = SubResource("OccluderPolygon2D_r4m7n")

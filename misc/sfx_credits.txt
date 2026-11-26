@@ -1,0 +1,11 @@
+rifle_fire.wav:
+	AssaultRifle1.wav by SuperPhat -- https://freesound.org/s/404562/ -- License: Creative Commons 0
+
+reload_rifle.wav:
+	AK-47 Assault Rifle being unloaded and reloaded by serøutōnin--deprivəd -- https://freesound.org/s/674742/ -- License: Creative Commons 0
+
+revolver_fire.wav:
+	Revolver Gunshots by C-V -- https://freesound.org/s/835200/ -- License: Creative Commons 0
+
+revolver_reload.wav:
+	Clean Revolver Reload by Dredile -- https://freesound.org/s/177863/ -- License: Creative Commons 0

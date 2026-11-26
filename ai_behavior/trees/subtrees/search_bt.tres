@@ -1,0 +1,86 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://bn5i6fui34omr"]
+
+[ext_resource type="Script" uid="uid://c7jhqi45i8wjo" path="res://scripts/ai_behavior/bt_tasks/move_actions/MoveTo.cs" id="1_l4rrm"]
+[ext_resource type="Script" uid="uid://bth6wivrfyqb6" path="res://scripts/ai_behavior/bt_tasks/LookAround.cs" id="2_wwv1w"]
+[ext_resource type="BehaviorTree" uid="uid://c4ydgbxxr43wo" path="res://ai_behavior/trees/subtrees/roam_bt.tres" id="3_4pa1c"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_l4rrm"]
+var/target_position/name = &"target_position"
+var/target_position/type = 5
+var/target_position/value = Vector2(0, 0)
+var/target_position/hint = 0
+var/target_position/hint_string = ""
+var/target_distance/name = &"target_distance"
+var/target_distance/type = 3
+var/target_distance/value = 0.0
+var/target_distance/hint = 0
+var/target_distance/hint_string = ""
+var/tool_range/name = &"tool_range"
+var/tool_range/type = 3
+var/tool_range/value = 32.0
+var/tool_range/hint = 0
+var/tool_range/hint_string = ""
+var/min_roam_range/name = &"min_roam_range"
+var/min_roam_range/type = 3
+var/min_roam_range/value = 256.0
+var/min_roam_range/hint = 0
+var/min_roam_range/hint_string = ""
+var/max_roam_range/name = &"max_roam_range"
+var/max_roam_range/type = 3
+var/max_roam_range/value = 512.0
+var/max_roam_range/hint = 0
+var/max_roam_range/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_4pa1c"]
+resource_name = "<null>"
+saved_value = null
+
+[sub_resource type="BBVariant" id="BBVariant_fyubb"]
+resource_name = "$target_node"
+value_source = 1
+variable = &"target_node"
+
+[sub_resource type="BTAction" id="BTAction_dwuyd"]
+script = ExtResource("1_l4rrm")
+_desiredDistance = SubResource("BBVariant_4pa1c")
+_target = SubResource("BBVariant_fyubb")
+
+[sub_resource type="BTAction" id="BTAction_fykqv"]
+script = ExtResource("2_wwv1w")
+MinTurn = 45.0
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_fyubb"]
+
+[sub_resource type="BTSubtree" id="BTSubtree_tvmen"]
+blackboard_plan = SubResource("BlackboardPlan_fyubb")
+subtree = ExtResource("3_4pa1c")
+
+[sub_resource type="BTAction" id="BTAction_ilkqg"]
+script = ExtResource("2_wwv1w")
+MinTurn = 45.0
+
+[sub_resource type="BTSequence" id="BTSequence_ua5pb"]
+children = [SubResource("BTSubtree_tvmen"), SubResource("BTAction_ilkqg")]
+
+[sub_resource type="BTRepeat" id="BTRepeat_1jan4"]
+children = [SubResource("BTSequence_ua5pb")]
+times = 3
+
+[sub_resource type="BBVariant" id="BBVariant_x664c"]
+resource_name = "roaming"
+saved_value = &"roaming"
+type = 21
+
+[sub_resource type="BTSetVar" id="BTSetVar_tgguc"]
+variable = &"current_state"
+value = SubResource("BBVariant_x664c")
+
+[sub_resource type="BTDelay" id="BTDelay_etpqg"]
+children = [SubResource("BTSetVar_tgguc")]
+
+[sub_resource type="BTSequence" id="BTSequence_0jn2h"]
+children = [SubResource("BTAction_dwuyd"), SubResource("BTAction_fykqv"), SubResource("BTRepeat_1jan4"), SubResource("BTDelay_etpqg")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_l4rrm")
+root_task = SubResource("BTSequence_0jn2h")

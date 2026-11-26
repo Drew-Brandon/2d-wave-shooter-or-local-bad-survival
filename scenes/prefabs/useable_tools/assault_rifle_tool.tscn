@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bsr8otoavit6c"]
+
+[ext_resource type="Script" uid="uid://lrpl50m7qrqp" path="res://scripts/useable_tools/GunTool.cs" id="1_stiuj"]
+[ext_resource type="Resource" uid="uid://drcw45wh7v51e" path="res://cast_info/ray_cast_info/tool_ray_check_cast.tres" id="2_56lxf"]
+[ext_resource type="PackedScene" uid="uid://cogbxh2f6jgsi" path="res://scenes/prefabs/visual/bullets/bullet_tracer_spawner.tscn" id="3_as13p"]
+[ext_resource type="Resource" uid="uid://8yi18rb7grle" path="res://single_values/node_paths/always_visible_path.tres" id="4_vihgl"]
+[ext_resource type="PackedScene" uid="uid://bm7jqmliwen8s" path="res://scenes/prefabs/visual/bullets/muzzle_flash_light.tscn" id="5_vihgl"]
+[ext_resource type="Script" uid="uid://cs37c8b7hkiqj" path="res://scripts/attack_info/HitscanProjectileShooter2D.cs" id="6_30ntn"]
+[ext_resource type="AudioStream" uid="uid://cuxo1rb0hvwc4" path="res://audio/weapons/rifle_fire.wav" id="6_vihgl"]
+[ext_resource type="AudioStream" uid="uid://bcopkl8e3w2sq" path="res://audio/weapons/rifle_reload.wav" id="7_stiuj"]
+[ext_resource type="Resource" uid="uid://cvppedjco7atq" path="res://projectiles/rifle_bullet.tres" id="9_56lxf"]
+[ext_resource type="Script" uid="uid://blhr4idq26v1e" path="res://scripts/cast_info_2d/RayCastInfo2D.cs" id="11_ds74o"]
+
+[sub_resource type="Resource" id="Resource_rfg7g"]
+script = ExtResource("11_ds74o")
+_collisionMask = 71
+metadata/_custom_type_script = "uid://blhr4idq26v1e"
+
+[node name="AssaultRifleTool" type="Node2D" unique_id=1387201087]
+script = ExtResource("1_stiuj")
+_reloadTime = 1500
+_isAuto = true
+_useCooldown = 70
+_range = 1024.0
+_lineOfSightRayCast = ExtResource("2_56lxf")
+
+[node name="BulletTracerSpawner" parent="." unique_id=903606134 instance=ExtResource("3_as13p")]
+_spawnPath = ExtResource("4_vihgl")
+
+[node name="MuzzleFlashLight" parent="." unique_id=426752747 instance=ExtResource("5_vihgl")]
+
+[node name="RifleAudio" type="AudioStreamPlayer2D" parent="." unique_id=960985172]
+stream = ExtResource("6_vihgl")
+volume_db = -4.0
+pitch_scale = 2.0
+
+[node name="RifleReloadAudio" type="AudioStreamPlayer2D" parent="." unique_id=581675927]
+stream = ExtResource("7_stiuj")
+volume_db = -4.0
+pitch_scale = 1.5
+
+[node name="Shooter" type="Marker2D" parent="." unique_id=932575484]
+gizmo_extents = 32.0
+script = ExtResource("6_30ntn")
+_maxSpreadDeg = 3.0
+_projectileInfo = ExtResource("9_56lxf")
+_rayCast = SubResource("Resource_rfg7g")
+
+[connection signal="PreciselySuccessfulUse" from="." to="Shooter" method="PreciseFire" unbinds=2]
+[connection signal="StartedReload" from="." to="RifleReloadAudio" method="play"]
+[connection signal="ProjectileShot" from="Shooter" to="BulletTracerSpawner" method="SpawnTracer"]
+[connection signal="ProjectileShot" from="Shooter" to="RifleAudio" method="play" unbinds=1]
+[connection signal="ProjectileShot" from="Shooter" to="MuzzleFlashLight/MuzzleFlashAnimation" method="PlayOrRestart" unbinds=1 binds= ["flash"]]
+
+[editable path="MuzzleFlashLight"]

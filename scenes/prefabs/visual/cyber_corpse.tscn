@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://54pynf8j43c7"]
+
+[ext_resource type="Texture2D" uid="uid://ckk0p2mfvdxhd" path="res://textures/humanoids/cyber/cyber_agent.png" id="1_3uxxa"]
+[ext_resource type="Texture2D" uid="uid://b1o2mq3hm0v8o" path="res://textures/humanoids/cyber/cyber_corpse/standard/cyber_fall1.png" id="2_25xkc"]
+[ext_resource type="Texture2D" uid="uid://dyl4hwbk8tvg1" path="res://textures/humanoids/cyber/cyber_corpse/standard/cyber_fall2.png" id="3_sxith"]
+[ext_resource type="Texture2D" uid="uid://dt8brpwsft6j" path="res://textures/humanoids/cyber/cyber_corpse/standard/cyber_corpse.png" id="4_3042r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wtwom"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("1_3uxxa")
+}, {
+"duration": 0.7,
+"texture": ExtResource("2_25xkc")
+}, {
+"duration": 0.6,
+"texture": ExtResource("3_sxith")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3042r")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_b4snq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_moglh"]
+resource_name = "fade"
+length = 128.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 96, 128),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o30pw"]
+_data = {
+&"RESET": SubResource("Animation_b4snq"),
+&"fade": SubResource("Animation_moglh")
+}
+
+[node name="CyberCorpse" type="AnimatedSprite2D" unique_id=1794919143]
+sprite_frames = SubResource("SpriteFrames_wtwom")
+animation = &"fall"
+autoplay = "fall"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1088814388]
+libraries/ = SubResource("AnimationLibrary_o30pw")
+autoplay = &"fade"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="queue_free" unbinds=1]

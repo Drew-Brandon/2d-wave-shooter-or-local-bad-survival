@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bjmj4n8y7bv01"]
+
+[ext_resource type="PackedScene" uid="uid://bq6e11iujfk13" path="res://scenes/prefabs/dropped_item_instances/dropped_item_body.tscn" id="1_onoht"]
+[ext_resource type="Resource" uid="uid://bu8i1adwnbimi" path="res://items/pistol_item.tres" id="2_2mg6u"]
+[ext_resource type="Script" uid="uid://dyfmea0bpq56g" path="res://scripts/inventory/ItemInstanceBlueprint.cs" id="3_eq1va"]
+[ext_resource type="Texture2D" uid="uid://5vtbxfbx5xml" path="res://textures/inventory/items/pistol.png" id="4_p1kjn"]
+
+[sub_resource type="Resource" id="Resource_he0hw"]
+script = ExtResource("3_eq1va")
+object_type = 2
+Ammo = 10
+item = ExtResource("2_2mg6u")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[node name="DroppedItemBody" unique_id=1508708952 instance=ExtResource("1_onoht")]
+_instanceBlueprint = SubResource("Resource_he0hw")
+
+[node name="DroppedItemSprite" parent="." index="1" unique_id=464961971]
+texture = ExtResource("4_p1kjn")

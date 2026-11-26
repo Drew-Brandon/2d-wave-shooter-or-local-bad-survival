@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://w73s7htvvcab"]
+
+[ext_resource type="Script" uid="uid://6cydex2h6gdd" path="res://scripts/plus_variants/LabelPlus.cs" id="1_t5fvj"]
+[ext_resource type="PackedScene" uid="uid://b7wff64bhiusn" path="res://scenes/prefabs/inventory/player_inventory_ui.tscn" id="2_ltvyg"]
+[ext_resource type="PackedScene" uid="uid://b6nkwwqfjhrm6" path="res://scenes/prefabs/misc/ui/list_popup.tscn" id="3_3mswr"]
+[ext_resource type="Resource" uid="uid://dus07kdpxebvh" path="res://single_values/node_paths/popup_path.tres" id="3_hvk8a"]
+[ext_resource type="PackedScene" uid="uid://ouiyh6xr3hus" path="res://scenes/prefabs/inventory/player_hotbar_ui.tscn" id="3_ltvyg"]
+[ext_resource type="Script" uid="uid://cu5bsf07mqkju" path="res://scripts/inventory/ui/ItemDropAreaUI.cs" id="5_3mswr"]
+[ext_resource type="Script" uid="uid://bvgjbd26024ea" path="res://scripts/global_intefaces/SceneOpener.cs" id="7_5jyjh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rssh7"]
+font_size = 64
+font_color = Color(1, 0, 0, 1)
+
+[node name="PlayerViewportUILayer" type="CanvasLayer" unique_id=1749849002]
+layer = 3
+
+[node name="InGameDisplay" type="Control" parent="." unique_id=2146669687]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ItemDropArea" type="Control" parent="InGameDisplay" unique_id=1891516293]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_3mswr")
+
+[node name="InventoryUI" parent="InGameDisplay" unique_id=115383930 instance=ExtResource("2_ltvyg")]
+visible = false
+layout_mode = 1
+_popupPath = ExtResource("3_hvk8a")
+
+[node name="GameplayDisplay" type="VBoxContainer" parent="InGameDisplay" unique_id=143846741]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -99.0
+offset_right = 276.0
+grow_vertical = 0
+
+[node name="StatsPanel" type="PanelContainer" parent="InGameDisplay/GameplayDisplay" unique_id=472559287]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="StatsContainer" type="HBoxContainer" parent="InGameDisplay/GameplayDisplay/StatsPanel" unique_id=78953609]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="PlayerHealthDisplay" type="Label" parent="InGameDisplay/GameplayDisplay/StatsPanel/StatsContainer" unique_id=377308037]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Health: 100"
+script = ExtResource("1_t5fvj")
+_prefix = "Health: "
+
+[node name="HotbarUI" parent="InGameDisplay/GameplayDisplay" unique_id=1168766035 instance=ExtResource("3_ltvyg")]
+layout_mode = 2
+_canDragSlots = false
+_popupPath = ExtResource("3_hvk8a")
+
+[node name="ListPopup" parent="InGameDisplay" unique_id=1829051058 instance=ExtResource("3_3mswr")]
+visible = false
+layout_mode = 0
+
+[node name="GameOverDisplay" type="VBoxContainer" parent="." unique_id=115771707]
+visible = false
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -174.0
+offset_right = 174.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GameOverDisplay" unique_id=1831414058]
+layout_mode = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_rssh7")
+
+[node name="RetryButton" type="Button" parent="GameOverDisplay" unique_id=598098070]
+layout_mode = 2
+text = "Retry"
+
+[node name="QuitToMenuButton" type="Button" parent="GameOverDisplay" unique_id=327079671]
+layout_mode = 2
+text = "Quit to Menu"
+
+[node name="QuitToDesktop" type="Button" parent="GameOverDisplay" unique_id=1581138905]
+layout_mode = 2
+text = "Quit to Desktop"
+
+[node name="SceneOpener" type="Node" parent="." unique_id=272100438]
+script = ExtResource("7_5jyjh")
+metadata/_custom_type_script = "uid://bvgjbd26024ea"
+
+[connection signal="pressed" from="GameOverDisplay/RetryButton" to="SceneOpener" method="ReloadScene"]
+[connection signal="pressed" from="GameOverDisplay/QuitToMenuButton" to="SceneOpener" method="OpenScene" binds= ["res://scenes/playable/main_menu_ui.tscn"]]
+[connection signal="pressed" from="GameOverDisplay/QuitToDesktop" to="SceneOpener" method="Quit"]
+
+[editable path="InGameDisplay/ListPopup"]

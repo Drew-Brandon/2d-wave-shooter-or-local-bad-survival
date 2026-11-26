@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StackableItemType" format=3 uid="uid://bwf5td2ux5yhv"]
+
+[ext_resource type="PackedScene" uid="uid://bq6e11iujfk13" path="res://scenes/prefabs/dropped_item_instances/dropped_item_body.tscn" id="1_6ecok"]
+[ext_resource type="Script" uid="uid://xnyqa1m05toa" path="res://scripts/inventory/item_types/StackableItemType.cs" id="1_i4uim"]
+[ext_resource type="Texture2D" uid="uid://c71kh7w1jc4tr" path="res://textures/inventory/items/pistol_ammo_small.png" id="1_ii1tv"]
+
+[resource]
+script = ExtResource("1_i4uim")
+_maxAmount = 20
+_displayName = &"Ammo"
+_icon = ExtResource("1_ii1tv")
+_dropScene = ExtResource("1_6ecok")
+metadata/_custom_type_script = "uid://xnyqa1m05toa"

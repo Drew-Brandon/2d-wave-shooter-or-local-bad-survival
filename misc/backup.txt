@@ -1,0 +1,86 @@
+using Godot;
+using Godot.Collections;
+
+[Tool, GlobalClass]
+public partial class NodeRefReciever : Resource//, ISerializationListener
+{
+	private static readonly StringName REF_NAMES_PROPERTY_NAME = "ref_names";
+
+	/*private NodeRefRelay _refRelay = null;
+
+	[Export]
+	private NodeRefRelay _refRelayProperty
+	{
+		get => _refRelay;
+
+		set
+		{
+			_refNameNil = value == null;
+			_refNameIndex = 0;
+
+			if (_refRelay != null)
+			{
+				_refRelay.PropertyListChanged -= NotifyPropertyListChanged;
+			}
+
+			if (value != null)
+			{
+				value.PropertyListChanged += NotifyPropertyListChanged;
+			}
+
+			_refRelay = value;
+		}
+	}*/
+
+	private bool _refNameNil = true;
+
+	private int _refNameIndex = 0;
+
+	public override Array<Dictionary> _GetPropertyList()
+	{
+		Dictionary refNamesProperty = MiscUtils.MakeProperty(
+			REF_NAMES_PROPERTY_NAME,
+			Variant.Type.Int
+			/*PropertyHint.Enum,
+			_refNameNil ? "nil" : _refRelay.GetRefNames()*/
+		);
+
+		return [refNamesProperty];
+	}
+
+	public override Variant _Get(StringName property)
+	{
+		if (property == REF_NAMES_PROPERTY_NAME)
+		{
+			return _refNameIndex;
+		}
+
+		return default;
+	}
+
+	public override bool _Set(StringName property, Variant value)
+	{
+		if (property == REF_NAMES_PROPERTY_NAME)
+		{
+			_refNameIndex = value.AsInt32();
+			return true;
+		}
+
+		return false;
+	}
+
+	public override bool _PropertyCanRevert(StringName property)
+	{
+		return property == REF_NAMES_PROPERTY_NAME;
+	}
+
+	public void OnBeforeSerialize()
+	{
+		
+	}
+
+	public void OnAfterDeserialize()
+	{
+		
+	}
+}

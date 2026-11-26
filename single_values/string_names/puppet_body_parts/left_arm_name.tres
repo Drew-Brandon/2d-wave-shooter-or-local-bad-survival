@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StringNameResource" format=3 uid="uid://b4hwvo0f7waxr"]
+
+[ext_resource type="Script" uid="uid://dh48yxpr0yx4c" path="res://scripts/value_resources/StringNameResource.cs" id="1_1sv0j"]
+
+[resource]
+script = ExtResource("1_1sv0j")
+_name = &"left_arm"
+metadata/_custom_type_script = "uid://dh48yxpr0yx4c"

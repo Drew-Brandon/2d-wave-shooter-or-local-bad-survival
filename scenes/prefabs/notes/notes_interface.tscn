@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://wtjwhcvew53"]
+
+[ext_resource type="Script" uid="uid://dh5cyogps75o" path="res://scripts/notes/NotesUI.cs" id="1_1de0p"]
+[ext_resource type="PackedScene" uid="uid://kd7xnu1l4nlk" path="res://scenes/prefabs/notes/note_slot.tscn" id="2_gc786"]
+
+[node name="NotesView" type="Control" unique_id=1368883746 node_paths=PackedStringArray("_noteButtonArea")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1de0p")
+_noteButtonArea = NodePath("HBoxContainer/Panel/ScrollContainer/VBoxContainer")
+_noteSlot = ExtResource("2_gc786")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=846852954]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=1671864279]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Panel" unique_id=254684631]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel/ScrollContainer" unique_id=753745311]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=162897524]
+layout_mode = 2
+size_flags_horizontal = 3

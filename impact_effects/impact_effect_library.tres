@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PackedSceneLibrary" format=3 uid="uid://bj6ouow3tg4v2"]
+
+[ext_resource type="PackedScene" uid="uid://xwvah34wnt2a" path="res://scenes/prefabs/visual/impact_effects/default_impact.tscn" id="1_7n4rw"]
+[ext_resource type="Script" uid="uid://05wlnqjiqpcu" path="res://scripts/value_libraries/PackedSceneLibrary.cs" id="2_7n4rw"]
+[ext_resource type="PackedScene" uid="uid://bapgd2rdcrh3w" path="res://scenes/prefabs/visual/impact_effects/flesh_impact.tscn" id="2_gerw5"]
+
+[resource]
+script = ExtResource("2_7n4rw")
+default_value = ExtResource("1_7n4rw")
+library = {
+&"flesh": ExtResource("2_gerw5")
+}
+metadata/_custom_type_script = "uid://05wlnqjiqpcu"

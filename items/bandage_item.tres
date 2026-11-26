@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HealthItemType" format=3 uid="uid://chp6wchynqyko"]
+
+[ext_resource type="Script" uid="uid://52iq8h3j3mwb" path="res://scripts/inventory/item_types/HealthItemType.cs" id="1_2vaic"]
+[ext_resource type="PackedScene" uid="uid://bq6e11iujfk13" path="res://scenes/prefabs/dropped_item_instances/dropped_item_body.tscn" id="1_c3e10"]
+[ext_resource type="PackedScene" uid="uid://clv3o6rl5tqsa" path="res://scenes/prefabs/useable_tools/health_tool.tscn" id="2_3olim"]
+[ext_resource type="Texture2D" uid="uid://dkopiqhiar8r" path="res://textures/inventory/items/bandage.png" id="3_t8kch"]
+
+[resource]
+script = ExtResource("1_2vaic")
+_maxAmount = 20
+_displayName = &"Bandage"
+_icon = ExtResource("3_t8kch")
+_equipScene = ExtResource("2_3olim")
+_dropScene = ExtResource("1_c3e10")
+metadata/_custom_type_script = "uid://52iq8h3j3mwb"

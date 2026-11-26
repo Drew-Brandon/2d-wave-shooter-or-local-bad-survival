@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StackableItemType" format=3 uid="uid://cd23beg13aj3w"]
+
+[ext_resource type="PackedScene" uid="uid://bq6e11iujfk13" path="res://scenes/prefabs/dropped_item_instances/dropped_item_body.tscn" id="1_yyq4j"]
+[ext_resource type="Script" uid="uid://xnyqa1m05toa" path="res://scripts/inventory/item_types/StackableItemType.cs" id="2_0ld2l"]
+[ext_resource type="Texture2D" uid="uid://dot7qu0saeam3" path="res://textures/inventory/items/rifle_ammo_small.png" id="2_yyq4j"]
+
+[resource]
+script = ExtResource("2_0ld2l")
+_maxAmount = 60
+_displayName = &"Rifle Ammo"
+_icon = ExtResource("2_yyq4j")
+_dropScene = ExtResource("1_yyq4j")
+metadata/_custom_type_script = "uid://xnyqa1m05toa"

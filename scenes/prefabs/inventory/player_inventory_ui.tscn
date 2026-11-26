@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://b7wff64bhiusn"]
+
+[ext_resource type="Script" uid="uid://ryckcwpmh307" path="res://scripts/inventory/ui/StaticInventoryUI.cs" id="1_u657c"]
+[ext_resource type="StyleBox" uid="uid://cvx68xivnide0" path="res://styles/inventory_panel_style.tres" id="2_6e384"]
+[ext_resource type="PackedScene" uid="uid://dpexa1v6sqxth" path="res://scenes/prefabs/inventory/item_slot_ui.tscn" id="2_gjvqa"]
+
+[node name="PlayerInventoryUI" type="MarginContainer" unique_id=115383930 node_paths=PackedStringArray("_slotsParent")]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -138.0
+offset_right = 208.0
+offset_bottom = 138.0
+grow_vertical = 2
+script = ExtResource("1_u657c")
+_slotsParent = NodePath("MarginContainer/InventoryGrid")
+
+[node name="Panel" type="Panel" parent="." unique_id=1049838879]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_6e384")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=13116324]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="InventoryGrid" type="GridContainer" parent="MarginContainer" unique_id=86441119]
+layout_mode = 2
+columns = 3
+
+[node name="ItemSlotUI5" parent="MarginContainer/InventoryGrid" unique_id=598068930 instance=ExtResource("2_gjvqa")]
+layout_mode = 2
+
+[node name="ItemSlotUI6" parent="MarginContainer/InventoryGrid" unique_id=1177621498 instance=ExtResource("2_gjvqa")]
+layout_mode = 2
+
+[node name="ItemSlotUI7" parent="MarginContainer/InventoryGrid" unique_id=514094998 instance=ExtResource("2_gjvqa")]
+layout_mode = 2
+
+[node name="ItemSlotUI8" parent="MarginContainer/InventoryGrid" unique_id=8193312 instance=ExtResource("2_gjvqa")]
+layout_mode = 2
+
+[node name="ItemSlotUI9" parent="MarginContainer/InventoryGrid" unique_id=173725281 instance=ExtResource("2_gjvqa")]
+layout_mode = 2
+
+[node name="ItemSlotUI10" parent="MarginContainer/InventoryGrid" unique_id=1585179740 instance=ExtResource("2_gjvqa")]
+layout_mode = 2
+
+[node name="ItemSlotUI11" parent="MarginContainer/InventoryGrid" unique_id=1625056206 instance=ExtResource("2_gjvqa")]
+layout_mode = 2
+
+[node name="ItemSlotUI12" parent="MarginContainer/InventoryGrid" unique_id=416606564 instance=ExtResource("2_gjvqa")]
+layout_mode = 2
+
+[node name="ItemSlotUI13" parent="MarginContainer/InventoryGrid" unique_id=966301914 instance=ExtResource("2_gjvqa")]
+layout_mode = 2
+
+[node name="ItemSlotUI14" parent="MarginContainer/InventoryGrid" unique_id=1093684003 instance=ExtResource("2_gjvqa")]
+layout_mode = 2
+
+[node name="ItemSlotUI15" parent="MarginContainer/InventoryGrid" unique_id=1173615996 instance=ExtResource("2_gjvqa")]
+layout_mode = 2
+
+[node name="ItemSlotUI16" parent="MarginContainer/InventoryGrid" unique_id=1588313995 instance=ExtResource("2_gjvqa")]
+layout_mode = 2

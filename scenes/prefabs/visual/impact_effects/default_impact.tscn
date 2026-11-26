@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://xwvah34wnt2a"]
+
+[ext_resource type="AudioStream" uid="uid://grcl8rd58eux" path="res://audio/loud_thud.wav" id="1_3mf2e"]
+
+[sub_resource type="Gradient" id="Gradient_omlwr"]
+offsets = PackedFloat32Array(0, 0.60837436)
+colors = PackedColorArray(0.5411765, 0.5411765, 0.41568628, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3iv5p"]
+gradient = SubResource("Gradient_omlwr")
+width = 6
+height = 6
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_omlwr"]
+lifetime_randomness = 0.6
+particle_flag_disable_z = true
+spread = 60.0
+initial_velocity_min = 128.0
+initial_velocity_max = 256.0
+gravity = Vector3(0, 0, 0)
+
+[node name="DefaultImpact" type="Node2D" unique_id=1572673957]
+
+[node name="DefaultImpactParticles" type="GPUParticles2D" parent="." unique_id=99964946]
+emitting = false
+amount = 16
+texture = SubResource("GradientTexture2D_3iv5p")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_omlwr")
+
+[node name="DefaultImpactAudio" type="AudioStreamPlayer2D" parent="." unique_id=1345242653]
+stream = ExtResource("1_3mf2e")
+volume_db = 4.0
+autoplay = true
+attenuation = 4.0
+
+[connection signal="finished" from="DefaultImpactParticles" to="." method="queue_free"]
+[connection signal="ready" from="DefaultImpactParticles" to="DefaultImpactParticles" method="set_emitting" binds= [true]]

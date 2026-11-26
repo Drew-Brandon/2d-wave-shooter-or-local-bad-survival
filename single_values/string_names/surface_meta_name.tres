@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StringNameResource" format=3 uid="uid://bim5nl8cpcxca"]
+
+[ext_resource type="Script" uid="uid://dh48yxpr0yx4c" path="res://scripts/value_resources/StringNameResource.cs" id="1_ed0j2"]
+
+[resource]
+script = ExtResource("1_ed0j2")
+_name = &"surface_type"
+metadata/_custom_type_script = "uid://dh48yxpr0yx4c"

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://clv3o6rl5tqsa"]
+
+[ext_resource type="Script" uid="uid://d2k4t8msr2gtn" path="res://scripts/useable_tools/HealingTool.cs" id="1_ylx4g"]
+
+[node name="HealthTool" type="Node2D" unique_id=425734544]
+script = ExtResource("1_ylx4g")

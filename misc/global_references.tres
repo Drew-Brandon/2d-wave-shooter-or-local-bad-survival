@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="GlobalReferences" format=3 uid="uid://fb0spebye1aw"]
+
+[ext_resource type="Script" uid="uid://vn6gteovdqto" path="res://scripts/global_references/GlobalReferences.cs" id="1_888t6"]
+
+[resource]
+script = ExtResource("1_888t6")
+metadata/_custom_type_script = "uid://vn6gteovdqto"

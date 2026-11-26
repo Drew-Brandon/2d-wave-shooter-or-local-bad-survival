@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ImpactEffectData2D" format=3 uid="uid://bcke644hmjtmt"]
+
+[ext_resource type="Resource" uid="uid://ur216fq6l64q" path="res://single_values/string_names/surface_layer_name.tres" id="1_bdu70"]
+[ext_resource type="Script" uid="uid://cyna7cu1s6dsy" path="res://scripts/attack_info/ImpactEffectData2D.cs" id="1_d8ge2"]
+[ext_resource type="Resource" uid="uid://bj6ouow3tg4v2" path="res://impact_effects/impact_effect_library.tres" id="2_ax3r6"]
+[ext_resource type="Resource" uid="uid://bim5nl8cpcxca" path="res://single_values/string_names/surface_meta_name.tres" id="3_m67yw"]
+
+[resource]
+script = ExtResource("1_d8ge2")
+_impactMeta = ExtResource("3_m67yw")
+_impactLayer = ExtResource("1_bdu70")
+_impactLibrary = ExtResource("2_ax3r6")
+metadata/_custom_type_script = "uid://cyna7cu1s6dsy"

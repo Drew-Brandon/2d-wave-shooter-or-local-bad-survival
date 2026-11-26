@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ouiyh6xr3hus"]
+
+[ext_resource type="Script" uid="uid://ryckcwpmh307" path="res://scripts/inventory/ui/StaticInventoryUI.cs" id="1_rphvx"]
+[ext_resource type="PackedScene" uid="uid://dpexa1v6sqxth" path="res://scenes/prefabs/inventory/item_slot_ui.tscn" id="2_xu0g7"]
+
+[node name="PlayerHotbarUI" type="MarginContainer" unique_id=115383930 node_paths=PackedStringArray("_slotsParent")]
+offset_right = 276.0
+offset_bottom = 72.0
+script = ExtResource("1_rphvx")
+_slotsParent = NodePath("MarginContainer/InventoryGrid")
+
+[node name="Panel" type="Panel" parent="." unique_id=1049838879]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=13116324]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="InventoryGrid" type="GridContainer" parent="MarginContainer" unique_id=86441119]
+layout_mode = 2
+columns = 4
+
+[node name="ItemSlotUI" parent="MarginContainer/InventoryGrid" unique_id=1506934860 instance=ExtResource("2_xu0g7")]
+layout_mode = 2
+
+[node name="EquipLabel" type="Label" parent="MarginContainer/InventoryGrid/ItemSlotUI" unique_id=1581081301]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "1"
+
+[node name="ItemSlotUI2" parent="MarginContainer/InventoryGrid" unique_id=1261746082 instance=ExtResource("2_xu0g7")]
+layout_mode = 2
+
+[node name="EquipLabel" type="Label" parent="MarginContainer/InventoryGrid/ItemSlotUI2" unique_id=948060238]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "2"
+
+[node name="ItemSlotUI3" parent="MarginContainer/InventoryGrid" unique_id=1923829642 instance=ExtResource("2_xu0g7")]
+layout_mode = 2
+
+[node name="EquipLabel" type="Label" parent="MarginContainer/InventoryGrid/ItemSlotUI3" unique_id=1974149345]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "3"
+
+[node name="ItemSlotUI4" parent="MarginContainer/InventoryGrid" unique_id=1648991307 instance=ExtResource("2_xu0g7")]
+layout_mode = 2
+
+[node name="EquipLabel" type="Label" parent="MarginContainer/InventoryGrid/ItemSlotUI4" unique_id=1419425620]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "4"

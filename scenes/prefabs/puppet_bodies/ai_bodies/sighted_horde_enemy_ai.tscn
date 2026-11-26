@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c8pq3jyjfkcgu"]
+
+[ext_resource type="PackedScene" uid="uid://do56db01u8q0t" path="res://scenes/prefabs/puppet_bodies/ai_bodies/sighted_enemy_ai.tscn" id="1_hrr1m"]
+[ext_resource type="BehaviorTree" uid="uid://gkwxo4wq0n0q" path="res://ai_behavior/trees/horde_member_bt.tres" id="2_lrgjg"]
+
+[node name="SightedHordeEnemyAI" unique_id=1950500914 instance=ExtResource("1_hrr1m")]
+
+[node name="NavigationAgent2D" parent="." index="2" unique_id=1597897872]
+debug_enabled = true
+
+[node name="BBValues" parent="." index="7" unique_id=952235147 node_paths=PackedStringArray("bb_nodes")]
+bb_nodes = {
+&"horde_manager": null
+}
+
+[node name="BTPlayer" parent="." index="8" unique_id=1702894553]
+behavior_tree = ExtResource("2_lrgjg")

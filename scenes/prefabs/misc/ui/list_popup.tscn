@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b6nkwwqfjhrm6"]
+
+[ext_resource type="Script" uid="uid://des5fmnqatbru" path="res://scripts/misc/ListPopupRelay.cs" id="1_i6l1m"]
+[ext_resource type="Script" uid="uid://tbws5bxcxp2j" path="res://scripts/misc/ui/MouseControl.cs" id="2_1faea"]
+[ext_resource type="LabelSettings" uid="uid://c5bbga7p3m27u" path="res://styles/main_label_settings.tres" id="2_8wibs"]
+
+[node name="ListPopup" type="PanelContainer" unique_id=1829051058]
+offset_right = 256.0
+offset_bottom = 23.0
+pivot_offset_ratio = Vector2(0, 1)
+mouse_filter = 2
+script = ExtResource("2_1faea")
+
+[node name="ListPopupLabel" type="Label" parent="." unique_id=96787850]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 1
+label_settings = ExtResource("2_8wibs")
+autowrap_mode = 2
+
+[node name="ListPopupRelay" type="Node" parent="." unique_id=2062350343]
+script = ExtResource("1_i6l1m")
+
+[connection signal="ListLost" from="ListPopupRelay" to="." method="hide"]
+[connection signal="ListRecieved" from="ListPopupRelay" to="ListPopupLabel" method="set_text"]
+[connection signal="ListRecieved" from="ListPopupRelay" to="." method="show" unbinds=1]

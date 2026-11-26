@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RayCastInfo2D" format=3 uid="uid://4dn5eycu14x2"]
+
+[ext_resource type="Script" uid="uid://blhr4idq26v1e" path="res://scripts/cast_info_2d/RayCastInfo2D.cs" id="1_3ax6l"]
+
+[resource]
+script = ExtResource("1_3ax6l")
+_collisionMask = 79
+metadata/_custom_type_script = "uid://blhr4idq26v1e"

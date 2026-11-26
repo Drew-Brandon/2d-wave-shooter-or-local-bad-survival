@@ -1,0 +1,63 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://c4ydgbxxr43wo"]
+
+[ext_resource type="Script" uid="uid://blhr4idq26v1e" path="res://scripts/cast_info_2d/RayCastInfo2D.cs" id="1_au24k"]
+[ext_resource type="Script" uid="uid://bhe52ua1rau4i" path="res://scripts/ai_behavior/bt_tasks/getters/GetPositionInVisibleRadius.cs" id="2_q1i5m"]
+[ext_resource type="Script" uid="uid://c7jhqi45i8wjo" path="res://scripts/ai_behavior/bt_tasks/move_actions/MoveTo.cs" id="3_lb35x"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_au24k"]
+var/target_position/name = &"target_position"
+var/target_position/type = 5
+var/target_position/value = Vector2(0, 0)
+var/target_position/hint = 0
+var/target_position/hint_string = ""
+var/min_roam_range/name = &"min_roam_range"
+var/min_roam_range/type = 3
+var/min_roam_range/value = 256.0
+var/min_roam_range/hint = 0
+var/min_roam_range/hint_string = ""
+var/max_roam_range/name = &"max_roam_range"
+var/max_roam_range/type = 3
+var/max_roam_range/value = 512.0
+var/max_roam_range/hint = 0
+var/max_roam_range/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_rsur0"]
+resource_name = "$max_roam_range"
+value_source = 1
+variable = &"max_roam_range"
+
+[sub_resource type="BBVariant" id="BBVariant_gd3bm"]
+resource_name = "$min_roam_range"
+value_source = 1
+variable = &"min_roam_range"
+
+[sub_resource type="Resource" id="Resource_hjnpy"]
+script = ExtResource("1_au24k")
+_collisionMask = 1
+metadata/_custom_type_script = "uid://blhr4idq26v1e"
+
+[sub_resource type="BTAction" id="BTAction_bt4ic"]
+script = ExtResource("2_q1i5m")
+_minRange = SubResource("BBVariant_gd3bm")
+_maxRange = SubResource("BBVariant_rsur0")
+_rayCastInfo = SubResource("Resource_hjnpy")
+
+[sub_resource type="BBVariant" id="BBVariant_tigt2"]
+resource_name = "<null>"
+saved_value = null
+
+[sub_resource type="BBVariant" id="BBVariant_5s3af"]
+resource_name = "<null>"
+saved_value = null
+
+[sub_resource type="BTAction" id="BTAction_u8y4e"]
+script = ExtResource("3_lb35x")
+_desiredDistance = SubResource("BBVariant_tigt2")
+_target = SubResource("BBVariant_5s3af")
+
+[sub_resource type="BTSequence" id="BTSequence_s22aj"]
+children = [SubResource("BTAction_bt4ic"), SubResource("BTAction_u8y4e")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_au24k")
+root_task = SubResource("BTSequence_s22aj")

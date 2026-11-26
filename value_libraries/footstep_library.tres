@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AudioStreamLibrary" format=3 uid="uid://rl4xjlctpik6"]
+
+[ext_resource type="Script" uid="uid://c1skpap2eci1" path="res://scripts/value_libraries/AudioStreamLibrary.cs" id="1_3u0ol"]
+[ext_resource type="AudioStream" uid="uid://d3brchmbspnhk" path="res://audio/footsteps/footsteps_wood.wav" id="1_oomfk"]
+[ext_resource type="AudioStream" uid="uid://bo310u2sukuns" path="res://audio/footsteps/footsteps_grass.wav" id="2_a3c2a"]
+
+[resource]
+script = ExtResource("1_3u0ol")
+library = {
+&"grass": ExtResource("2_a3c2a"),
+&"wood": ExtResource("1_oomfk")
+}
+metadata/_custom_type_script = "uid://c1skpap2eci1"

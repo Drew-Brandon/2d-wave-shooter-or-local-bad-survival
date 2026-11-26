@@ -1,3 +1,4 @@
+namespace Logic;
 using Godot;
 
 [GlobalClass]

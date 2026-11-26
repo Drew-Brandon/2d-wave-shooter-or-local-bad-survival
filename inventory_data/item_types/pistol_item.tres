@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GunItem" format=3 uid="uid://bdj8n2k2agj75"]
+
+[ext_resource type="Resource" uid="uid://ddasbuk4fsf4n" path="res://inventory_data/item_types/pistol_ammo_item.tres" id="1_as3st"]
+[ext_resource type="Texture2D" uid="uid://5vtbxfbx5xml" path="res://textures/inventory/items/pistol.png" id="1_kv0cl"]
+[ext_resource type="Script" uid="uid://e35upiyjurg4" path="res://scripts/inventory/item_types/GunItemType.cs" id="1_rvyhp"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/physics_items/physics_gun.tscn" id="3_eug1o"]
+
+[resource]
+script = ExtResource("1_rvyhp")
+_ammoType = ExtResource("1_as3st")
+_displayName = &"Pistol"
+_icon = ExtResource("1_kv0cl")
+_physicsScene = ExtResource("3_eug1o")
+metadata/_custom_type_script = "uid://e35upiyjurg4"

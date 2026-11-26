@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cogbxh2f6jgsi"]
+
+[ext_resource type="Script" uid="uid://wn35bmdglyx2" path="res://scripts/visual/TracerSpawner2D.cs" id="1_i7xga"]
+[ext_resource type="PackedScene" uid="uid://bqjuu0fj5xjnp" path="res://scenes/prefabs/visual/bullets/bullet_tracer_line.tscn" id="2_2mmch"]
+
+[node name="BulletTracerSpawner" type="Node2D" unique_id=903606134]
+script = ExtResource("1_i7xga")
+_tracerLifetime = 10
+_spawnPathString = "AlwaysVisisble"
+_spawnScene = ExtResource("2_2mmch")
+metadata/_custom_type_script = "uid://wn35bmdglyx2"

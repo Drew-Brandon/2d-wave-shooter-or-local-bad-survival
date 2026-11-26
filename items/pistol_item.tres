@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GunItemType" format=3 uid="uid://bu8i1adwnbimi"]
+
+[ext_resource type="Resource" uid="uid://bwf5td2ux5yhv" path="res://items/pistol_ammo_item.tres" id="1_ksydg"]
+[ext_resource type="Script" uid="uid://e35upiyjurg4" path="res://scripts/inventory/item_types/GunItemType.cs" id="1_wyoxg"]
+[ext_resource type="PackedScene" uid="uid://bq6e11iujfk13" path="res://scenes/prefabs/dropped_item_instances/dropped_item_body.tscn" id="2_1b06m"]
+[ext_resource type="PackedScene" uid="uid://bkabgniyemip1" path="res://scenes/prefabs/useable_tools/pistol_tool.tscn" id="2_7xul3"]
+[ext_resource type="Texture2D" uid="uid://5vtbxfbx5xml" path="res://textures/inventory/items/pistol.png" id="2_ksydg"]
+[ext_resource type="Resource" uid="uid://d2vuuj6eu3o5i" path="res://projectiles/pistol_bullet.tres" id="5_xdte5"]
+
+[resource]
+script = ExtResource("1_wyoxg")
+_projectile = ExtResource("5_xdte5")
+_ammoType = ExtResource("1_ksydg")
+_displayName = &"Pistol"
+_icon = ExtResource("2_ksydg")
+_equipScene = ExtResource("2_7xul3")
+_dropScene = ExtResource("2_1b06m")
+metadata/_custom_type_script = "uid://e35upiyjurg4"

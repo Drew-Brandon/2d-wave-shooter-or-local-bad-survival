@@ -1,0 +1,114 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://d3jc0gle048ne"]
+
+[ext_resource type="BehaviorTree" uid="uid://c4ydgbxxr43wo" path="res://ai_behavior/trees/subtrees/roam_bt.tres" id="1_ewcd1"]
+[ext_resource type="BehaviorTree" uid="uid://cwfviliqrmo50" path="res://ai_behavior/trees/subtrees/chase_bt.tres" id="2_aq4vp"]
+[ext_resource type="BehaviorTree" uid="uid://bn5i6fui34omr" path="res://ai_behavior/trees/subtrees/search_bt.tres" id="3_ebdy8"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_wo1hy"]
+var/current_state/name = &"current_state"
+var/current_state/type = 21
+var/current_state/value = &"roaming"
+var/current_state/hint = 2
+var/current_state/hint_string = "roaming,chasing,searching"
+var/target_position/name = &"target_position"
+var/target_position/type = 5
+var/target_position/value = Vector2(0, 0)
+var/target_position/hint = 0
+var/target_position/hint_string = ""
+var/target_distance/name = &"target_distance"
+var/target_distance/type = 3
+var/target_distance/value = 0.0
+var/target_distance/hint = 0
+var/target_distance/hint_string = ""
+var/tool_range/name = &"tool_range"
+var/tool_range/type = 3
+var/tool_range/value = 32.0
+var/tool_range/hint = 0
+var/tool_range/hint_string = ""
+var/min_roam_range/name = &"min_roam_range"
+var/min_roam_range/type = 3
+var/min_roam_range/value = 256.0
+var/min_roam_range/hint = 0
+var/min_roam_range/hint_string = ""
+var/max_roam_range/name = &"max_roam_range"
+var/max_roam_range/type = 3
+var/max_roam_range/value = 512.0
+var/max_roam_range/hint = 0
+var/max_roam_range/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_ebdy8"]
+resource_name = "roaming"
+saved_value = &"roaming"
+type = 21
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_q22pv"]
+variable = &"current_state"
+value = SubResource("BBVariant_ebdy8")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_aq4vp"]
+mapping/target_position = &"target_position"
+mapping/min_roam_range = &"min_roam_range"
+mapping/max_roam_range = &"max_roam_range"
+
+[sub_resource type="BTSubtree" id="BTSubtree_ebdy8"]
+blackboard_plan = SubResource("BlackboardPlan_aq4vp")
+subtree = ExtResource("1_ewcd1")
+
+[sub_resource type="BTCooldown" id="BTCooldown_ewcd1"]
+children = [SubResource("BTSubtree_ebdy8")]
+duration = 1.0
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_ewcd1"]
+custom_name = "Roam Sequence"
+children = [SubResource("BTCheckVar_q22pv"), SubResource("BTCooldown_ewcd1")]
+
+[sub_resource type="BBVariant" id="BBVariant_5oos3"]
+resource_name = "chasing"
+saved_value = &"chasing"
+type = 21
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_hjnpy"]
+variable = &"current_state"
+value = SubResource("BBVariant_5oos3")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_q22pv"]
+
+[sub_resource type="BTSubtree" id="BTSubtree_5oos3"]
+blackboard_plan = SubResource("BlackboardPlan_q22pv")
+subtree = ExtResource("2_aq4vp")
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_aq4vp"]
+custom_name = "Chase Sequence"
+children = [SubResource("BTCheckVar_hjnpy"), SubResource("BTSubtree_5oos3")]
+
+[sub_resource type="BBVariant" id="BBVariant_q22pv"]
+resource_name = "searching"
+saved_value = &"searching"
+type = 21
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_5oos3"]
+variable = &"current_state"
+value = SubResource("BBVariant_q22pv")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_5oos3"]
+mapping/target_position = &"target_position"
+mapping/target_distance = &"target_distance"
+mapping/tool_range = &"tool_range"
+mapping/min_roam_range = &"min_roam_range"
+mapping/max_roam_range = &"max_roam_range"
+
+[sub_resource type="BTSubtree" id="BTSubtree_hjnpy"]
+blackboard_plan = SubResource("BlackboardPlan_5oos3")
+subtree = ExtResource("3_ebdy8")
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_ebdy8"]
+custom_name = "Search Sequence"
+children = [SubResource("BTCheckVar_5oos3"), SubResource("BTSubtree_hjnpy")]
+
+[sub_resource type="BTSelector" id="BTSelector_q1i5m"]
+custom_name = "Root Selector"
+children = [SubResource("BTDynamicSequence_ewcd1"), SubResource("BTDynamicSequence_aq4vp"), SubResource("BTDynamicSequence_ebdy8")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_wo1hy")
+root_task = SubResource("BTSelector_q1i5m")

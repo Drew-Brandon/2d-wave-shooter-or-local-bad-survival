@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://bqjs3gmoaqb0i"]
+
+[ext_resource type="Texture2D" uid="uid://dht4asvj24spx" path="res://textures/ui/local_bad_survival_logo.png" id="1_r5g5g"]
+[ext_resource type="PackedScene" uid="uid://ckgtpmxekbitp" path="res://scenes/prefabs/misc/ui/settings_container.tscn" id="2_w2pk4"]
+[ext_resource type="Script" uid="uid://bvgjbd26024ea" path="res://scripts/global_intefaces/SceneOpener.cs" id="3_aahmx"]
+
+[node name="MainMenuUI" type="Control" unique_id=1830697221]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenuItems" type="VBoxContainer" parent="." unique_id=570634257]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 0.1
+anchor_bottom = 1.0
+offset_top = -299.0
+offset_right = 132.0
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0, 1)
+alignment = 2
+
+[node name="LocalBadLogo" type="TextureRect" parent="MainMenuItems" unique_id=1305452190]
+layout_mode = 2
+texture = ExtResource("1_r5g5g")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="PlayButton" type="Button" parent="MainMenuItems" unique_id=680282516]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Play"
+
+[node name="SettingsButton" type="Button" parent="MainMenuItems" unique_id=1357992238]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings
+"
+
+[node name="QuitButton" type="Button" parent="MainMenuItems" unique_id=1615309268]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[node name="Settings" parent="." unique_id=529803184 instance=ExtResource("2_w2pk4")]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_top = -156.0
+offset_right = 391.0
+grow_horizontal = 1
+grow_vertical = 0
+
+[node name="SettingsLabel" parent="Settings" index="0" unique_id=208111661]
+size_flags_horizontal = 0
+
+[node name="SceneOpener" type="Node" parent="." unique_id=998829882]
+script = ExtResource("3_aahmx")
+metadata/_custom_type_script = "uid://bvgjbd26024ea"
+
+[connection signal="pressed" from="MainMenuItems/PlayButton" to="SceneOpener" method="OpenScene" binds= ["res://scenes/playable/office_survival.tscn"]]
+[connection signal="pressed" from="MainMenuItems/SettingsButton" to="MainMenuItems" method="hide"]
+[connection signal="pressed" from="MainMenuItems/SettingsButton" to="Settings" method="show"]
+[connection signal="pressed" from="MainMenuItems/QuitButton" to="SceneOpener" method="Quit"]
+[connection signal="pressed" from="Settings/BackButton" to="MainMenuItems" method="show"]
+[connection signal="pressed" from="Settings/BackButton" to="Settings" method="hide"]
+
+[editable path="Settings"]

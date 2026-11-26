@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://ckgtpmxekbitp"]
+
+[ext_resource type="Script" uid="uid://cufjeckfanvfa" path="res://scripts/settings/WindowModeOptionButton.cs" id="1_4hfn3"]
+[ext_resource type="Script" uid="uid://cpfstximsfuky" path="res://scripts/settings/volume/VolumeRange.cs" id="2_6ytxc"]
+[ext_resource type="Resource" uid="uid://d0lf1bk8o1dkl" path="res://misc/main_audio_bus_settings_group.tres" id="3_mm2s1"]
+[ext_resource type="AudioStream" uid="uid://cuxo1rb0hvwc4" path="res://audio/weapons/rifle_fire.wav" id="5_6ytxc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ytxc"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_8bgfc"]
+font_size = 24
+
+[node name="SettingsContainer" type="VBoxContainer" unique_id=720705198]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsLabel" type="Label" parent="." unique_id=208111661]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_6ytxc")
+horizontal_alignment = 1
+
+[node name="WindowedModeContainer" type="HBoxContainer" parent="." unique_id=1968052758]
+layout_mode = 2
+
+[node name="WindowedModeLabel" type="Label" parent="WindowedModeContainer" unique_id=458126952]
+layout_mode = 2
+text = "Windowed Mode:"
+label_settings = SubResource("LabelSettings_8bgfc")
+
+[node name="WindowModeDropdown" type="OptionButton" parent="WindowedModeContainer" unique_id=533064632]
+layout_mode = 2
+alignment = 1
+selected = 0
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 3
+popup/item_2/text = "Exclusive Fullscreen"
+popup/item_2/id = 4
+script = ExtResource("1_4hfn3")
+_itemModes = Array[int]([0, 3, 4])
+metadata/_custom_type_script = "uid://cufjeckfanvfa"
+
+[node name="VolumeContainer" type="HBoxContainer" parent="." unique_id=1854390108]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="VolumeContainer" unique_id=288685366]
+layout_mode = 2
+text = "Volume:"
+label_settings = SubResource("LabelSettings_8bgfc")
+
+[node name="VolumeSlider" type="HSlider" parent="VolumeContainer" unique_id=1892919343]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 2.0
+step = 0.1
+script = ExtResource("2_6ytxc")
+_busGroup = ExtResource("3_mm2s1")
+metadata/_custom_type_script = "uid://cpfstximsfuky"
+
+[node name="BackButton" type="Button" parent="." unique_id=1855553424]
+layout_mode = 2
+text = "Back"
+
+[node name="VolumeSamplePlayer" type="AudioStreamPlayer" parent="." unique_id=1918403209]
+stream = ExtResource("5_6ytxc")
+pitch_scale = 1.5
+
+[connection signal="drag_ended" from="VolumeContainer/VolumeSlider" to="VolumeSamplePlayer" method="play" unbinds=1]

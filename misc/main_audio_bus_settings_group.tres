@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AudioBusSettingsGroup" format=3 uid="uid://d0lf1bk8o1dkl"]
+
+[ext_resource type="Script" uid="uid://pypgpkf8lj6g" path="res://scripts/settings/volume/AudioBusSettingsGroup.cs" id="1_5beb2"]
+
+[resource]
+script = ExtResource("1_5beb2")
+_audioBusses = Array[StringName]([&"Master", &"Indoors"])
+metadata/_custom_type_script = "uid://pypgpkf8lj6g"

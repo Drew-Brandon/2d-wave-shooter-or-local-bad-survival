@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="GunItemType" format=3 uid="uid://dyhf3u426dmht"]
+
+[ext_resource type="Script" uid="uid://e35upiyjurg4" path="res://scripts/inventory/item_types/GunItemType.cs" id="1_8rpn5"]
+[ext_resource type="Resource" uid="uid://bkg7fexopbw0m" path="res://items/shotgun_ammo_item.tres" id="1_ddo8i"]
+[ext_resource type="PackedScene" uid="uid://bq6e11iujfk13" path="res://scenes/prefabs/dropped_item_instances/dropped_item_body.tscn" id="2_20jei"]
+[ext_resource type="PackedScene" uid="uid://bm3o5cwv7vrqe" path="res://scenes/prefabs/useable_tools/shotgun_tool.tscn" id="2_rmhy7"]
+[ext_resource type="Texture2D" uid="uid://bibcfmof3d0bh" path="res://textures/inventory/items/pro_shotgun.png" id="3_20jei"]
+[ext_resource type="Resource" uid="uid://bgcls73nvvnu" path="res://projectiles/shotgun_projectile.tres" id="5_20jei"]
+
+[resource]
+script = ExtResource("1_8rpn5")
+_maxAmmo = 4
+_projectile = ExtResource("5_20jei")
+_ammoType = ExtResource("1_ddo8i")
+_displayName = &"Shotgun"
+_icon = ExtResource("3_20jei")
+_equipScene = ExtResource("2_rmhy7")
+_dropScene = ExtResource("2_20jei")
+metadata/_custom_type_script = "uid://e35upiyjurg4"

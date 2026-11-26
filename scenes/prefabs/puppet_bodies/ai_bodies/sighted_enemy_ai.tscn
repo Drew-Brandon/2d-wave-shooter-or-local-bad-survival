@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://do56db01u8q0t"]
+
+[ext_resource type="PackedScene" uid="uid://3jb4ygngy1wh" path="res://scenes/prefabs/puppet_bodies/ai_bodies/enemy_body.tscn" id="1_ihlbg"]
+[ext_resource type="Script" uid="uid://vn4b4rapp73x" path="res://scripts/perceptions/Sight.cs" id="2_566ru"]
+[ext_resource type="Script" uid="uid://b1tbr74dvdy31" path="res://scripts/cast_info_2d/ShapeCastInfo2D.cs" id="3_ndqxr"]
+[ext_resource type="Script" uid="uid://blhr4idq26v1e" path="res://scripts/cast_info_2d/RayCastInfo2D.cs" id="4_pg0e2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_inggl"]
+radius = 512.0
+
+[sub_resource type="Resource" id="Resource_ihlbg"]
+script = ExtResource("3_ndqxr")
+_shape = SubResource("CircleShape2D_inggl")
+_collisionMask = 2
+metadata/_custom_type_script = "uid://b1tbr74dvdy31"
+
+[sub_resource type="Resource" id="Resource_566ru"]
+script = ExtResource("4_pg0e2")
+_collisionMask = 11
+metadata/_custom_type_script = "uid://blhr4idq26v1e"
+
+[node name="SightedEnemyAI" unique_id=1950500914 instance=ExtResource("1_ihlbg")]
+
+[node name="Sight" type="Node2D" parent="." index="5" unique_id=205723873 node_paths=PackedStringArray("_ignoreNodeList")]
+script = ExtResource("2_566ru")
+_rangeCast = SubResource("Resource_ihlbg")
+_sightCast = SubResource("Resource_566ru")
+_ignoreNodeList = []
+
+[connection signal="OnLost" from="Sight" to="BBInterface" method="set_var" unbinds=1 binds= [&"current_state", &"searching"]]
+[connection signal="OnSpotted" from="Sight" to="BBInterface" method="set_var" unbinds=1 binds= [&"current_state", &"chasing"]]
+[connection signal="OnSpotted" from="Sight" to="BBInterface" method="set_var_alt" binds= [&"target_node"]]

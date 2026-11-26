@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bqjuu0fj5xjnp"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_08vyl"]
+light_mode = 1
+
+[node name="BulletTracer" type="Line2D" unique_id=801875296]
+material = SubResource("CanvasItemMaterial_08vyl")
+points = PackedVector2Array(0, 0, 128, 0)
+width = 4.0
+default_color = Color(1, 1, 0, 1)

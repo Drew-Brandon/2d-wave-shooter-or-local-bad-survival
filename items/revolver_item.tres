@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="GunItemType" format=3 uid="uid://bvejjlo0kmhrk"]
+
+[ext_resource type="PackedScene" uid="uid://bq6e11iujfk13" path="res://scenes/prefabs/dropped_item_instances/dropped_item_body.tscn" id="1_6x24q"]
+[ext_resource type="Script" uid="uid://e35upiyjurg4" path="res://scripts/inventory/item_types/GunItemType.cs" id="1_kl2rs"]
+[ext_resource type="Resource" uid="uid://cs3n7l4n0i0xo" path="res://items/revolver_ammo_item.tres" id="1_m28bj"]
+[ext_resource type="PackedScene" uid="uid://cq7kbltpevoke" path="res://scenes/prefabs/useable_tools/revolver_tool.tscn" id="2_m28bj"]
+[ext_resource type="Texture2D" uid="uid://cunlil44keoya" path="res://textures/inventory/items/revolver.png" id="4_m28bj"]
+[ext_resource type="Resource" uid="uid://bpsxjfbgvgyak" path="res://projectiles/revolver_bullet.tres" id="5_83aq3"]
+
+[resource]
+script = ExtResource("1_kl2rs")
+_maxAmmo = 6
+_projectile = ExtResource("5_83aq3")
+_ammoType = ExtResource("1_m28bj")
+_displayName = &"Revolver"
+_icon = ExtResource("4_m28bj")
+_equipScene = ExtResource("2_m28bj")
+_dropScene = ExtResource("1_6x24q")
+metadata/_custom_type_script = "uid://e35upiyjurg4"

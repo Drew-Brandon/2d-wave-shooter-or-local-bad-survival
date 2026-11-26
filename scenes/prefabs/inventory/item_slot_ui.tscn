@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dpexa1v6sqxth"]
+
+[ext_resource type="Script" uid="uid://q4fi51pkusvu" path="res://scripts/inventory/ui/ItemSlotUI.cs" id="1_qqaqf"]
+[ext_resource type="Script" uid="uid://c2h6wk1vwvdr0" path="res://scripts/misc/ui/UIDragRerouter.cs" id="2_4x34y"]
+[ext_resource type="PackedScene" uid="uid://dasbjej6jvcny" path="res://scenes/prefabs/inventory/item_drag_slot_ui.tscn" id="2_t8jcv"]
+[ext_resource type="StyleBox" uid="uid://cj5tvj16pj1te" path="res://styles/slot_panel_style.tres" id="3_ttwxd"]
+
+[node name="ItemSlotUI" type="AspectRatioContainer" unique_id=1506934860]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_qqaqf")
+_previewScene = ExtResource("2_t8jcv")
+
+[node name="SlotPanel" type="Panel" parent="." unique_id=967431227 node_paths=PackedStringArray("_target")]
+layout_mode = 2
+mouse_default_cursor_shape = 6
+theme_override_styles/panel = ExtResource("3_ttwxd")
+script = ExtResource("2_4x34y")
+_target = NodePath("..")
+
+[node name="SlotIcon" type="TextureRect" parent="SlotPanel" unique_id=678763423]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="SlotLabel" type="Label" parent="SlotPanel" unique_id=193231982]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 2
+vertical_alignment = 2
+text_overrun_behavior = 1
+
+[connection signal="Brushed" from="." to="SlotPanel" method="set_modulate" binds= [Color(1, 1, 1, 1)]]
+[connection signal="Highlighted" from="." to="SlotPanel" method="set_modulate" binds= [Color(1.8247963, 1.8247963, 1.8247963, 1)]]
+[connection signal="IconUpdated" from="." to="SlotPanel/SlotIcon" method="set_texture"]
+[connection signal="LabelUpdated" from="." to="SlotPanel/SlotLabel" method="set_text"]
+[connection signal="mouse_entered" from="SlotPanel" to="." method="InvokePopup"]
+[connection signal="mouse_exited" from="SlotPanel" to="." method="LosePopup"]

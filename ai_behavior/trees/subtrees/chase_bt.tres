@@ -1,0 +1,54 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://cwfviliqrmo50"]
+
+[ext_resource type="Script" uid="uid://dk44yjb7dd4jg" path="res://scripts/ai_behavior/bt_tasks/move_actions/PursueTarget.cs" id="1_facvf"]
+[ext_resource type="Script" uid="uid://b6i7mdjdalpjq" path="res://scripts/ai_behavior/bt_tasks/UseTool.cs" id="3_t1bu5"]
+[ext_resource type="Script" uid="uid://bevdughvrgoi5" path="res://scripts/ai_behavior/bt_tasks/getters/ShouldUseToolOn.cs" id="3_vts4p"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_wo1hy"]
+
+[sub_resource type="BBVariant" id="BBVariant_facvf"]
+resource_name = "$tool_range"
+value_source = 1
+variable = &"tool_range"
+
+[sub_resource type="BBVariant" id="BBVariant_vts4p"]
+resource_name = "$target_node"
+value_source = 1
+variable = &"target_node"
+
+[sub_resource type="BTAction" id="BTAction_ebdy8"]
+script = ExtResource("1_facvf")
+_desiredDistance = SubResource("BBVariant_facvf")
+_target = SubResource("BBVariant_vts4p")
+
+[sub_resource type="BTCooldown" id="BTCooldown_t64iu"]
+children = [SubResource("BTAction_ebdy8")]
+duration = 0.2
+
+[sub_resource type="BBVariant" id="BBVariant_lgbi4"]
+resource_name = "$target_node"
+value_source = 1
+variable = &"target_node"
+
+[sub_resource type="BTAction" id="BTAction_u4lt1"]
+script = ExtResource("3_vts4p")
+_target = SubResource("BBVariant_lgbi4")
+
+[sub_resource type="BBVariant" id="BBVariant_sxp5n"]
+resource_name = "$target_node"
+value_source = 1
+variable = &"target_node"
+
+[sub_resource type="BTAction" id="BTAction_abxrv"]
+script = ExtResource("3_t1bu5")
+_targPosName = SubResource("BBVariant_sxp5n")
+
+[sub_resource type="BTSequence" id="BTSequence_aw8sy"]
+children = [SubResource("BTAction_u4lt1"), SubResource("BTAction_abxrv")]
+
+[sub_resource type="BTParallel" id="BTParallel_q22pv"]
+children = [SubResource("BTCooldown_t64iu"), SubResource("BTSequence_aw8sy")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_wo1hy")
+root_task = SubResource("BTParallel_q22pv")

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dasbjej6jvcny"]
+
+[ext_resource type="Script" uid="uid://q4fi51pkusvu" path="res://scripts/inventory/ui/ItemSlotUI.cs" id="1_5bu0e"]
+[ext_resource type="StyleBox" uid="uid://cj5tvj16pj1te" path="res://styles/slot_panel_style.tres" id="2_5bu0e"]
+
+[node name="ItemSlotUI" type="AspectRatioContainer" unique_id=1506934860]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_default_cursor_shape = 6
+script = ExtResource("1_5bu0e")
+
+[node name="SlotPanel" type="Panel" parent="." unique_id=967431227]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_5bu0e")
+
+[node name="SlotIcon" type="TextureRect" parent="SlotPanel" unique_id=678763423]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="SlotLabel" type="Label" parent="SlotPanel" unique_id=193231982]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+horizontal_alignment = 2
+vertical_alignment = 2
+text_overrun_behavior = 1
+
+[connection signal="IconUpdated" from="." to="SlotPanel/SlotIcon" method="set_texture"]
+[connection signal="LabelUpdated" from="." to="SlotPanel/SlotLabel" method="set_text"]
+[connection signal="mouse_entered" from="SlotPanel" to="." method="InvokePopup"]
+[connection signal="mouse_exited" from="SlotPanel" to="." method="LosePopup"]

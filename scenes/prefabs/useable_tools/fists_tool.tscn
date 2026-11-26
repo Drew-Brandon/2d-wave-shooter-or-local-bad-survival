@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cic4xeakknbmx"]
+
+[ext_resource type="Script" uid="uid://dv3cmliu65erh" path="res://scripts/useable_tools/MeleeWeaponTool.cs" id="1_4gw5n"]
+[ext_resource type="Script" uid="uid://c7yobg1g1hajb" path="res://scripts/attack_info/HitscanSweeper2D.cs" id="2_q2jsf"]
+[ext_resource type="Resource" uid="uid://drcw45wh7v51e" path="res://cast_info/ray_cast_info/tool_ray_check_cast.tres" id="2_rmyw5"]
+[ext_resource type="Resource" uid="uid://4dn5eycu14x2" path="res://cast_info/ray_cast_info/occluder_ray_cast.tres" id="3_rmyw5"]
+[ext_resource type="Resource" uid="uid://8yi18rb7grle" path="res://single_values/node_paths/always_visible_path.tres" id="4_ji46v"]
+[ext_resource type="Resource" uid="uid://bg1cvx8osd6co" path="res://value_libraries/weapon_impact_library.tres" id="5_ikpfc"]
+
+[node name="FistsTool" type="Node2D" unique_id=1106774859]
+script = ExtResource("1_4gw5n")
+_useCooldown = 750
+_range = 48.0
+_lineOfSightRayCast = ExtResource("2_rmyw5")
+
+[node name="Swinger" type="Marker2D" parent="." unique_id=1455314076]
+script = ExtResource("2_q2jsf")
+_range = 38.0
+_baseDamage = 7.0
+_rayCast = ExtResource("3_rmyw5")
+_impactSpawnPath = ExtResource("4_ji46v")
+_impactData = ExtResource("5_ikpfc")
+
+[connection signal="PowerfullySuccessfulUsed" from="." to="Swinger" method="Swing" unbinds=1]

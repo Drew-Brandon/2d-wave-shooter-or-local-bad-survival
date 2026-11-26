@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dr55te4jyavpu"]
+
+[ext_resource type="AudioStream" uid="uid://pcc8qfefrmjw" path="res://audio/electric_buzz.wav" id="1_016kc"]
+
+[sub_resource type="Gradient" id="Gradient_m4ixq"]
+offsets = PackedFloat32Array(0.22572815, 0.34708738, 0.6400966)
+colors = PackedColorArray(0.9806552, 0.9806552, 0.9806552, 1, 0.7993265, 0.7993265, 0.7993265, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_41a63"]
+gradient = SubResource("Gradient_m4ixq")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="HouseLight" type="PointLight2D" unique_id=1959366911]
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_filter = 2
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_41a63")
+height = 32.0
+
+[node name="LightBuzz" type="AudioStreamPlayer2D" parent="." unique_id=1934561176]
+stream = ExtResource("1_016kc")
+autoplay = true
+max_distance = 512.0
+bus = &"Indoor"

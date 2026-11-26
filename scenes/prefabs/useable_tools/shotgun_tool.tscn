@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://bm3o5cwv7vrqe"]
+
+[ext_resource type="Script" uid="uid://bukt2tchmbumj" path="res://scripts/useable_tools/ManualReloadGunTool.cs" id="1_bamhc"]
+[ext_resource type="PackedScene" uid="uid://cogbxh2f6jgsi" path="res://scenes/prefabs/visual/bullets/bullet_tracer_spawner.tscn" id="3_5ousm"]
+[ext_resource type="Resource" uid="uid://8yi18rb7grle" path="res://single_values/node_paths/always_visible_path.tres" id="3_w0job"]
+[ext_resource type="AudioStream" uid="uid://bxd3bqojqa4ps" path="res://audio/weapons/shotgun_fire.wav" id="4_1cwlv"]
+[ext_resource type="Script" uid="uid://ce2unscdckera" path="res://scripts/plus_variants/AnimationPlayerPlus.cs" id="4_w0job"]
+[ext_resource type="Script" uid="uid://cs37c8b7hkiqj" path="res://scripts/attack_info/HitscanProjectileShooter2D.cs" id="6_bamhc"]
+[ext_resource type="Resource" uid="uid://bgcls73nvvnu" path="res://projectiles/shotgun_projectile.tres" id="7_ry8cr"]
+[ext_resource type="Resource" uid="uid://4dn5eycu14x2" path="res://cast_info/ray_cast_info/occluder_ray_cast.tres" id="9_spfid"]
+[ext_resource type="AudioStream" uid="uid://b8ri6v0kg3wid" path="res://audio/weapons/shotgun_shell_insert.wav" id="10_ry8cr"]
+[ext_resource type="AudioStream" uid="uid://65lacnkg34c2" path="res://audio/weapons/shotgun_pump.wav" id="11_bamhc"]
+
+[sub_resource type="Gradient" id="Gradient_st7nw"]
+offsets = PackedFloat32Array(0, 0.6133005)
+colors = PackedColorArray(0.9477352, 0.9477352, 0.9477352, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0jwe6"]
+gradient = SubResource("Gradient_st7nw")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_st7nw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_0jwe6"]
+resource_name = "flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_di0at"]
+_data = {
+&"RESET": SubResource("Animation_st7nw"),
+&"flash": SubResource("Animation_0jwe6")
+}
+
+[node name="ShotgunTool" type="Node2D" unique_id=1387201087]
+script = ExtResource("1_bamhc")
+_reloadTime = 800
+_useCooldown = 600
+_range = 512.0
+
+[node name="BulletTracer" parent="." unique_id=903606134 instance=ExtResource("3_5ousm")]
+_spawnPath = ExtResource("3_w0job")
+
+[node name="MuzzleFlashLight" type="PointLight2D" parent="." unique_id=1108908262]
+visible = false
+color = Color(1, 1, 0, 1)
+energy = 2.0
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_0jwe6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MuzzleFlashLight" unique_id=1703961943]
+libraries/ = SubResource("AnimationLibrary_di0at")
+script = ExtResource("4_w0job")
+
+[node name="ShotgunAudio" type="AudioStreamPlayer2D" parent="." unique_id=960985172]
+stream = ExtResource("4_1cwlv")
+
+[node name="Shooter" type="Marker2D" parent="." unique_id=1177439025]
+gizmo_extents = 32.0
+script = ExtResource("6_bamhc")
+_maxSpreadDeg = 10.0
+_projectileInfo = ExtResource("7_ry8cr")
+_rayCast = ExtResource("9_spfid")
+
+[node name="ReloadAudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=751297308]
+stream = ExtResource("10_ry8cr")
+volume_db = 6.0
+
+[node name="PumpAudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1344303921]
+stream = ExtResource("11_bamhc")
+volume_db = 6.0
+
+[connection signal="FinishedReload" from="." to="PumpAudioPlayer" method="play"]
+[connection signal="PreciselySuccessfulUse" from="." to="Shooter" method="PreciseFire" unbinds=2]
+[connection signal="RoundLoaded" from="." to="ReloadAudioPlayer" method="play"]
+[connection signal="ProjectileShot" from="Shooter" to="BulletTracer" method="SpawnTracer"]
+[connection signal="ProjectileShot" from="Shooter" to="ShotgunAudio" method="play" unbinds=1]
+[connection signal="ProjectileShot" from="Shooter" to="MuzzleFlashLight/AnimationPlayer" method="PlayOrRestart" unbinds=1 binds= [&"flash"]]

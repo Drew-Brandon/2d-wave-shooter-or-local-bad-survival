@@ -1,0 +1,100 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://duach6joxbk57"]
+
+[ext_resource type="BehaviorTree" uid="uid://pbl5kqxrirnw" path="res://ai_behavior/trees/subtrees/patrol_bt.tres" id="1_ipp5n"]
+[ext_resource type="BehaviorTree" uid="uid://cwfviliqrmo50" path="res://ai_behavior/trees/subtrees/chase_bt.tres" id="4_fqfpa"]
+[ext_resource type="BehaviorTree" uid="uid://bn5i6fui34omr" path="res://ai_behavior/trees/subtrees/search_bt.tres" id="5_cycs5"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_wo1hy"]
+var/current_state/name = &"current_state"
+var/current_state/type = 21
+var/current_state/value = &"roaming"
+var/current_state/hint = 2
+var/current_state/hint_string = "roaming,chasing,searching"
+var/target_position/name = &"target_position"
+var/target_position/type = 5
+var/target_position/value = Vector2(0, 0)
+var/target_position/hint = 0
+var/target_position/hint_string = ""
+var/current_patrol_point/name = &"current_patrol_point"
+var/current_patrol_point/type = 2
+var/current_patrol_point/value = 0
+var/current_patrol_point/hint = 0
+var/current_patrol_point/hint_string = ""
+var/is_reverse/name = &"is_reverse"
+var/is_reverse/type = 1
+var/is_reverse/value = false
+var/is_reverse/hint = 0
+var/is_reverse/hint_string = ""
+var/tool_range/name = &"tool_range"
+var/tool_range/type = 3
+var/tool_range/value = 32.0
+var/tool_range/hint = 0
+var/tool_range/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_ebdy8"]
+resource_name = "roaming"
+saved_value = &"roaming"
+type = 21
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_q22pv"]
+variable = &"current_state"
+value = SubResource("BBVariant_ebdy8")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_qep16"]
+
+[sub_resource type="BTSubtree" id="BTSubtree_fqfpa"]
+blackboard_plan = SubResource("BlackboardPlan_qep16")
+subtree = ExtResource("1_ipp5n")
+
+[sub_resource type="BTDelay" id="BTDelay_fqfpa"]
+children = [SubResource("BTSubtree_fqfpa")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_ewcd1"]
+custom_name = "Patrol Sequence"
+children = [SubResource("BTCheckVar_q22pv"), SubResource("BTDelay_fqfpa")]
+
+[sub_resource type="BBVariant" id="BBVariant_5oos3"]
+resource_name = "chasing"
+saved_value = &"chasing"
+type = 21
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_hjnpy"]
+variable = &"current_state"
+value = SubResource("BBVariant_5oos3")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_40wiq"]
+
+[sub_resource type="BTSubtree" id="BTSubtree_jgxam"]
+blackboard_plan = SubResource("BlackboardPlan_40wiq")
+subtree = ExtResource("4_fqfpa")
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_aq4vp"]
+custom_name = "Chase Sequence"
+children = [SubResource("BTCheckVar_hjnpy"), SubResource("BTSubtree_jgxam")]
+
+[sub_resource type="BBVariant" id="BBVariant_q22pv"]
+resource_name = "searching"
+saved_value = &"searching"
+type = 21
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_5oos3"]
+variable = &"current_state"
+value = SubResource("BBVariant_q22pv")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_r1exm"]
+
+[sub_resource type="BTSubtree" id="BTSubtree_ao6h8"]
+blackboard_plan = SubResource("BlackboardPlan_r1exm")
+subtree = ExtResource("5_cycs5")
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_ebdy8"]
+custom_name = "Search Sequence"
+children = [SubResource("BTCheckVar_5oos3"), SubResource("BTSubtree_ao6h8")]
+
+[sub_resource type="BTSelector" id="BTSelector_q1i5m"]
+custom_name = "Root Selector"
+children = [SubResource("BTDynamicSequence_ewcd1"), SubResource("BTDynamicSequence_aq4vp"), SubResource("BTDynamicSequence_ebdy8")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_wo1hy")
+root_task = SubResource("BTSelector_q1i5m")

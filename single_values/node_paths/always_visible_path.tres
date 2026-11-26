@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="NodePathResource" format=3 uid="uid://8yi18rb7grle"]
+
+[ext_resource type="Script" uid="uid://bf36w0fwron16" path="res://scripts/value_resources/NodePathResource.cs" id="1_3vvuw"]
+
+[resource]
+script = ExtResource("1_3vvuw")
+_pathStrProperty = "AlwaysVisible"
+metadata/_custom_type_script = "uid://bf36w0fwron16"

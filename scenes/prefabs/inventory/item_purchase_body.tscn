@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://dkhkusv8y62ip"]
+
+[ext_resource type="Script" uid="uid://b7640ps67o7nv" path="res://scripts/interactables/InteractableButton.cs" id="1_u68u7"]
+[ext_resource type="Script" uid="uid://dqjnhxjvxer6u" path="res://scripts/survival_gamemode/points_system/PointsCharger.cs" id="2_1fqei"]
+[ext_resource type="Script" uid="uid://blhr4idq26v1e" path="res://scripts/cast_info_2d/RayCastInfo2D.cs" id="2_hy5oh"]
+[ext_resource type="Script" uid="uid://cbicotjq75ryw" path="res://scripts/inventory/InventoryAdder.cs" id="3_7bte0"]
+
+[sub_resource type="Resource" id="Resource_xkl7u"]
+script = ExtResource("2_hy5oh")
+_collisionMask = 79
+metadata/_custom_type_script = "uid://blhr4idq26v1e"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d7f6k"]
+radius = 16.0
+
+[sub_resource type="Animation" id="Animation_7bte0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ItemPurchaseSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hy5oh"]
+resource_name = "item_glow"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ItemPurchaseSprite:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2.1168277, 2.1168277, 2.1168277, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xkl7u"]
+_data = {
+&"RESET": SubResource("Animation_7bte0"),
+&"item_glow": SubResource("Animation_hy5oh")
+}
+
+[node name="ItemPurchaseBody" type="StaticBody2D" unique_id=1630922756]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_u68u7")
+_lineOfSightCast = SubResource("Resource_xkl7u")
+
+[node name="ItemPurchaseCollision" type="CollisionShape2D" parent="." unique_id=419827793]
+shape = SubResource("CircleShape2D_d7f6k")
+
+[node name="ItemPurchaseSprite" type="Sprite2D" parent="." unique_id=158641875]
+
+[node name="PointsCharger" type="Node" parent="." unique_id=1200418131]
+script = ExtResource("2_1fqei")
+
+[node name="ItemAdder" type="Node" parent="." unique_id=1614313111]
+script = ExtResource("3_7bte0")
+_toAdd = Array[Object]([])
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=809594925]
+libraries/ = SubResource("AnimationLibrary_xkl7u")
+autoplay = &"item_glow"
+
+[connection signal="InteractionStarted" from="." to="PointsCharger" method="ChargePoints" unbinds=1]
+[connection signal="ChargeSucceeded" from="PointsCharger" to="ItemAdder" method="AddToDefault"]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StackableItemType" format=3 uid="uid://bkg7fexopbw0m"]
+
+[ext_resource type="PackedScene" uid="uid://bq6e11iujfk13" path="res://scenes/prefabs/dropped_item_instances/dropped_item_body.tscn" id="1_4due4"]
+[ext_resource type="Script" uid="uid://xnyqa1m05toa" path="res://scripts/inventory/item_types/StackableItemType.cs" id="1_81u3r"]
+[ext_resource type="Texture2D" uid="uid://d0ysbg5wsik0r" path="res://textures/inventory/items/shotgun_ammo_small.png" id="1_86rw4"]
+
+[resource]
+script = ExtResource("1_81u3r")
+_maxAmount = 15
+_displayName = &"Shotgun Ammo"
+_icon = ExtResource("1_86rw4")
+_dropScene = ExtResource("1_4due4")
+metadata/_custom_type_script = "uid://xnyqa1m05toa"

@@ -1,0 +1,321 @@
+[gd_scene format=3 uid="uid://b3kej3pnf6py6"]
+
+[ext_resource type="Texture2D" uid="uid://d0jo7c1ifly7y" path="res://textures/humanoids/top_down_blue_human.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://dxddbunewhad2" path="res://scripts/puppets/bodies/PlayerBodyTop2D.cs" id="1_g2els"]
+[ext_resource type="Script" uid="uid://blhr4idq26v1e" path="res://scripts/cast_info_2d/RayCastInfo2D.cs" id="2_smehm"]
+[ext_resource type="Script" uid="uid://boxvmg8ei5fa3" path="res://scripts/puppets/controllers/PlayerControllerTop2D.cs" id="3_qhqgy"]
+[ext_resource type="Resource" uid="uid://xannjmwg583" path="res://cast_info/shape_cast_info/interact_shape_cast.tres" id="3_shbrq"]
+[ext_resource type="Texture2D" uid="uid://bkco5r3t5iwkd" path="res://textures/humanoids/dying_top_down_blue_human.png" id="6_6jpwt"]
+[ext_resource type="Script" uid="uid://blihqo3laky7l" path="res://scripts/logic/ShaderSetter.cs" id="8_c1k3r"]
+[ext_resource type="Script" uid="uid://dp1rcf5l0h6jy" path="res://scripts/visual/FOVRaycasting.cs" id="8_gkb8g"]
+[ext_resource type="PackedScene" uid="uid://5ffeocbcngh8" path="res://scenes/prefabs/misc/humanoid_motion_audio.tscn" id="8_ksg4u"]
+[ext_resource type="Resource" uid="uid://rl4xjlctpik6" path="res://value_libraries/footstep_library.tres" id="9_fttym"]
+[ext_resource type="Material" uid="uid://cxytwln84dpfs" path="res://materials/fov_effect_mat.tres" id="10_c1k3r"]
+[ext_resource type="Script" uid="uid://c761qpkkae6ho" path="res://scripts/inventory/inventory_types/StaticInventory.cs" id="11_ckd70"]
+[ext_resource type="Script" uid="uid://cibwlvk4ayea" path="res://scripts/puppets/PuppetSpeedMultiplierData.cs" id="11_sd2l4"]
+[ext_resource type="Script" uid="uid://botpmjmdqlrcr" path="res://scripts/health_sources/SkeletalHealthSource.cs" id="12_fttym"]
+[ext_resource type="Script" uid="uid://dcskfpwjdhvnj" path="res://scripts/health_sources/SkeletonPartInfo.cs" id="13_sd2l4"]
+[ext_resource type="Resource" uid="uid://bcvx7fo7pj3pc" path="res://single_values/node_paths/only_fov_path.tres" id="13_yb72s"]
+[ext_resource type="PackedScene" uid="uid://w73s7htvvcab" path="res://scenes/prefabs/misc/ui/player_viewport_ui_layer.tscn" id="14_fttym"]
+[ext_resource type="AudioStream" uid="uid://c3o6hohdrpqnf" path="res://audio/weapons/holster_weapon.wav" id="17_o0v8h"]
+
+[sub_resource type="Resource" id="Resource_c1k3r"]
+script = ExtResource("2_smehm")
+_collisionMask = 65
+metadata/_custom_type_script = "uid://blhr4idq26v1e"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shbrq"]
+atlas = ExtResource("6_6jpwt")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_peoox"]
+atlas = ExtResource("6_6jpwt")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8m0td"]
+atlas = ExtResource("6_6jpwt")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k30bg"]
+animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_shbrq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_peoox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8m0td")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
+
+[sub_resource type="Resource" id="Resource_sd2l4"]
+script = ExtResource("11_sd2l4")
+_name = &"sprint"
+_multiplier = 2.0
+metadata/_custom_type_script = "uid://cibwlvk4ayea"
+
+[sub_resource type="Resource" id="Resource_yb72s"]
+script = ExtResource("13_sd2l4")
+_healthMultipliers = Dictionary[StringName, float]({})
+metadata/_custom_type_script = "uid://dcskfpwjdhvnj"
+
+[sub_resource type="Animation" id="Animation_o0v8h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSwivel/FOVRaycasting:_inFovRange")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [660.873]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSwivel/FOVRaycasting:_outFovRange")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [64.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerViewportUILayer/GameOverDisplay:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerViewportUILayer/GameOverDisplay:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6jpwt"]
+resource_name = "death"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSwivel/FOVRaycasting:_inFovRange")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.826, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [734.303, 64.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSwivel/FOVRaycasting:_outFovRange")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.826, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [64.0, 64.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerViewportUILayer/GameOverDisplay:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerViewportUILayer/GameOverDisplay:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2, 2.4, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_shbrq"]
+_data = {
+&"RESET": SubResource("Animation_o0v8h"),
+&"death": SubResource("Animation_6jpwt")
+}
+
+[node name="PlayerBody" type="CharacterBody2D" unique_id=1866261614 node_paths=PackedStringArray("_viewportUILayer", "_worldUILayer", "_popupRelay", "_inventory", "_healthSource", "_toolsParent", "_swivel")]
+collision_layer = 2
+collision_mask = 77
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_g2els")
+_viewportUILayer = NodePath("PlayerViewportUILayer")
+_worldUILayer = NodePath("PlayerWorldUILayer")
+_pointCast = ExtResource("3_shbrq")
+_popupRelay = NodePath("PlayerViewportUILayer/InGameDisplay/ListPopup/ListPopupRelay")
+_inventory = NodePath("PlayerInventory")
+_healthSource = NodePath("PlayerHealthSource")
+_toolsParent = NodePath("PlayerSwivel/PlayerToolsParent")
+_swivel = NodePath("PlayerSwivel")
+metadata/_custom_type_script = "uid://dxddbunewhad2"
+metadata/surface_type = &"flesh"
+
+[node name="PlayerSwivel" type="Node2D" parent="." unique_id=30855860]
+
+[node name="FOVRaycasting" type="Node2D" parent="PlayerSwivel" unique_id=635296151]
+script = ExtResource("8_gkb8g")
+_fovAngleDeg = 70.0
+_angleStepDeg = 1.0
+_inFovRange = 660.873
+_fovRay = SubResource("Resource_c1k3r")
+
+[node name="PlayerSprite" type="Sprite2D" parent="PlayerSwivel" unique_id=1848432402]
+light_mask = 2
+visibility_layer = 2
+z_index = 1
+texture = ExtResource("1_3vyb7")
+
+[node name="PlayerToolsParent" type="Node2D" parent="PlayerSwivel" unique_id=806618864]
+
+[node name="DeathAnimationSprite" type="AnimatedSprite2D" parent="PlayerSwivel" unique_id=1037250966]
+visible = false
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_k30bg")
+animation = &"death"
+frame = 2
+frame_progress = 1.0
+
+[node name="FOVBackBufferCopy" type="BackBufferCopy" parent="." unique_id=235485409]
+copy_mode = 2
+
+[node name="FOVShaderSetter" type="Node" parent="." unique_id=1096661365 node_paths=PackedStringArray("_node")]
+script = ExtResource("8_c1k3r")
+_node = NodePath("../FOVOverlay")
+
+[node name="FOVOverlay" type="Polygon2D" parent="." unique_id=772858289]
+z_index = 2
+material = ExtResource("10_c1k3r")
+polygon = PackedVector2Array(-640, 360, -640, -360, 640, -360, 640, 360)
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="." unique_id=1045529414]
+shape = SubResource("CircleShape2D_qhqgy")
+
+[node name="PlayerAudioListener" type="AudioListener2D" parent="." unique_id=1534599888]
+
+[node name="HumanoidMotionAudio" parent="." unique_id=107082883 instance=ExtResource("8_ksg4u")]
+volume_db = -4.0
+_baseSpeed = 100.0
+_audioLibrary = ExtResource("9_fttym")
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=2013863081]
+zoom = Vector2(1.5, 1.5)
+limit_enabled = false
+
+[node name="PlayerController" type="Node" parent="." unique_id=1206320529 node_paths=PackedStringArray("_bodyProperty")]
+script = ExtResource("3_qhqgy")
+_sprintMultiplier = SubResource("Resource_sd2l4")
+_maxSwingAmount = 128.0
+_maxSwingSpeed = 1.5
+_interactAction = &"toggle_interact"
+_toggleInventoryAction = &"toggle_inventory"
+_useToolAction = &"use_tool"
+_reloadGunAction = &"reload"
+_sprintAction = &"sprint"
+_moveLeftAction = &"move_left"
+_moveRightAction = &"move_right"
+_moveUpAction = &"move_up"
+_moveDownAction = &"move_down"
+_equipItem1Action = &"equip_item_1"
+_equipItem2Action = &"equip_item_2"
+_equipItem3Action = &"equip_item_3"
+_equipItem4Action = &"equip_item_4"
+_cancelReloadGunAction = &"cancel_reload"
+_bodyProperty = NodePath("..")
+
+[node name="PlayerInventory" type="Node2D" parent="." unique_id=1074829005]
+script = ExtResource("11_ckd70")
+_inventorySize = 16
+_dropPath = ExtResource("13_yb72s")
+
+[node name="PlayerHealthSource" type="Node" parent="." unique_id=949640689 node_paths=PackedStringArray("_origin")]
+script = ExtResource("12_fttym")
+_healthMultipliers = SubResource("Resource_yb72s")
+_origin = NodePath("..")
+_maxHealth = 100.0
+_curHealth = 100.0
+metadata/_custom_type_script = "uid://botpmjmdqlrcr"
+
+[node name="PlayerWorldUILayer" type="CanvasLayer" parent="." unique_id=490218622]
+follow_viewport_enabled = true
+
+[node name="PlayerViewportUILayer" parent="." unique_id=1749849002 instance=ExtResource("14_fttym")]
+
+[node name="InventoryUI" parent="PlayerViewportUILayer/InGameDisplay" parent_id_path=PackedInt32Array(1749849002, 2146669687) index="1" unique_id=115383930 node_paths=PackedStringArray("_inventory")]
+_startIndex = 4
+_inventory = NodePath("../../../PlayerInventory")
+
+[node name="HotbarUI" parent="PlayerViewportUILayer/InGameDisplay/GameplayDisplay" parent_id_path=PackedInt32Array(1749849002, 143846741) index="1" unique_id=1168766035 node_paths=PackedStringArray("_inventory")]
+_inventory = NodePath("../../../../PlayerInventory")
+
+[node name="EquipAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1435379574]
+stream = ExtResource("17_o0v8h")
+volume_db = -4.0
+
+[node name="PlayerAnimations" type="AnimationPlayer" parent="." unique_id=216041886]
+libraries/ = SubResource("AnimationLibrary_shbrq")
+
+[connection signal="InventoryClosed" from="." to="PlayerViewportUILayer/InGameDisplay/InventoryUI" method="hide"]
+[connection signal="InventoryClosed" from="." to="PlayerViewportUILayer/InGameDisplay/GameplayDisplay/HotbarUI" method="LockDragging"]
+[connection signal="InventoryClosed" from="." to="PlayerViewportUILayer/InGameDisplay/ItemDropArea" method="set_mouse_filter" binds= [2]]
+[connection signal="InventoryOpened" from="." to="PlayerViewportUILayer/InGameDisplay/InventoryUI" method="show"]
+[connection signal="InventoryOpened" from="." to="PlayerViewportUILayer/InGameDisplay/GameplayDisplay/HotbarUI" method="UnlockDragging"]
+[connection signal="InventoryOpened" from="." to="PlayerViewportUILayer/InGameDisplay/ItemDropArea" method="set_mouse_filter" binds= [0]]
+[connection signal="SlotEquipped" from="." to="PlayerViewportUILayer/InGameDisplay/GameplayDisplay/HotbarUI" method="HighlightSlot"]
+[connection signal="SlotUnequipped" from="." to="PlayerViewportUILayer/InGameDisplay/GameplayDisplay/HotbarUI" method="BrushSlot"]
+[connection signal="ToolChanged" from="." to="EquipAudioPlayer" method="play" unbinds=1]
+[connection signal="OnFOVUpdatedGlobal" from="PlayerSwivel/FOVRaycasting" to="FOVShaderSetter" method="SetShaderParamAlt" binds= [&"fov_verts"]]
+[connection signal="OnFOVVertCountUpdated" from="PlayerSwivel/FOVRaycasting" to="FOVShaderSetter" method="SetShaderParamAlt" binds= [&"fov_vert_count"]]
+[connection signal="Died" from="PlayerHealthSource" to="." method="UnequipTool" unbinds=1]
+[connection signal="Died" from="PlayerHealthSource" to="PlayerSwivel/PlayerSprite" method="hide" unbinds=1]
+[connection signal="Died" from="PlayerHealthSource" to="PlayerSwivel/DeathAnimationSprite" method="show" unbinds=1]
+[connection signal="Died" from="PlayerHealthSource" to="PlayerWorldUILayer" method="hide" unbinds=1]
+[connection signal="Died" from="PlayerHealthSource" to="." method="SetFrozenState" unbinds=1 binds= [true]]
+[connection signal="Died" from="PlayerHealthSource" to="PlayerSwivel/DeathAnimationSprite" method="play" unbinds=1 binds= [&"death"]]
+[connection signal="Died" from="PlayerHealthSource" to="PlayerController" method="SetEnabledState" unbinds=1 binds= [false]]
+[connection signal="Died" from="PlayerHealthSource" to="PlayerAnimations" method="play" unbinds=1 binds= [&"death"]]
+[connection signal="HealthChanged" from="PlayerHealthSource" to="PlayerViewportUILayer/InGameDisplay/GameplayDisplay/StatsPanel/StatsContainer/PlayerHealthDisplay" method="SetTextWithPrefixAndCeilFloat" unbinds=1]
+
+[editable path="PlayerViewportUILayer"]
+[editable path="PlayerViewportUILayer/InGameDisplay/ListPopup"]

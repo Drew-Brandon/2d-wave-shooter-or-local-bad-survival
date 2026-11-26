@@ -1,0 +1,167 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://gkwxo4wq0n0q"]
+
+[ext_resource type="BehaviorTree" uid="uid://cwfviliqrmo50" path="res://ai_behavior/trees/subtrees/chase_bt.tres" id="1_ikdkq"]
+[ext_resource type="Script" uid="uid://c0nxrcbj435x6" path="res://scripts/ai_behavior/bt_tasks/WaitForSignal.cs" id="1_mix8m"]
+[ext_resource type="BehaviorTree" uid="uid://bn5i6fui34omr" path="res://ai_behavior/trees/subtrees/search_bt.tres" id="2_kn3ih"]
+[ext_resource type="Script" uid="uid://c7jhqi45i8wjo" path="res://scripts/ai_behavior/bt_tasks/move_actions/MoveTo.cs" id="2_mix8m"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_1na07"]
+var/current_state/name = &"current_state"
+var/current_state/type = 21
+var/current_state/value = &"roaming"
+var/current_state/hint = 2
+var/current_state/hint_string = "roaming,chasing,searching"
+var/target_position/name = &"target_position"
+var/target_position/type = 5
+var/target_position/value = Vector2(0, 0)
+var/target_position/hint = 0
+var/target_position/hint_string = ""
+var/target_distance/name = &"target_distance"
+var/target_distance/type = 3
+var/target_distance/value = 0.0
+var/target_distance/hint = 0
+var/target_distance/hint_string = ""
+var/tool_range/name = &"tool_range"
+var/tool_range/type = 3
+var/tool_range/value = 32.0
+var/tool_range/hint = 0
+var/tool_range/hint_string = ""
+var/min_roam_range/name = &"min_roam_range"
+var/min_roam_range/type = 3
+var/min_roam_range/value = 256.0
+var/min_roam_range/hint = 0
+var/min_roam_range/hint_string = ""
+var/max_roam_range/name = &"max_roam_range"
+var/max_roam_range/type = 3
+var/max_roam_range/value = 512.0
+var/max_roam_range/hint = 0
+var/max_roam_range/hint_string = ""
+var/rally_radius/name = &"rally_radius"
+var/rally_radius/type = 3
+var/rally_radius/value = 0.0
+var/rally_radius/hint = 0
+var/rally_radius/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_mix8m"]
+resource_name = "roaming"
+saved_value = &"roaming"
+type = 21
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_4b43w"]
+variable = &"current_state"
+value = SubResource("BBVariant_mix8m")
+
+[sub_resource type="BTAction" id="BTAction_4b43w"]
+script = ExtResource("1_mix8m")
+_failOnSignal = true
+_nodeName = &"horde_manager"
+_signalName = &"OnNewRallyPointAssigned"
+
+[sub_resource type="BBNode" id="BBNode_mix8m"]
+resource_name = "$horde_manager"
+value_source = 1
+variable = &"horde_manager"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_4b43w"]
+node = SubResource("BBNode_mix8m")
+method = &"GetRallyPoint"
+result_var = &"target_position"
+
+[sub_resource type="BBNode" id="BBNode_6qvwy"]
+resource_name = "$horde_manager"
+value_source = 1
+variable = &"horde_manager"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_nweoa"]
+node = SubResource("BBNode_6qvwy")
+method = &"NotifyMemberArrival"
+
+[sub_resource type="BBVariant" id="BBVariant_6qvwy"]
+resource_name = "<null>"
+saved_value = null
+
+[sub_resource type="BBVariant" id="BBVariant_nweoa"]
+resource_name = "$target_position"
+value_source = 1
+variable = &"target_position"
+
+[sub_resource type="BTAction" id="BTAction_nweoa"]
+script = ExtResource("2_mix8m")
+_desiredDist = SubResource("BBVariant_6qvwy")
+_targ = SubResource("BBVariant_nweoa")
+
+[sub_resource type="BBNode" id="BBNode_4b43w"]
+resource_name = "$horde_manager"
+value_source = 1
+variable = &"horde_manager"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_6qvwy"]
+node = SubResource("BBNode_4b43w")
+method = &"GetRallyRadius"
+result_var = &"rally_radius"
+
+[sub_resource type="BTSequence" id="BTSequence_6ddht"]
+custom_name = "Horde Move Sequence"
+children = [SubResource("BTCallMethod_4b43w"), SubResource("BTCallMethod_nweoa"), SubResource("BTAction_nweoa"), SubResource("BTCallMethod_6qvwy")]
+
+[sub_resource type="BTParallel" id="BTParallel_6qvwy"]
+custom_name = "Horde Update Sequence"
+children = [SubResource("BTAction_4b43w"), SubResource("BTSequence_6ddht")]
+
+[sub_resource type="BTAction" id="BTAction_mix8m"]
+script = ExtResource("1_mix8m")
+_nodeName = &"horde_manager"
+_signalName = &"OnNewRallyPointAssigned"
+
+[sub_resource type="BTSequence" id="BTSequence_4b43w"]
+custom_name = "Horde Roam Sequence"
+children = [SubResource("BTParallel_6qvwy"), SubResource("BTAction_mix8m")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_nweoa"]
+custom_name = "Roam Sequence"
+children = [SubResource("BTCheckVar_4b43w"), SubResource("BTSequence_4b43w")]
+
+[sub_resource type="BBVariant" id="BBVariant_6ddht"]
+resource_name = "chasing"
+saved_value = &"chasing"
+type = 21
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_vlgq7"]
+variable = &"current_state"
+value = SubResource("BBVariant_6ddht")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_q22pv"]
+
+[sub_resource type="BTSubtree" id="BTSubtree_0j014"]
+blackboard_plan = SubResource("BlackboardPlan_q22pv")
+subtree = ExtResource("1_ikdkq")
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_on0ja"]
+custom_name = "Chase Sequence"
+children = [SubResource("BTCheckVar_vlgq7"), SubResource("BTSubtree_0j014")]
+
+[sub_resource type="BBVariant" id="BBVariant_w4igf"]
+resource_name = "searching"
+saved_value = &"searching"
+type = 21
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_7adpd"]
+variable = &"current_state"
+value = SubResource("BBVariant_w4igf")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_5oos3"]
+
+[sub_resource type="BTSubtree" id="BTSubtree_8skkl"]
+blackboard_plan = SubResource("BlackboardPlan_5oos3")
+subtree = ExtResource("2_kn3ih")
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_eiocs"]
+custom_name = "Search Sequence"
+children = [SubResource("BTCheckVar_7adpd"), SubResource("BTSubtree_8skkl")]
+
+[sub_resource type="BTSelector" id="BTSelector_mua4a"]
+children = [SubResource("BTDynamicSequence_nweoa"), SubResource("BTDynamicSequence_on0ja"), SubResource("BTDynamicSequence_eiocs")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_1na07")
+root_task = SubResource("BTSelector_mua4a")

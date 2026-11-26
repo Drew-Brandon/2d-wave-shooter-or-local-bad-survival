@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemInstanceBlueprint" format=3 uid="uid://d4h4al5atf1ia"]
+
+[ext_resource type="Resource" uid="uid://ddasbuk4fsf4n" path="res://inventory_data/item_types/pistol_ammo_item.tres" id="1_6e3ou"]
+[ext_resource type="Script" uid="uid://dyfmea0bpq56g" path="res://scripts/inventory/ItemInstanceBlueprint.cs" id="2_mdrjb"]
+
+[resource]
+script = ExtResource("2_mdrjb")
+object_type = 3
+Amount = 5
+BaseItem = ExtResource("1_6e3ou")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"

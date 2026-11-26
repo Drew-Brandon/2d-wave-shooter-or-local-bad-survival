@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cc837vcqm7wy3"]
+
+[ext_resource type="Texture2D" uid="uid://cm1jku8fdh2ri" path="res://textures/ui/RedOutline.png" id="1_3patj"]
+[ext_resource type="Script" uid="uid://dfibmle3y882x" path="res://scripts/logic/Area2DButton.cs" id="1_nkss1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkss1"]
+size = Vector2(32, 32)
+
+[node name="AimButton" type="Area2D" unique_id=1234555470]
+collision_mask = 0
+script = ExtResource("1_nkss1")
+_triggerInput = &"use"
+
+[node name="AimSprite" type="Sprite2D" parent="." unique_id=485831447]
+z_index = 2
+texture = ExtResource("1_3patj")
+
+[node name="AimCollision" type="CollisionShape2D" parent="." unique_id=768137472]
+position = Vector2(0, 1.5258789e-05)
+shape = SubResource("RectangleShape2D_nkss1")

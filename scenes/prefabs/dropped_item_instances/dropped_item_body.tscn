@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bq6e11iujfk13"]
+
+[ext_resource type="Script" uid="uid://b2ayywp0si8g8" path="res://scripts/inventory/DroppedItemInstance.cs" id="1_uiyce"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7jhmh"]
+
+[node name="DroppedItemBody" type="StaticBody2D" unique_id=1508708952]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_uiyce")
+
+[node name="DroppedItemCollision" type="CollisionShape2D" parent="." unique_id=1634433943]
+shape = SubResource("CircleShape2D_7jhmh")
+
+[node name="DroppedItemSprite" type="Sprite2D" parent="." unique_id=464961971]
+scale = Vector2(0.25, 0.25)
+
+[connection signal="IconChanged" from="." to="DroppedItemSprite" method="set_texture"]

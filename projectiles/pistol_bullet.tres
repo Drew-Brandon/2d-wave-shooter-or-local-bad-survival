@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProjectileInfo2D" format=3 uid="uid://d2vuuj6eu3o5i"]
+
+[ext_resource type="Resource" uid="uid://bg1cvx8osd6co" path="res://value_libraries/weapon_impact_library.tres" id="1_b1qgf"]
+[ext_resource type="Resource" uid="uid://8yi18rb7grle" path="res://single_values/node_paths/always_visible_path.tres" id="2_psas6"]
+[ext_resource type="Script" uid="uid://bbnuyfhpcq3bi" path="res://scripts/attack_info/ProjectileInfo2D.cs" id="3_lmgns"]
+
+[resource]
+script = ExtResource("3_lmgns")
+_impactSpawnPath = ExtResource("2_psas6")
+_impactData = ExtResource("1_b1qgf")
+metadata/_custom_type_script = "uid://bbnuyfhpcq3bi"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NodeReference" format=3 uid="uid://cobov5t16fya5"]
+
+[ext_resource type="Script" uid="uid://j7qxhlu3fy6" path="res://scripts/global_references/NodeReference.cs" id="1_osi31"]
+
+[resource]
+script = ExtResource("1_osi31")
+_nodeType = "TileMapLayer"
+_nodeName = &"Test"
+metadata/_custom_type_script = "uid://j7qxhlu3fy6"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NodeRefRelay" format=3 uid="uid://cjtwb4xjh2bef"]
+
+[ext_resource type="Script" uid="uid://ce21pdeho0ege" path="res://scripts/node_ref/NodeRefRelay.cs" id="1_7ivdl"]
+
+[resource]
+script = ExtResource("1_7ivdl")
+_refNamesArrayProperty = [&"geometry_tile_map"]
+ref_names_changed = true
+metadata/_custom_type_script = "uid://ce21pdeho0ege"

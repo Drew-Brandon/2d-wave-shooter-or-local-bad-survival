@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://c5lap555fdby7"]
+
+[ext_resource type="Script" uid="uid://b4i1nmemducdq" path="res://scripts/puppets/bodies/EnemyBody.cs" id="1_pg0e2"]
+[ext_resource type="Texture2D" uid="uid://ckk0p2mfvdxhd" path="res://textures/humanoids/cyber/cyber_agent.png" id="3_1ekfl"]
+[ext_resource type="Script" path="res://scripts/useable_tools/HitscanWeapon.cs" id="4_572g2"]
+[ext_resource type="Script" uid="uid://blhr4idq26v1e" path="res://scripts/cast_info_2d/RayCastInfo2D.cs" id="4_pg0e2"]
+[ext_resource type="Script" uid="uid://caiy12wkmql14" path="res://scripts/ai_behavior/BlackboardInterface.gd" id="6_sac2l"]
+[ext_resource type="Script" uid="uid://bt3uuk24wmlbh" path="res://scripts/ai_behavior/BlackboardValues.gd" id="7_yllff"]
+[ext_resource type="BehaviorTree" uid="uid://cwfviliqrmo50" path="res://ai_behavior/trees/subtrees/chase_bt.tres" id="8_hn0gx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cu448"]
+radius = 12.0
+
+[sub_resource type="Resource" id="Resource_sfocm"]
+script = ExtResource("4_pg0e2")
+_collisionMask = 11
+metadata/_custom_type_script = "uid://blhr4idq26v1e"
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_j6tal"]
+
+[node name="ChaserEnemyAI" type="CharacterBody2D" unique_id=1950500914 node_paths=PackedStringArray("_navAgent", "_swivel")]
+collision_layer = 4
+script = ExtResource("1_pg0e2")
+_navAgent = NodePath("NavigationAgent2D")
+_rotWeight = 1.0
+_swivel = NodePath(".")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1190193900]
+shape = SubResource("CircleShape2D_cu448")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1071661949]
+texture_filter = 1
+texture = ExtResource("3_1ekfl")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1597897872]
+path_desired_distance = 2.0
+target_desired_distance = 32.0
+avoidance_enabled = true
+radius = 8.0
+neighbor_distance = 16.0
+max_neighbors = 16
+max_speed = 150.0
+
+[node name="FootstepPlayer" type="AudioStreamPlayer2D" parent="." unique_id=468124015]
+volume_db = -4.0
+attenuation = 3.9999993
+
+[node name="Fists" type="Node2D" parent="." unique_id=163123261]
+script = ExtResource("4_572g2")
+_hitscanInfo = SubResource("Resource_sfocm")
+_range = 32.0
+
+[node name="BBInterface" type="Node" parent="." unique_id=923858847 node_paths=PackedStringArray("bt_plyr")]
+script = ExtResource("6_sac2l")
+bt_plyr = NodePath("../BTPlayer")
+
+[node name="BBValues" type="Node" parent="." unique_id=952235147 node_paths=PackedStringArray("bt_plyr")]
+script = ExtResource("7_yllff")
+bt_plyr = NodePath("../BTPlayer")
+
+[node name="BTPlayer" type="BTPlayer" parent="." unique_id=1702894553]
+behavior_tree = ExtResource("8_hn0gx")
+blackboard_plan = SubResource("BlackboardPlan_j6tal")

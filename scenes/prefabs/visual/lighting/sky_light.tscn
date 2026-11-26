@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://bn1my5r3ylyml"]
+
+[sub_resource type="Animation" id="Animation_m4ixq"]
+length = 32.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10, 12, 20, 22, 32),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.4, 0.0, 1.0, 1.0, 0.0, 0.4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:blend_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10, 22),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 2, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 10, 12, 20, 22),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_41a63"]
+resource_name = "day_night_cycle"
+length = 32.0
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vpjem"]
+_data = {
+&"RESET": SubResource("Animation_m4ixq"),
+&"day_night_cycle": SubResource("Animation_41a63")
+}
+
+[node name="SkyLight" type="DirectionalLight2D" unique_id=1894552500]
+energy = 0.4
+range_item_cull_mask = 3
+height = 1.0
+
+[node name="DayNightCycleAnimation" type="AnimationPlayer" parent="." unique_id=1825771028]
+libraries/ = SubResource("AnimationLibrary_vpjem")
+autoplay = &"RESET"

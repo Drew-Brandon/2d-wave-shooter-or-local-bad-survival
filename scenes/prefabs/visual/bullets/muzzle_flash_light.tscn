@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://bm7jqmliwen8s"]
+
+[ext_resource type="Script" uid="uid://ce2unscdckera" path="res://scripts/plus_variants/AnimationPlayerPlus.cs" id="1_4th2q"]
+
+[sub_resource type="Gradient" id="Gradient_st7nw"]
+offsets = PackedFloat32Array(0, 0.6133005)
+colors = PackedColorArray(0.9477352, 0.9477352, 0.9477352, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0jwe6"]
+gradient = SubResource("Gradient_st7nw")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_st7nw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_0jwe6"]
+resource_name = "flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_di0at"]
+_data = {
+&"RESET": SubResource("Animation_st7nw"),
+&"flash": SubResource("Animation_0jwe6")
+}
+
+[node name="MuzzleFlashLight" type="PointLight2D" unique_id=426752747]
+visible = false
+color = Color(1, 1, 0, 1)
+energy = 2.0
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_0jwe6")
+
+[node name="MuzzleFlashAnimation" type="AnimationPlayer" parent="." unique_id=1462471350]
+libraries/ = SubResource("AnimationLibrary_di0at")
+script = ExtResource("1_4th2q")
+metadata/_custom_type_script = "uid://ce2unscdckera"

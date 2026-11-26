@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://cq7kbltpevoke"]
+
+[ext_resource type="Script" uid="uid://lrpl50m7qrqp" path="res://scripts/useable_tools/GunTool.cs" id="1_kqeif"]
+[ext_resource type="PackedScene" uid="uid://cogbxh2f6jgsi" path="res://scenes/prefabs/visual/bullets/bullet_tracer_spawner.tscn" id="2_vdxgj"]
+[ext_resource type="Resource" uid="uid://8yi18rb7grle" path="res://single_values/node_paths/always_visible_path.tres" id="3_swyx6"]
+[ext_resource type="PackedScene" uid="uid://bm7jqmliwen8s" path="res://scenes/prefabs/visual/bullets/muzzle_flash_light.tscn" id="4_7hfl5"]
+[ext_resource type="AudioStream" uid="uid://buirwh2a0hjdg" path="res://audio/weapons/revolver_fire.wav" id="5_vdxgj"]
+[ext_resource type="Script" uid="uid://cs37c8b7hkiqj" path="res://scripts/attack_info/HitscanProjectileShooter2D.cs" id="6_mj4kl"]
+[ext_resource type="AudioStream" uid="uid://2ca0ujrk70av" path="res://audio/weapons/revolver_reload.wav" id="6_swyx6"]
+[ext_resource type="Resource" uid="uid://bpsxjfbgvgyak" path="res://projectiles/revolver_bullet.tres" id="8_gie5p"]
+[ext_resource type="Script" uid="uid://blhr4idq26v1e" path="res://scripts/cast_info_2d/RayCastInfo2D.cs" id="9_j57ue"]
+
+[sub_resource type="Resource" id="Resource_8eu0j"]
+script = ExtResource("9_j57ue")
+_collisionMask = 79
+metadata/_custom_type_script = "uid://blhr4idq26v1e"
+
+[node name="RevolverTool" type="Node2D" unique_id=1387201087]
+script = ExtResource("1_kqeif")
+_useCooldown = 100
+_range = 512.0
+
+[node name="BulletTracerSpawner" parent="." unique_id=903606134 instance=ExtResource("2_vdxgj")]
+z_index = 1
+_spawnPath = ExtResource("3_swyx6")
+
+[node name="MuzzleFlashLight" parent="." unique_id=426752747 instance=ExtResource("4_7hfl5")]
+
+[node name="RevolverAudio" type="AudioStreamPlayer2D" parent="." unique_id=1941086125]
+stream = ExtResource("5_vdxgj")
+volume_db = -4.0
+pitch_scale = 0.7
+
+[node name="RevolverFire" type="AudioStreamPlayer2D" parent="." unique_id=595629994]
+stream = ExtResource("6_swyx6")
+volume_db = -4.0
+
+[node name="Shooter" type="Marker2D" parent="." unique_id=1325926444]
+gizmo_extents = 32.0
+script = ExtResource("6_mj4kl")
+_maxSpreadDeg = 1.0
+_projectileInfo = ExtResource("8_gie5p")
+_rayCast = SubResource("Resource_8eu0j")
+
+[connection signal="PreciselySuccessfulUse" from="." to="Shooter" method="PreciseFire" unbinds=2]
+[connection signal="StartedReload" from="." to="RevolverFire" method="play"]
+[connection signal="ProjectileShot" from="Shooter" to="BulletTracerSpawner" method="SpawnTracer"]
+[connection signal="ProjectileShot" from="Shooter" to="RevolverAudio" method="play" unbinds=1]
+[connection signal="ProjectileShot" from="Shooter" to="MuzzleFlashLight/MuzzleFlashAnimation" method="PlayOrRestart" unbinds=1 binds= [&"flash"]]
+
+[editable path="MuzzleFlashLight"]

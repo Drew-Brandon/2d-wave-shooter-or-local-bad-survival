@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://crk6o7epcubhv"]
+
+[ext_resource type="Texture2D" uid="uid://c5g2d5dsdrh6o" path="res://textures/props/office_chair.png" id="1_8fclr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u1fwb"]
+radius = 16.0
+
+[node name="Chair" type="RigidBody2D" unique_id=427363534]
+collision_layer = 8
+collision_mask = 79
+mass = 30.0
+gravity_scale = 0.0
+linear_damp = 0.4
+angular_damp = 0.05
+
+[node name="ChairSprite" type="Sprite2D" parent="." unique_id=228617120]
+texture = ExtResource("1_8fclr")
+
+[node name="ChairCollision" type="CollisionShape2D" parent="." unique_id=280722090]
+shape = SubResource("CircleShape2D_u1fwb")

@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://3jb4ygngy1wh"]
+
+[ext_resource type="Script" uid="uid://b4i1nmemducdq" path="res://scripts/puppets/bodies/EnemyBody.cs" id="1_4yvco"]
+[ext_resource type="Texture2D" uid="uid://ckk0p2mfvdxhd" path="res://textures/humanoids/cyber/cyber_agent.png" id="2_f5awx"]
+[ext_resource type="Script" uid="uid://cibwlvk4ayea" path="res://scripts/puppets/PuppetSpeedMultiplierData.cs" id="2_mt0ly"]
+[ext_resource type="Resource" uid="uid://bjwmare5gfo75" path="res://single_values/string_names/puppet_body_parts/left_leg.tres" id="3_lc6cq"]
+[ext_resource type="Resource" uid="uid://db6ep04p8q0c2" path="res://single_values/string_names/puppet_body_parts/right_leg.tres" id="4_tx3kd"]
+[ext_resource type="Resource" uid="uid://bcvx7fo7pj3pc" path="res://single_values/node_paths/only_fov_path.tres" id="7_hqbl7"]
+[ext_resource type="Script" uid="uid://botpmjmdqlrcr" path="res://scripts/health_sources/SkeletalHealthSource.cs" id="7_le7ql"]
+[ext_resource type="PackedScene" uid="uid://5ihdnp50klh" path="res://scenes/prefabs/misc/ui/aim_interface.tscn" id="8_sd483"]
+[ext_resource type="Script" uid="uid://dcskfpwjdhvnj" path="res://scripts/health_sources/SkeletonPartInfo.cs" id="8_y6v53"]
+[ext_resource type="Script" uid="uid://dfwwojkymb1lx" path="res://scripts/puppets/controllers/AIControllerTop2D.cs" id="10_eihpm"]
+[ext_resource type="BehaviorTree" uid="uid://cwfviliqrmo50" path="res://ai_behavior/trees/subtrees/chase_bt.tres" id="15_lc6cq"]
+[ext_resource type="Script" uid="uid://1sccy8nqhesv" path="res://scripts/logic/SpawnerRadius2D.cs" id="15_mt0ly"]
+[ext_resource type="PackedScene" uid="uid://5ffeocbcngh8" path="res://scenes/prefabs/misc/humanoid_motion_audio.tscn" id="16_tx3kd"]
+[ext_resource type="PackedScene" uid="uid://dssx854xqnqj3" path="res://scenes/prefabs/visual/blood_fade.tscn" id="17_2sec0"]
+[ext_resource type="Resource" uid="uid://rl4xjlctpik6" path="res://value_libraries/footstep_library.tres" id="17_hqbl7"]
+[ext_resource type="Resource" uid="uid://fb0spebye1aw" path="res://misc/global_references.tres" id="18_2sec0"]
+[ext_resource type="Script" uid="uid://badjy6nc105kp" path="res://scripts/logic/Spawner2D.cs" id="18_hqbl7"]
+[ext_resource type="PackedScene" uid="uid://54pynf8j43c7" path="res://scenes/prefabs/visual/cyber_corpse.tscn" id="19_47rm1"]
+
+[sub_resource type="Resource" id="Resource_2sec0"]
+script = ExtResource("2_mt0ly")
+_name = &"cripple"
+_multiplier = 0.5
+metadata/_custom_type_script = "uid://cibwlvk4ayea"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_548tf"]
+
+[sub_resource type="Resource" id="Resource_vu1bx"]
+script = ExtResource("8_y6v53")
+_interface = ExtResource("8_sd483")
+_healthMultipliers = Dictionary[StringName, float]({
+&"head": 2.0,
+&"left_arm": 1.0,
+&"left_leg": 1.0,
+&"right_arm": 1.0,
+&"right_leg": 1.0,
+&"torso": 1.0
+})
+metadata/_custom_type_script = "uid://dcskfpwjdhvnj"
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_tx3kd"]
+
+[node name="EnemyBody" type="CharacterBody2D" unique_id=956442597 node_paths=PackedStringArray("_healthSource", "_toolsParent", "_swivel")]
+z_index = 1
+collision_layer = 4
+collision_mask = 75
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_4yvco")
+_crippleEffect = SubResource("Resource_2sec0")
+_crippleParts = Array[Object]([ExtResource("3_lc6cq"), ExtResource("4_tx3kd")])
+_healthSource = NodePath("EnemyHealthSource")
+_toolsParent = NodePath("EnemySwivel/EnemyToolsParent")
+_swivel = NodePath("EnemySwivel")
+_baseSpeed = 70.0
+metadata/_custom_type_script = "uid://b4i1nmemducdq"
+
+[node name="EnemySwivel" type="Node2D" parent="." unique_id=1927296186]
+
+[node name="EnemySprite" type="Sprite2D" parent="EnemySwivel" unique_id=1978805704]
+texture = ExtResource("2_f5awx")
+
+[node name="EnemyToolsParent" type="Node2D" parent="EnemySwivel" unique_id=482345563]
+
+[node name="EnemyCorpseSpawner" type="Node2D" parent="EnemySwivel" unique_id=1440766286]
+script = ExtResource("18_hqbl7")
+_spawnPath = ExtResource("7_hqbl7")
+_spawnScene = ExtResource("19_47rm1")
+
+[node name="EnemyCollision" type="CollisionShape2D" parent="." unique_id=542183821]
+shape = SubResource("CircleShape2D_548tf")
+
+[node name="EnemyNavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1628878789]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
+avoidance_enabled = true
+
+[node name="EnemyHealthSource" type="Node" parent="." unique_id=495164219 node_paths=PackedStringArray("_origin")]
+script = ExtResource("7_le7ql")
+_healthMultipliers = SubResource("Resource_vu1bx")
+_origin = NodePath("..")
+metadata/_custom_type_script = "uid://botpmjmdqlrcr"
+
+[node name="EnemyControllerTop2D" type="Node" parent="." unique_id=1904773374 node_paths=PackedStringArray("_navigationAgent", "_btPlayer", "_bodyProperty")]
+script = ExtResource("10_eihpm")
+_safetyMultiplier = &"safety"
+_navigationAgent = NodePath("../EnemyNavigationAgent2D")
+_btPlayer = NodePath("../BTPlayer")
+_bodyProperty = NodePath("..")
+metadata/_custom_type_script = "uid://dfwwojkymb1lx"
+
+[node name="EnemyBloodSpawner" type="Node2D" parent="." unique_id=999070661]
+script = ExtResource("15_mt0ly")
+_radius = 16.0
+_spawnPath = ExtResource("7_hqbl7")
+_spawnScene = ExtResource("17_2sec0")
+
+[node name="BTPlayer" type="BTPlayer" parent="." unique_id=1102158964]
+behavior_tree = ExtResource("15_lc6cq")
+blackboard_plan = SubResource("BlackboardPlan_tx3kd")
+
+[node name="HumanoidMotionAudio" parent="." unique_id=107082883 instance=ExtResource("16_tx3kd")]
+volume_db = -4.0
+attenuation = 2.0
+_baseSpeed = 70.0
+_audioLibrary = ExtResource("17_hqbl7")
+_references = ExtResource("18_2sec0")
+
+[connection signal="Damaged" from="EnemyHealthSource" to="EnemyBloodSpawner" method="Spawn" unbinds=2]
+[connection signal="Died" from="EnemyHealthSource" to="." method="queue_free" unbinds=1]
+[connection signal="Died" from="EnemyHealthSource" to="EnemySwivel/EnemyCorpseSpawner" method="Spawn" unbinds=1]

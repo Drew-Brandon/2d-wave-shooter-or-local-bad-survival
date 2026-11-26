@@ -1,0 +1,49 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://pbl5kqxrirnw"]
+
+[ext_resource type="Script" uid="uid://w1gmfbeskjiq" path="res://scripts/ai_behavior/bt_tasks/getters/GetPatrolPosition.cs" id="1_l01hs"]
+[ext_resource type="Script" uid="uid://c7jhqi45i8wjo" path="res://scripts/ai_behavior/bt_tasks/move_actions/MoveTo.cs" id="2_1ddid"]
+[ext_resource type="Script" uid="uid://b2k41xrcjat0j" path="res://scripts/ai_behavior/bt_tasks/getters/GetNextPatrolPoint.cs" id="3_yo8h3"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_l01hs"]
+var/target_position/name = &"target_position"
+var/target_position/type = 5
+var/target_position/value = Vector2(0, 0)
+var/target_position/hint = 0
+var/target_position/hint_string = ""
+var/current_patrol_point/name = &"current_patrol_point"
+var/current_patrol_point/type = 2
+var/current_patrol_point/value = 0
+var/current_patrol_point/hint = 0
+var/current_patrol_point/hint_string = ""
+var/is_reverse/name = &"is_reverse"
+var/is_reverse/type = 1
+var/is_reverse/value = false
+var/is_reverse/hint = 0
+var/is_reverse/hint_string = ""
+
+[sub_resource type="BTAction" id="BTAction_owiwe"]
+script = ExtResource("1_l01hs")
+
+[sub_resource type="BBVariant" id="BBVariant_tigt2"]
+resource_name = "<null>"
+saved_value = null
+
+[sub_resource type="BBVariant" id="BBVariant_5s3af"]
+resource_name = "$target_position"
+value_source = 1
+variable = &"target_position"
+
+[sub_resource type="BTAction" id="BTAction_ljfpq"]
+script = ExtResource("2_1ddid")
+_desiredDist = SubResource("BBVariant_tigt2")
+_targ = SubResource("BBVariant_5s3af")
+
+[sub_resource type="BTAction" id="BTAction_18el7"]
+script = ExtResource("3_yo8h3")
+
+[sub_resource type="BTSequence" id="BTSequence_2dihm"]
+children = [SubResource("BTAction_owiwe"), SubResource("BTAction_ljfpq"), SubResource("BTAction_18el7")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_l01hs")
+root_task = SubResource("BTSequence_2dihm")

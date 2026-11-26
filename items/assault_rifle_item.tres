@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="GunItemType" format=3 uid="uid://b5c5cbgqiguil"]
+
+[ext_resource type="Script" uid="uid://e35upiyjurg4" path="res://scripts/inventory/item_types/GunItemType.cs" id="1_8qkrq"]
+[ext_resource type="Resource" uid="uid://cd23beg13aj3w" path="res://items/rifle_ammo_item.tres" id="1_ayc0i"]
+[ext_resource type="PackedScene" uid="uid://bsr8otoavit6c" path="res://scenes/prefabs/useable_tools/assault_rifle_tool.tscn" id="1_b0w3p"]
+[ext_resource type="PackedScene" uid="uid://bq6e11iujfk13" path="res://scenes/prefabs/dropped_item_instances/dropped_item_body.tscn" id="2_tqao5"]
+[ext_resource type="Texture2D" uid="uid://cpapasjl2g7tq" path="res://textures/inventory/items/assault_rifle.png" id="4_tqao5"]
+[ext_resource type="Resource" uid="uid://cvppedjco7atq" path="res://projectiles/rifle_bullet.tres" id="5_wahvr"]
+
+[resource]
+script = ExtResource("1_8qkrq")
+_maxAmmo = 30
+_projectile = ExtResource("5_wahvr")
+_ammoType = ExtResource("1_ayc0i")
+_displayName = &"Assault Rifle"
+_icon = ExtResource("4_tqao5")
+_equipScene = ExtResource("1_b0w3p")
+_dropScene = ExtResource("2_tqao5")
+metadata/_custom_type_script = "uid://e35upiyjurg4"

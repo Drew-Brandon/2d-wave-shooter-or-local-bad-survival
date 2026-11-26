@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://5ffeocbcngh8"]
+
+[ext_resource type="Script" uid="uid://c4ocbbwkcxd1r" path="res://scripts/misc/MotionAudioStreamPlayer2D.cs" id="1_eyg0u"]
+
+[node name="HumanoidMotionAudio" type="AudioStreamPlayer2D" unique_id=107082883]
+script = ExtResource("1_eyg0u")
+baseSpeed = 100.0
+metadata/_custom_type_script = "uid://c4ocbbwkcxd1r"

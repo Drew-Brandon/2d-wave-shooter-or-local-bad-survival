@@ -1,0 +1,498 @@
+[gd_scene format=4 uid="uid://chc0poi31slmv"]
+
+[ext_resource type="TileSet" uid="uid://dwjncmyauf74c" path="res://misc/geometry_tile_set.tres" id="1_c216x"]
+[ext_resource type="Script" uid="uid://bjs121mdp0eb3" path="res://scripts/survival_gamemode/round_system/RoundManager.cs" id="2_dbvd1"]
+[ext_resource type="PackedScene" uid="uid://dkhkusv8y62ip" path="res://scenes/prefabs/inventory/item_purchase_body.tscn" id="2_luw6c"]
+[ext_resource type="PackedScene" uid="uid://b3kej3pnf6py6" path="res://scenes/prefabs/puppet_bodies/player_body.tscn" id="2_o2t6e"]
+[ext_resource type="Texture2D" uid="uid://c71kh7w1jc4tr" path="res://textures/inventory/items/pistol_ammo_small.png" id="2_rf50j"]
+[ext_resource type="PackedScene" uid="uid://3jb4ygngy1wh" path="res://scenes/prefabs/puppet_bodies/ai_bodies/enemy_body.tscn" id="3_7eeeg"]
+[ext_resource type="Resource" uid="uid://bcvx7fo7pj3pc" path="res://single_values/node_paths/only_fov_path.tres" id="3_50hab"]
+[ext_resource type="PackedScene" uid="uid://dr55te4jyavpu" path="res://scenes/prefabs/visual/lighting/house_light.tscn" id="3_kpkiv"]
+[ext_resource type="Script" uid="uid://6cydex2h6gdd" path="res://scripts/plus_variants/LabelPlus.cs" id="3_lyw5i"]
+[ext_resource type="Script" uid="uid://jk1ds066i7vn" path="res://scripts/survival_gamemode/round_system/RoundSpawnInfoBlueprint.cs" id="4_tuhfa"]
+[ext_resource type="Script" uid="uid://ie8lexgvjbmd" path="res://scripts/survival_gamemode/round_system/RoundInfo.cs" id="5_o2t6e"]
+[ext_resource type="PackedScene" uid="uid://b2sjv5m8pphwo" path="res://scenes/prefabs/misc/points_locked_door.tscn" id="6_8m7ll"]
+[ext_resource type="Texture2D" uid="uid://bibcfmof3d0bh" path="res://textures/inventory/items/pro_shotgun.png" id="6_iymqt"]
+[ext_resource type="Script" uid="uid://b1tbr74dvdy31" path="res://scripts/cast_info_2d/ShapeCastInfo2D.cs" id="7_tuhfa"]
+[ext_resource type="Resource" uid="uid://dyhf3u426dmht" path="res://items/shotgun_item.tres" id="7_u63hq"]
+[ext_resource type="Resource" uid="uid://bkg7fexopbw0m" path="res://items/shotgun_ammo_item.tres" id="8_hb8gu"]
+[ext_resource type="Texture2D" uid="uid://d0ysbg5wsik0r" path="res://textures/inventory/items/shotgun_ammo_small.png" id="8_u63hq"]
+[ext_resource type="Texture2D" uid="uid://dkopiqhiar8r" path="res://textures/inventory/items/bandage.png" id="9_eb6qe"]
+[ext_resource type="Script" uid="uid://cbicotjq75ryw" path="res://scripts/inventory/InventoryAdder.cs" id="9_luw6c"]
+[ext_resource type="Script" uid="uid://cx3j1emkgq35q" path="res://scripts/survival_gamemode/points_system/PointsCounter.cs" id="9_wd575"]
+[ext_resource type="Resource" uid="uid://chp6wchynqyko" path="res://items/bandage_item.tres" id="9_x6rbm"]
+[ext_resource type="Resource" uid="uid://bu8i1adwnbimi" path="res://items/pistol_item.tres" id="10_3xvl0"]
+[ext_resource type="PackedScene" uid="uid://cic4xeakknbmx" path="res://scenes/prefabs/useable_tools/fists_tool.tscn" id="11_p46p5"]
+[ext_resource type="Script" uid="uid://dyfmea0bpq56g" path="res://scripts/inventory/ItemInstanceBlueprint.cs" id="11_w3q7r"]
+[ext_resource type="Resource" uid="uid://bwf5td2ux5yhv" path="res://items/pistol_ammo_item.tres" id="12_3xvl0"]
+[ext_resource type="Texture2D" uid="uid://cpapasjl2g7tq" path="res://textures/inventory/items/assault_rifle.png" id="13_xfyu0"]
+[ext_resource type="Resource" uid="uid://b5c5cbgqiguil" path="res://items/assault_rifle_item.tres" id="14_h0ioq"]
+[ext_resource type="Texture2D" uid="uid://dot7qu0saeam3" path="res://textures/inventory/items/rifle_ammo_small.png" id="15_h0ioq"]
+[ext_resource type="Resource" uid="uid://cd23beg13aj3w" path="res://items/rifle_ammo_item.tres" id="16_eb6qe"]
+[ext_resource type="Script" uid="uid://catd81nlaln30" path="res://scripts/misc/ChildrenRelocator.cs" id="18_4ew47"]
+[ext_resource type="Texture2D" uid="uid://cunlil44keoya" path="res://textures/inventory/items/revolver.png" id="19_wm7j1"]
+[ext_resource type="Resource" uid="uid://bvejjlo0kmhrk" path="res://items/revolver_item.tres" id="20_dy188"]
+[ext_resource type="Texture2D" uid="uid://sftgfsp5wqv7" path="res://textures/inventory/items/revolver_ammo_small.png" id="21_kpkiv"]
+[ext_resource type="Resource" uid="uid://cs3n7l4n0i0xo" path="res://items/revolver_ammo_item.tres" id="22_dy188"]
+[ext_resource type="Script" uid="uid://msstpoqw8al8" path="res://scripts/global_references/GlobalReferencesSource.cs" id="28_h0ioq"]
+[ext_resource type="Resource" uid="uid://fb0spebye1aw" path="res://misc/global_references.tres" id="29_x6rbm"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4ew47"]
+vertices = PackedVector2Array(214, 214, -214, 214, -54, 138, 54, 138, -266, -150, -266, -22, -278, -54, -278, -106, -138, 138, 694, -150, 694, 150, 682, 138, 682, -138, 630, -150, 630, -138, 630, 150, 630, 138, 630, 278, 618, 266, 618, -266, 630, -278, 502, -278, 502, -266, 502, 278, 502, 266, -266, 22, -266, 118, -278, 106, -278, 54, -502, 118, -330, 106, -438, 106, -490, 106, -502, 22, -490, 54, -778, 22, -778, 86, -790, 74, -790, 22, -982, 86, -970, 74, -982, -86, -970, -74, -778, -86, -790, -74, -778, -22, -790, -22, 566, -150, 566, 150, 490, 74, 490, -74, 438, -150, 342, -74, 438, 150, 342, 74, 214, 22, 138, 138, 138, 54, -214, 22, -138, 54, 214, -214, 214, -22, 138, -54, 138, -138, -214, -214, 54, -138, -362, -150, -330, -106, -266, -406, -266, -330, -362, -330, -502, -406, -362, -278, -266, -278, -266, -202, -362, -202, 54, -54, -54, -54, -54, -138, -138, -138, -214, -22, -138, -54, 266, -22, 266, -150, 394, -150, 394, -202, 330, -202, 330, -342, 502, -342, 438, -202, 502, -202, 266, 22, 438, 202, 502, 202, 502, 342, 330, 342, 330, 202, 394, 202, 394, 150, 266, 150, -330, 54, -438, 54, -918, 22, -918, -22, -502, -22, -406, -202, -502, -202, -502, -278, -406, -278, -406, -330, -502, -330, -406, -150, -438, -54, -438, -106, -330, -54, -502, -150, -490, -106, -490, -54, 54, 54, -54, 54)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 2, 1), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 9, 12, 14), PackedInt32Array(11, 10, 15, 16), PackedInt32Array(15, 17, 18, 19), PackedInt32Array(16, 15, 19), PackedInt32Array(14, 16, 19), PackedInt32Array(13, 14, 19), PackedInt32Array(20, 13, 19), PackedInt32Array(21, 20, 19, 22), PackedInt32Array(18, 17, 23, 24), PackedInt32Array(25, 26, 27, 28), PackedInt32Array(27, 26, 29, 30), PackedInt32Array(31, 30, 29), PackedInt32Array(32, 31, 29), PackedInt32Array(32, 29, 33, 34), PackedInt32Array(35, 36, 37, 38), PackedInt32Array(37, 36, 39, 40), PackedInt32Array(40, 39, 41, 42), PackedInt32Array(42, 41, 43, 44), PackedInt32Array(44, 43, 45, 46), PackedInt32Array(47, 48, 49, 50), PackedInt32Array(51, 47, 50, 52), PackedInt32Array(49, 48, 53, 54), PackedInt32Array(55, 0, 56, 57), PackedInt32Array(8, 1, 58, 59), PackedInt32Array(60, 61, 62, 63), PackedInt32Array(64, 60, 63, 65), PackedInt32Array(66, 4, 7, 67), PackedInt32Array(68, 69, 70, 71), PackedInt32Array(72, 73, 74, 75), PackedInt32Array(65, 76, 77, 78), PackedInt32Array(64, 65, 78), PackedInt32Array(64, 78, 79), PackedInt32Array(80, 64, 79, 81), PackedInt32Array(82, 83, 84, 52), PackedInt32Array(85, 86, 87, 88, 21), PackedInt32Array(85, 21, 22, 89), PackedInt32Array(22, 90, 89), PackedInt32Array(84, 85, 89, 51), PackedInt32Array(84, 51, 52), PackedInt32Array(82, 52, 54, 91), PackedInt32Array(92, 93, 24), PackedInt32Array(23, 94, 95, 96, 97), PackedInt32Array(24, 23, 97, 92), PackedInt32Array(53, 92, 97, 98), PackedInt32Array(54, 53, 98), PackedInt32Array(54, 98, 99, 91), PackedInt32Array(61, 82, 91, 55), PackedInt32Array(100, 30, 31, 101), PackedInt32Array(38, 102, 103, 46), PackedInt32Array(35, 38, 46, 45), PackedInt32Array(33, 35, 45, 104), PackedInt32Array(105, 106, 107, 108), PackedInt32Array(109, 110, 71), PackedInt32Array(109, 71, 70), PackedInt32Array(109, 70, 72, 108), PackedInt32Array(108, 72, 75, 105), PackedInt32Array(105, 75, 66, 111), PackedInt32Array(5, 112, 113, 114), PackedInt32Array(114, 6, 5), PackedInt32Array(66, 67, 114, 113, 111), PackedInt32Array(115, 111, 113, 116), PackedInt32Array(104, 115, 116, 117), PackedInt32Array(100, 101, 33, 104, 117, 112, 5, 25), PackedInt32Array(25, 28, 100), PackedInt32Array(101, 34, 33), PackedInt32Array(76, 62, 61, 55, 57, 118), PackedInt32Array(77, 76, 118, 119), PackedInt32Array(25, 5, 80, 58), PackedInt32Array(59, 58, 80, 81, 77, 119), PackedInt32Array(119, 118, 3, 2), PackedInt32Array(0, 3, 56)])
+
+[sub_resource type="Resource" id="Resource_lyw5i"]
+script = ExtResource("11_w3q7r")
+object_type = 3
+Amount = 10
+item = ExtResource("12_3xvl0")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[sub_resource type="Resource" id="Resource_eb6qe"]
+script = ExtResource("11_w3q7r")
+object_type = 3
+Amount = 1
+item = ExtResource("9_x6rbm")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[sub_resource type="Resource" id="Resource_7auid"]
+script = ExtResource("11_w3q7r")
+object_type = 2
+Ammo = 4
+item = ExtResource("7_u63hq")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[sub_resource type="Resource" id="Resource_7k4pf"]
+script = ExtResource("11_w3q7r")
+object_type = 3
+Amount = 4
+item = ExtResource("8_hb8gu")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[sub_resource type="Resource" id="Resource_7nbd8"]
+script = ExtResource("11_w3q7r")
+object_type = 2
+Ammo = 30
+item = ExtResource("14_h0ioq")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[sub_resource type="Resource" id="Resource_wq2gj"]
+script = ExtResource("11_w3q7r")
+object_type = 3
+Amount = 30
+item = ExtResource("16_eb6qe")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[sub_resource type="Resource" id="Resource_7m2s5"]
+script = ExtResource("11_w3q7r")
+object_type = 2
+Ammo = 6
+item = ExtResource("20_dy188")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[sub_resource type="Resource" id="Resource_kpkiv"]
+script = ExtResource("11_w3q7r")
+object_type = 3
+Amount = 6
+item = ExtResource("22_dy188")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[sub_resource type="Resource" id="Resource_itrit"]
+script = ExtResource("4_tuhfa")
+object_type = 0
+_spawnCount = 3
+_spawnScene = ExtResource("3_7eeeg")
+_toolScene = ExtResource("11_p46p5")
+metadata/_custom_type_script = "uid://jk1ds066i7vn"
+
+[sub_resource type="Resource" id="Resource_q3csc"]
+script = ExtResource("5_o2t6e")
+_escalationRate = 1.3
+_spawnInfo = Array[Object]([SubResource("Resource_itrit")])
+metadata/_custom_type_script = "uid://ie8lexgvjbmd"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2t6e"]
+radius = 16.0
+
+[sub_resource type="Resource" id="Resource_wd575"]
+script = ExtResource("7_tuhfa")
+_shape = SubResource("CircleShape2D_o2t6e")
+_collisionMask = 14
+metadata/_custom_type_script = "uid://b1tbr74dvdy31"
+
+[sub_resource type="Resource" id="Resource_3xxt4"]
+script = ExtResource("11_w3q7r")
+object_type = 2
+Ammo = 10
+item = ExtResource("10_3xvl0")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[sub_resource type="Resource" id="Resource_nnyc0"]
+script = ExtResource("11_w3q7r")
+object_type = 3
+Amount = 30
+item = ExtResource("12_3xvl0")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[sub_resource type="Resource" id="Resource_wm7j1"]
+script = ExtResource("11_w3q7r")
+object_type = 3
+Amount = 1
+item = ExtResource("9_x6rbm")
+metadata/_custom_type_script = "uid://dyfmea0bpq56g"
+
+[node name="OfficeSurvival" type="Node2D" unique_id=1468577795]
+
+[node name="AlwaysVisible" type="Node2D" parent="." unique_id=1475104239]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="AlwaysVisible" unique_id=738209687]
+navigation_polygon = SubResource("NavigationPolygon_4ew47")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="AlwaysVisible/NavigationRegion2D" unique_id=1055956734]
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAD///7/AAAAAAAAAAD+//7/AAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAABAP7/AAAAAAAAAAAAAP7/AAAAAAAAAAD9////AAAAAAAAAAD9/wAAAAAAAAAAAAD8//7/AAAAAAAAAAD8////AAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wAAAAAAAAAAAAD7////AAAAAAAAAAD7//7/AAAAAAAAAAD6//7/AAAAAAAAAAD5//7/AAAAAAAAAAD5////AAAAAAAAAAD5/wAAAAAAAAAAAAD6/wAAAAAAAAAAAAD6////AAAAAAAAAAD6/wEAAAAAAAAAAAD5/wEAAAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAADAP7/AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAP//AAAAAAAAAAAGAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP//AAAAAAAAAAAFAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAD6//3/AAAAAAAAAAD7//3/AAAAAAAAAAAEAP3/AAAAAAAAAAAFAP3/AAAAAAAAAAD5//n/AAAAAAAAAAD5//r/AAAAAAAAAAD5//v/AAAAAAAAAAD5//z/AAAAAAAAAAD6//n/AAAAAAAAAAD6//r/AAAAAAAAAAD6//v/AAAAAAAAAAD6//z/AAAAAAAAAAD7//n/AAAAAAAAAAD7//r/AAAAAAAAAAD7//v/AAAAAAAAAAD7//z/AAAAAAAAAAD8//n/AAAAAAAAAAD8//r/AAAAAAAAAAD8//v/AAAAAAAAAAD8//z/AAAAAAEAAAD9//n/AAAAAAAAAAD9//r/AAAAAAAAAAD9//v/AAAAAAAAAAD9//z/AAAAAAEAAAD+//n/AAAAAAAAAAD+//r/AAAAAAAAAAD+//v/AAAAAAAAAAD+//z/AAAAAAAAAAD///n/AAAAAAAAAAD///r/AAAAAAAAAAD///v/AAAAAAAAAAD///z/AAAAAAAAAAAAAPn/AAAAAAAAAAAAAPr/AAAAAAAAAAAAAPv/AAAAAAAAAAAAAPz/AAAAAAAAAAABAPn/AAAAAAAAAAABAPr/AAAAAAAAAAABAPv/AAAAAAAAAAABAPz/AAAAAAAAAAACAPn/AAAAAAAAAAACAPr/AAAAAAAAAAACAPv/AAAAAAAAAAACAPz/AAAAAAEAAAADAPn/AAAAAAAAAAADAPr/AAAAAAAAAAADAPv/AAAAAAAAAAADAPz/AAAAAAEAAAAEAPn/AAAAAAAAAAAEAPr/AAAAAAAAAAAEAPv/AAAAAAAAAAAEAPz/AAAAAAAAAAAFAPn/AAAAAAAAAAAFAPr/AAAAAAAAAAAFAPv/AAAAAAAAAAAFAPz/AAAAAAAAAAAGAPn/AAAAAAAAAAAGAPr/AAAAAAAAAAAGAPv/AAAAAAAAAAAGAPz/AAAAAAAAAAD6/wIAAAAAAAAAAAD7/wIAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAD5/wMAAAAAAAAAAAD5/wQAAAAAAAAAAAD5/wUAAAAAAAAAAAD5/wYAAAAAAAAAAAD6/wMAAAAAAAAAAAD6/wQAAAAAAAAAAAD6/wUAAAAAAAAAAAD6/wYAAAAAAAAAAAD7/wMAAAAAAAAAAAD7/wQAAAAAAAAAAAD7/wUAAAAAAAAAAAD7/wYAAAAAAAAAAAD8/wMAAAAAAAEAAAD8/wQAAAAAAAAAAAD8/wUAAAAAAAAAAAD8/wYAAAAAAAAAAAD9/wMAAAAAAAEAAAD9/wQAAAAAAAAAAAD9/wUAAAAAAAAAAAD9/wYAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wUAAAAAAAAAAAD+/wYAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD//wYAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAACAAMAAAAAAAEAAAACAAQAAAAAAAAAAAACAAUAAAAAAAAAAAACAAYAAAAAAAAAAAADAAMAAAAAAAEAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAD8/wIAAAAAAAEAAAD9/wIAAAAAAAEAAAD+/wIAAAAAAAAAAAD//wIAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAEAAAADAAIAAAAAAAEAAAACAAEAAAAAAAAAAAD9/wEAAAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAEAAAD8//3/AAAAAAEAAAD+//3/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAACAP3/AAAAAAEAAAACAP7/AAAAAAAAAAADAP3/AAAAAAEAAAD5/wIAAAAAAAAAAAD4/wIAAAAAAAEAAAD4/wMAAAAAAAEAAAD4/wQAAAAAAAEAAAD4/wUAAAAAAAEAAAD4/wYAAAAAAAEAAAD4/wcAAAAAAAEAAAD5/wcAAAAAAAEAAAD6/wcAAAAAAAEAAAD7/wcAAAAAAAEAAAD8/wcAAAAAAAEAAAD9/wcAAAAAAAEAAAD+/wcAAAAAAAEAAAD//wcAAAAAAAEAAAAAAAcAAAAAAAEAAAABAAcAAAAAAAEAAAACAAcAAAAAAAEAAAADAAcAAAAAAAEAAAAEAAcAAAAAAAEAAAAFAAcAAAAAAAEAAAAGAAcAAAAAAAEAAAAHAAcAAAAAAAEAAAAHAAYAAAAAAAEAAAAHAAUAAAAAAAEAAAAHAAQAAAAAAAEAAAAHAAMAAAAAAAEAAAAHAAIAAAAAAAEAAAAGAAIAAAAAAAAAAAAHAAEAAAAAAAEAAAAHAAAAAAAAAAAAAAAHAP//AAAAAAAAAAAHAP7/AAAAAAEAAAAHAP3/AAAAAAEAAAAGAP3/AAAAAAAAAAAHAPz/AAAAAAEAAAAHAPv/AAAAAAEAAAAHAPr/AAAAAAEAAAAHAPn/AAAAAAEAAAAHAPj/AAAAAAEAAAAGAPj/AAAAAAEAAAAFAPj/AAAAAAEAAAAEAPj/AAAAAAEAAAADAPj/AAAAAAEAAAACAPj/AAAAAAEAAAABAPj/AAAAAAEAAAAAAPj/AAAAAAEAAAD///j/AAAAAAEAAAD+//j/AAAAAAEAAAD9//j/AAAAAAEAAAD8//j/AAAAAAEAAAD7//j/AAAAAAEAAAD6//j/AAAAAAEAAAD5//j/AAAAAAEAAAD4//j/AAAAAAEAAAD4//n/AAAAAAEAAAD4//r/AAAAAAEAAAD4//v/AAAAAAEAAAD4//z/AAAAAAEAAAD4//3/AAAAAAEAAAD4//7/AAAAAAEAAAD4////AAAAAAAAAAD4/wAAAAAAAAAAAAD4/wEAAAAAAAEAAAD5//3/AAAAAAAAAAD3/wAAAAACAAEAAAD3////AAACAAEAAAD2////AAACAAEAAAD1////AAACAAEAAAD1/wAAAAACAAEAAAD2/wAAAAACAAEAAADy//7/AAACAAEAAADy////AAACAAEAAADy/wAAAAACAAEAAADy/wEAAAACAAEAAADz//7/AAACAAEAAADz////AAACAAEAAADz/wAAAAACAAEAAADz/wEAAAACAAEAAAD0//7/AAACAAEAAAD0////AAACAAEAAAD0/wAAAAACAAEAAAD0/wEAAAACAAEAAAD1//7/AAACAAEAAAD1/wEAAAACAAEAAADz//z/AAACAAEAAADz//3/AAACAAEAAAD0//z/AAACAAEAAAD0//3/AAACAAEAAADz//v/AAACAAEAAAD0//v/AAACAAEAAAD1//z/AAABAAMAAAD1//3/AAABAAMAAAD2//z/AAABAAMAAAD2//3/AAACAAAAAAD3//z/AAABAAMAAAD3//3/AAABAAMAAAD2//7/AAABAAMAAAD3//7/AAABAAMAAAD2/wEAAAABAAMAAAD2/wIAAAACAAAAAAD3/wEAAAABAAMAAAD3/wIAAAABAAMAAADw/wIAAAABAAMAAADw/wMAAAABAAMAAADx/wIAAAACAAAAAADx/wMAAAABAAMAAADy/wIAAAABAAMAAADy/wMAAAABAAMAAADz/wIAAAABAAMAAADz/wMAAAABAAMAAAD0/wIAAAABAAMAAAD0/wMAAAABAAMAAAD1/wIAAAABAAMAAAD1/wMAAAABAAMAAAD2/wMAAAABAAMAAAD3/wMAAAABAAMAAADw//v/AAABAAMAAADw//z/AAABAAMAAADw//3/AAABAAMAAADw//7/AAABAAMAAADw////AAACAAEAAADw/wAAAAACAAEAAADw/wEAAAABAAMAAADx//v/AAABAAMAAADx//z/AAABAAMAAADx//3/AAACAAAAAADx//7/AAABAAMAAADx////AAACAAEAAADx/wAAAAACAAEAAADx/wEAAAABAAMAAADy//v/AAABAAMAAADy//z/AAABAAMAAADy//3/AAABAAMAAAD1//v/AAABAAMAAAD2//v/AAABAAMAAAD3//v/AAABAAMAAADv/wQAAAAAAAEAAADw/wQAAAAAAAEAAADx/wQAAAAAAAEAAADy/wQAAAAAAAEAAADz/wQAAAAAAAEAAAD0/wQAAAAAAAEAAAD1/wQAAAAAAAEAAAD2/wQAAAAAAAEAAAD3/wQAAAAAAAEAAADv//r/AAAAAAEAAADv//v/AAAAAAEAAADv//z/AAAAAAEAAADv//3/AAAAAAEAAADv//7/AAAAAAEAAADv////AAAAAAAAAADv/wAAAAAAAAAAAADv/wEAAAAAAAEAAADv/wIAAAAAAAEAAADv/wMAAAAAAAEAAADw//r/AAAAAAEAAADx//r/AAAAAAEAAADy//r/AAAAAAEAAAD1//r/AAAAAAEAAAD2//r/AAAAAAEAAAD3//r/AAAAAAEAAADz//r/AAAAAAAAAAD0//r/AAAAAAAAAADu////AAAAAAAAAADu/wAAAAAAAAAAAADt//7/AAAAAAEAAADt////AAAAAAAAAADt/wAAAAAAAAAAAADt/wEAAAAAAAEAAADu//7/AAAAAAEAAADu/wEAAAAAAAEAAADs/wEAAAAAAAEAAADs//7/AAAAAAEAAADs////AAAAAAAAAADs/wAAAAAAAAAAAAAIAP//AAAAAAAAAAAIAAAAAAAAAAAAAAAIAP3/AAAAAAAAAAAIAP7/AAAAAAAAAAAJAP3/AAAAAAAAAAAJAP7/AAAAAAAAAAAKAP3/AAAAAAAAAAAKAP7/AAAAAAAAAAALAP3/AAAAAAAAAAALAP7/AAAAAAEAAAAJAP//AAAAAAAAAAAIAAEAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAKAP//AAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAALAP//AAAAAAEAAAALAAAAAAAAAAEAAAALAAEAAAAAAAEAAAAMAP3/AAAAAAAAAAAMAP7/AAAAAAEAAAAMAAEAAAAAAAEAAAAMAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAJAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAALAAIAAAAAAAAAAAAIAPz/AAAAAAAAAAAIAAMAAAAAAAAAAAAJAPz/AAAAAAAAAAAJAAMAAAAAAAAAAAAKAPz/AAAAAAAAAAAKAAMAAAAAAAAAAAALAPz/AAAAAAAAAAALAAMAAAAAAAAAAAAMAPz/AAAAAAAAAAAMAAMAAAAAAAAAAAANAPz/AAAAAAAAAAANAP3/AAAAAAAAAAANAP7/AAAAAAEAAAANAAEAAAAAAAEAAAANAAIAAAAAAAAAAAANAAMAAAAAAAAAAAAOAPz/AAAAAAAAAAAOAP3/AAAAAAAAAAAOAP7/AAAAAAEAAAAOAP//AAAAAAEAAAAOAAAAAAAAAAEAAAAOAAEAAAAAAAEAAAAOAAIAAAAAAAAAAAAOAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAALAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAANAAQAAAAAAAAAAAAOAAQAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAPv/AAAAAAAAAAAPAPz/AAAAAAAAAAAPAP3/AAAAAAAAAAAPAP7/AAAAAAAAAAAPAP//AAAAAAAAAAAPAAAAAAAAAAAAAAAPAAEAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAMAAAAAAAAAAAAIAPv/AAAAAAAAAAAJAPv/AAAAAAAAAAAKAPv/AAAAAAAAAAALAPv/AAAAAAAAAAAMAPv/AAAAAAAAAAANAPv/AAAAAAAAAAAOAPv/AAAAAAAAAAAQAPv/AAAAAAAAAAAQAPz/AAAAAAAAAAAQAP3/AAAAAAAAAAAQAP7/AAAAAAAAAAAQAP//AAAAAAAAAAAQAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAQAAIAAAAAAAAAAAAQAAMAAAAAAAAAAAAQAAQAAAAAAAAAAAARAPv/AAAAAAAAAAARAPz/AAAAAAAAAAARAP3/AAAAAAAAAAARAP7/AAAAAAAAAAARAP//AAAAAAAAAAARAAAAAAAAAAAAAAARAAEAAAAAAAAAAAARAAIAAAAAAAAAAAARAAMAAAAAAAAAAAARAAQAAAAAAAAAAAAIAAUAAAAAAAEAAAAJAAUAAAAAAAEAAAAKAAUAAAAAAAEAAAALAAUAAAAAAAEAAAAOAAUAAAAAAAEAAAAPAAUAAAAAAAEAAAAQAAUAAAAAAAEAAAARAAUAAAAAAAEAAAASAAUAAAAAAAEAAAASAPr/AAAAAAEAAAASAPv/AAAAAAEAAAASAPz/AAAAAAEAAAASAP3/AAAAAAEAAAASAP7/AAAAAAEAAAASAP//AAAAAAEAAAASAAAAAAAAAAEAAAASAAEAAAAAAAEAAAASAAIAAAAAAAEAAAASAAMAAAAAAAEAAAASAAQAAAAAAAEAAAAIAPr/AAAAAAEAAAAJAPr/AAAAAAEAAAAKAPr/AAAAAAEAAAALAPr/AAAAAAEAAAAMAPr/AAAAAAAAAAANAPr/AAAAAAAAAAAOAPr/AAAAAAEAAAAPAPr/AAAAAAEAAAAQAPr/AAAAAAEAAAARAPr/AAAAAAEAAAAMAAUAAAAAAAAAAAANAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAAKAAcAAAAAAAAAAAAKAAgAAAAAAAAAAAAKAAkAAAAAAAAAAAAKAAoAAAAAAAAAAAALAAYAAAAAAAAAAAALAAcAAAAAAAAAAAALAAgAAAAAAAAAAAALAAkAAAAAAAAAAAALAAoAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAAAAAAAAAAMAAkAAAAAAAAAAAAMAAoAAAAAAAAAAAANAAYAAAAAAAAAAAANAAcAAAAAAAAAAAANAAgAAAAAAAAAAAANAAkAAAAAAAAAAAANAAoAAAAAAAAAAAAOAAYAAAAAAAAAAAAOAAcAAAAAAAAAAAAOAAgAAAAAAAAAAAAOAAkAAAAAAAAAAAAOAAoAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAAPAAgAAAAAAAAAAAAPAAkAAAAAAAAAAAAPAAoAAAAAAAAAAAAJAAYAAAAAAAEAAAAJAAcAAAAAAAEAAAAJAAgAAAAAAAEAAAAJAAkAAAAAAAEAAAAJAAoAAAAAAAEAAAAJAAsAAAAAAAEAAAAKAAsAAAAAAAEAAAALAAsAAAAAAAEAAAAMAAsAAAAAAAEAAAANAAsAAAAAAAEAAAAOAAsAAAAAAAEAAAAPAAsAAAAAAAEAAAAQAAYAAAAAAAEAAAAQAAcAAAAAAAEAAAAQAAgAAAAAAAAAAAAQAAkAAAAAAAEAAAAQAAoAAAAAAAEAAAAQAAsAAAAAAAEAAAAKAPX/AAAAAAAAAAAKAPb/AAAAAAAAAAAKAPf/AAAAAAAAAAAKAPj/AAAAAAAAAAAKAPn/AAAAAAAAAAALAPX/AAAAAAAAAAALAPb/AAAAAAAAAAALAPf/AAAAAAAAAAALAPj/AAAAAAAAAAALAPn/AAAAAAAAAAAMAPX/AAAAAAAAAAAMAPb/AAAAAAAAAAAMAPf/AAAAAAAAAAAMAPj/AAAAAAAAAAAMAPn/AAAAAAAAAAANAPX/AAAAAAAAAAANAPb/AAAAAAAAAAANAPf/AAAAAAAAAAANAPj/AAAAAAAAAAANAPn/AAAAAAAAAAAOAPX/AAAAAAAAAAAOAPb/AAAAAAAAAAAOAPf/AAAAAAAAAAAOAPj/AAAAAAAAAAAOAPn/AAAAAAAAAAAPAPX/AAAAAAAAAAAPAPb/AAAAAAAAAAAPAPf/AAAAAAAAAAAPAPj/AAAAAAAAAAAPAPn/AAAAAAAAAAAJAPT/AAAAAAEAAAAJAPX/AAAAAAEAAAAJAPb/AAAAAAEAAAAJAPf/AAAAAAEAAAAJAPj/AAAAAAEAAAAJAPn/AAAAAAEAAAAKAPT/AAAAAAEAAAALAPT/AAAAAAEAAAAMAPT/AAAAAAEAAAANAPT/AAAAAAEAAAAOAPT/AAAAAAEAAAAPAPT/AAAAAAEAAAAQAPT/AAAAAAEAAAAQAPX/AAAAAAEAAAAQAPb/AAAAAAEAAAAQAPf/AAAAAAAAAAAQAPj/AAAAAAEAAAAQAPn/AAAAAAEAAAARAPb/AAAAAAEAAAASAPb/AAAAAAEAAAATAPb/AAAAAAEAAAARAPj/AAAAAAEAAAASAPj/AAAAAAEAAAARAPf/AAAAAAAAAAASAPf/AAAAAAAAAAATAPf/AAAAAAAAAAATAPj/AAAAAAAAAAARAAkAAAAAAAEAAAASAAkAAAAAAAEAAAATAAkAAAAAAAEAAAARAAcAAAAAAAEAAAASAAcAAAAAAAEAAAATAAcAAAAAAAAAAAARAAgAAAAAAAAAAAASAAgAAAAAAAAAAAATAAgAAAAAAAAAAAATAPn/AAAAAAAAAAATAPr/AAAAAAAAAAATAPv/AAAAAAAAAAATAPz/AAAAAAAAAAATAP3/AAAAAAAAAAATAP7/AAAAAAAAAAATAP//AAAAAAAAAAATAAAAAAAAAAAAAAATAAEAAAAAAAAAAAATAAIAAAAAAAAAAAATAAMAAAAAAAAAAAATAAQAAAAAAAAAAAATAAUAAAAAAAAAAAATAAYAAAAAAAAAAAASAAYAAAAAAAEAAAAUAPb/AAAAAAEAAAAUAPf/AAAAAAEAAAAUAPj/AAAAAAEAAAAUAPn/AAAAAAEAAAAUAPr/AAAAAAEAAAAUAPv/AAAAAAAAAAAUAPz/AAAAAAEAAAAUAP3/AAAAAAEAAAAUAP7/AAAAAAEAAAAUAP//AAAAAAEAAAAUAAAAAAAAAAEAAAAUAAEAAAAAAAEAAAAUAAIAAAAAAAEAAAAUAAMAAAAAAAEAAAAUAAQAAAAAAAAAAAAUAAUAAAAAAAEAAAAUAAYAAAAAAAEAAAAUAAcAAAAAAAEAAAAUAAgAAAAAAAEAAAAUAAkAAAAAAAEAAADq////AAAAAAAAAADq/wAAAAAAAAAAAADr////AAAAAAAAAADr/wAAAAAAAAAAAADq//7/AAAAAAEAAADr//7/AAAAAAEAAADq/wEAAAAAAAEAAADr/wEAAAAAAAEAAADp/wEAAAAAAAEAAADp//7/AAAAAAEAAADw//L/AAAAAAEAAADw//P/AAAAAAAAAADw//T/AAAAAAAAAADw//X/AAAAAAAAAADw//b/AAAAAAEAAADw//f/AAAAAAAAAADw//j/AAAAAAAAAADw//n/AAAAAAAAAADx//L/AAAAAAEAAADx//P/AAAAAAAAAADx//T/AAAAAAAAAADx//X/AAAAAAAAAADx//b/AAAAAAEAAADx//f/AAAAAAAAAADx//j/AAAAAAAAAADx//n/AAAAAAAAAADy//L/AAAAAAEAAADy//P/AAAAAAAAAADy//T/AAAAAAAAAADy//X/AAAAAAAAAADy//b/AAAAAAEAAADy//f/AAAAAAAAAADy//j/AAAAAAAAAADy//n/AAAAAAAAAADz//L/AAAAAAEAAADz//P/AAAAAAAAAADz//T/AAAAAAAAAADz//X/AAAAAAAAAADz//b/AAAAAAAAAADz//f/AAAAAAAAAADz//j/AAAAAAAAAADz//n/AAAAAAAAAAD0//L/AAAAAAEAAAD0//P/AAAAAAAAAAD0//T/AAAAAAAAAAD0//X/AAAAAAAAAAD0//b/AAAAAAAAAAD0//f/AAAAAAAAAAD0//j/AAAAAAAAAAD0//n/AAAAAAAAAAD1//L/AAAAAAEAAAD1//P/AAAAAAAAAAD1//T/AAAAAAAAAAD1//X/AAAAAAAAAAD1//b/AAAAAAEAAAD1//f/AAAAAAAAAAD1//j/AAAAAAAAAAD1//n/AAAAAAAAAAD2//L/AAAAAAEAAAD2//P/AAAAAAAAAAD2//T/AAAAAAAAAAD2//X/AAAAAAAAAAD2//b/AAAAAAEAAAD2//f/AAAAAAAAAAD2//j/AAAAAAAAAAD2//n/AAAAAAAAAAD3//L/AAAAAAEAAAD3//P/AAAAAAAAAAD3//T/AAAAAAAAAAD3//X/AAAAAAAAAAD3//b/AAAAAAEAAAD3//f/AAAAAAAAAAD3//j/AAAAAAAAAAD3//n/AAAAAAAAAADv//L/AAAAAAEAAADv//P/AAAAAAEAAADv//T/AAAAAAEAAADv//X/AAAAAAEAAADv//b/AAAAAAEAAADv//f/AAAAAAEAAADv//j/AAAAAAEAAADv//n/AAAAAAEAAAD4//L/AAAAAAEAAAD4//P/AAAAAAEAAAD4//T/AAAAAAEAAAD4//X/AAAAAAEAAAD4//b/AAAAAAEAAAD4//f/AAAAAAEAAADm////AAAAAAAAAADm/wAAAAAAAAAAAADn////AAAAAAAAAADn/wAAAAAAAAAAAADo////AAAAAAAAAADo/wAAAAAAAAAAAADp////AAAAAAAAAADp/wAAAAAAAAAAAADl////AAAAAAAAAADl/wAAAAAAAAAAAADn/wEAAAAAAAAAAADn/wIAAAAAAAAAAADo/wEAAAAAAAEAAADo/wIAAAAAAAEAAADi////AAAAAAEAAADi/wAAAAAAAAEAAADj////AAAAAAAAAADj/wAAAAAAAAAAAADk////AAAAAAAAAADk/wAAAAAAAAAAAADi/wEAAAAAAAEAAADj/wEAAAAAAAEAAADk/wEAAAAAAAEAAADl/wEAAAAAAAEAAADm/wEAAAAAAAEAAADi//7/AAAAAAEAAADj//7/AAAAAAEAAADk//7/AAAAAAEAAADl//7/AAAAAAEAAADm//7/AAAAAAEAAADh/wIAAAAAAAAAAADi/wIAAAAAAAAAAADj/wIAAAAAAAAAAADk/wIAAAAAAAAAAADl/wIAAAAAAAAAAADm/wIAAAAAAAAAAADh//3/AAAAAAAAAADh//7/AAAAAAAAAADh////AAAAAAAAAADh/wAAAAAAAAAAAADh/wEAAAAAAAAAAADi//3/AAAAAAAAAADj//3/AAAAAAAAAADk//3/AAAAAAAAAADl//3/AAAAAAAAAADm//3/AAAAAAAAAADn//3/AAAAAAAAAADn//7/AAAAAAAAAADo//7/AAAAAAEAAADo//3/AAAAAAEAAADg//z/AAAAAAEAAADh//z/AAAAAAEAAADi//z/AAAAAAEAAADj//z/AAAAAAEAAADk//z/AAAAAAEAAADl//z/AAAAAAEAAADm//z/AAAAAAEAAADn//z/AAAAAAEAAADo//z/AAAAAAEAAADg//3/AAAAAAEAAADg//7/AAAAAAEAAADg////AAAAAAEAAADg/wAAAAAAAAEAAADg/wEAAAAAAAEAAADg/wIAAAAAAAEAAADg/wMAAAAAAAEAAADh/wMAAAAAAAEAAADi/wMAAAAAAAEAAADj/wMAAAAAAAEAAADk/wMAAAAAAAEAAADl/wMAAAAAAAEAAADm/wMAAAAAAAEAAADn/wMAAAAAAAEAAADo/wMAAAAAAAEAAAAVAPv/AAAAAAAAAAAVAPz/AAAAAAAAAAAVAP3/AAAAAAAAAAAVAP7/AAAAAAAAAAAVAP//AAAAAAAAAAAVAAAAAAAAAAAAAAAVAAEAAAAAAAAAAAAVAAIAAAAAAAAAAAAVAAMAAAAAAAAAAAAVAAQAAAAAAAAAAAAVAAUAAAAAAAEAAAAVAPr/AAAAAAEAAAAWAPr/AAAAAAEAAAAWAPv/AAAAAAEAAAAWAPz/AAAAAAEAAAAWAP3/AAAAAAEAAAAWAP7/AAAAAAEAAAAWAP//AAAAAAEAAAAWAAAAAAAAAAEAAAAWAAEAAAAAAAEAAAAWAAIAAAAAAAEAAAAWAAMAAAAAAAEAAAAWAAQAAAAAAAEAAAAWAAUAAAAAAAEAAAASAPn/AAAAAAEAAAA=")
+tile_set = ExtResource("1_c216x")
+
+[node name="PointsLockedDoor" parent="AlwaysVisible" unique_id=1811567120 instance=ExtResource("6_8m7ll")]
+position = Vector2(-240, 0)
+rotation = -1.5707964
+
+[node name="PointsCharger" parent="AlwaysVisible/PointsLockedDoor" index="2" unique_id=996667187 node_paths=PackedStringArray("_pointsCounter")]
+_chargeAmount = 150
+_pointsCounter = NodePath("../../../PointsCounter")
+
+[node name="PickableBody" parent="AlwaysVisible/PointsLockedDoor" index="3" unique_id=577001768]
+_popupText = PackedStringArray("Courtyard Door", "Price: 150")
+
+[node name="PointsLockedDoor3" parent="AlwaysVisible" unique_id=1671453475 instance=ExtResource("6_8m7ll")]
+position = Vector2(-528, 0)
+rotation = -1.5707964
+
+[node name="PointsCharger" parent="AlwaysVisible/PointsLockedDoor3" index="2" unique_id=996667187 node_paths=PackedStringArray("_pointsCounter")]
+_chargeAmount = 150
+_pointsCounter = NodePath("../../../PointsCounter")
+
+[node name="PickableBody" parent="AlwaysVisible/PointsLockedDoor3" index="3" unique_id=577001768]
+_popupText = PackedStringArray("Hall Door", "Price: 150")
+
+[node name="PointsLockedDoor2" parent="AlwaysVisible" unique_id=35740384 instance=ExtResource("6_8m7ll")]
+position = Vector2(240, 0)
+rotation = -1.5707964
+
+[node name="PointsCharger" parent="AlwaysVisible/PointsLockedDoor2" index="2" unique_id=996667187 node_paths=PackedStringArray("_pointsCounter")]
+_chargeAmount = 0
+_pointsCounter = NodePath("../../../PointsCounter")
+
+[node name="PickableBody" parent="AlwaysVisible/PointsLockedDoor2" index="3" unique_id=577001768]
+_popupText = PackedStringArray("Lobby Door", "Price: 50")
+
+[node name="HouseLight" parent="AlwaysVisible" unique_id=1959366911 instance=ExtResource("3_kpkiv")]
+
+[node name="HouseLight2" parent="AlwaysVisible" unique_id=549281503 instance=ExtResource("3_kpkiv")]
+position = Vector2(-784, 0)
+
+[node name="HouseLight3" parent="AlwaysVisible" unique_id=756844394 instance=ExtResource("3_kpkiv")]
+position = Vector2(-384, -240)
+
+[node name="HouseLight4" parent="AlwaysVisible" unique_id=1290169297 instance=ExtResource("3_kpkiv")]
+position = Vector2(-384, -368)
+
+[node name="HouseLight5" parent="AlwaysVisible" unique_id=1284873260 instance=ExtResource("3_kpkiv")]
+position = Vector2(304, 112)
+
+[node name="HouseLight6" parent="AlwaysVisible" unique_id=1636631874 instance=ExtResource("3_kpkiv")]
+position = Vector2(528, 112)
+
+[node name="HouseLight7" parent="AlwaysVisible" unique_id=1082798321 instance=ExtResource("3_kpkiv")]
+position = Vector2(528, -112)
+
+[node name="HouseLight8" parent="AlwaysVisible" unique_id=992819365 instance=ExtResource("3_kpkiv")]
+position = Vector2(304, -112)
+
+[node name="HouseLight9" parent="AlwaysVisible" unique_id=931543746 instance=ExtResource("3_kpkiv")]
+position = Vector2(416, 272)
+
+[node name="HouseLight10" parent="AlwaysVisible" unique_id=1002024886 instance=ExtResource("3_kpkiv")]
+position = Vector2(416, -272)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="AlwaysVisible" unique_id=1259713768]
+color = Color(0, 0, 0, 1)
+energy = 0.5
+blend_mode = 2
+
+[node name="PlayerBody" parent="." unique_id=1866261614 instance=ExtResource("2_o2t6e")]
+
+[node name="HumanoidMotionAudio" parent="PlayerBody" index="6" unique_id=107082883 node_paths=PackedStringArray("_tileMap")]
+_tileMap = NodePath("../../AlwaysVisible/NavigationRegion2D/TileMapLayer")
+
+[node name="ScoreLabel" type="Label" parent="PlayerBody/PlayerViewportUILayer" parent_id_path=PackedInt32Array(1866261614, 1749849002) index="3" unique_id=1378712799]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("3_lyw5i")
+_prefix = "Score: "
+metadata/_custom_type_script = "uid://6cydex2h6gdd"
+
+[node name="OnlyFOV" type="Node2D" parent="." unique_id=1496298555]
+
+[node name="ItemPurchaseBody" parent="OnlyFOV" unique_id=1630922756 instance=ExtResource("2_luw6c")]
+position = Vector2(-48, 48)
+_popupText = PackedStringArray("Pistol Ammo", "Cost: 7")
+
+[node name="ItemPurchaseSprite" parent="OnlyFOV/ItemPurchaseBody" index="1" unique_id=158641875]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_rf50j")
+
+[node name="PointsCharger" parent="OnlyFOV/ItemPurchaseBody" index="2" unique_id=1200418131 node_paths=PackedStringArray("_pointsCounter")]
+_chargeAmount = 7
+_pointsCounter = NodePath("../../../PointsCounter")
+
+[node name="ItemAdder" parent="OnlyFOV/ItemPurchaseBody" index="3" unique_id=1614313111 node_paths=PackedStringArray("_defaultTarget")]
+_defaultTarget = NodePath("../../../PlayerBody/PlayerInventory")
+_toAdd = Array[Object]([SubResource("Resource_lyw5i")])
+
+[node name="ItemPurchaseBody6" parent="OnlyFOV" unique_id=679718427 instance=ExtResource("2_luw6c")]
+position = Vector2(48, 48)
+_popupText = PackedStringArray("Bandage", "Cost: 20")
+
+[node name="ItemPurchaseSprite" parent="OnlyFOV/ItemPurchaseBody6" index="1" unique_id=158641875]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_eb6qe")
+
+[node name="PointsCharger" parent="OnlyFOV/ItemPurchaseBody6" index="2" unique_id=1200418131 node_paths=PackedStringArray("_pointsCounter")]
+_chargeAmount = 20
+_pointsCounter = NodePath("../../../PointsCounter")
+
+[node name="ItemAdder" parent="OnlyFOV/ItemPurchaseBody6" index="3" unique_id=1614313111 node_paths=PackedStringArray("_defaultTarget")]
+_defaultTarget = NodePath("../../../PlayerBody/PlayerInventory")
+_toAdd = Array[Object]([SubResource("Resource_eb6qe")])
+
+[node name="ItemPurchaseBody2" parent="OnlyFOV" unique_id=741309499 instance=ExtResource("2_luw6c")]
+position = Vector2(336, 0)
+_popupText = PackedStringArray("Shotgun", "Price: 50")
+
+[node name="ItemPurchaseSprite" parent="OnlyFOV/ItemPurchaseBody2" index="1" unique_id=158641875]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_iymqt")
+
+[node name="PointsCharger" parent="OnlyFOV/ItemPurchaseBody2" index="2" unique_id=1200418131 node_paths=PackedStringArray("_pointsCounter")]
+_chargeAmount = 50
+_pointsCounter = NodePath("../../../PointsCounter")
+
+[node name="ItemAdder" parent="OnlyFOV/ItemPurchaseBody2" index="3" unique_id=1614313111 node_paths=PackedStringArray("_defaultTarget")]
+_defaultTarget = NodePath("../../../PlayerBody/PlayerInventory")
+_toAdd = Array[Object]([SubResource("Resource_7auid")])
+
+[node name="ItemPurchaseBody3" parent="OnlyFOV" unique_id=1487090367 instance=ExtResource("2_luw6c")]
+position = Vector2(624, 0)
+_popupText = PackedStringArray("Shotgun Ammo", "Price: 15")
+
+[node name="ItemPurchaseSprite" parent="OnlyFOV/ItemPurchaseBody3" index="1" unique_id=158641875]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_u63hq")
+
+[node name="PointsCharger" parent="OnlyFOV/ItemPurchaseBody3" index="2" unique_id=1200418131 node_paths=PackedStringArray("_pointsCounter")]
+_chargeAmount = 15
+_pointsCounter = NodePath("../../../PointsCounter")
+
+[node name="ItemAdder" parent="OnlyFOV/ItemPurchaseBody3" index="3" unique_id=1614313111 node_paths=PackedStringArray("_defaultTarget")]
+_defaultTarget = NodePath("../../../PlayerBody/PlayerInventory")
+_toAdd = Array[Object]([SubResource("Resource_7k4pf")])
+
+[node name="ItemPurchaseBody4" parent="OnlyFOV" unique_id=1832461579 instance=ExtResource("2_luw6c")]
+position = Vector2(-464, -368)
+_popupText = PackedStringArray("Assault Rifle", "Price: 100")
+
+[node name="ItemPurchaseSprite" parent="OnlyFOV/ItemPurchaseBody4" index="1" unique_id=158641875]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("13_xfyu0")
+
+[node name="PointsCharger" parent="OnlyFOV/ItemPurchaseBody4" index="2" unique_id=1200418131 node_paths=PackedStringArray("_pointsCounter")]
+_chargeAmount = 100
+_pointsCounter = NodePath("../../../PointsCounter")
+
+[node name="ItemAdder" parent="OnlyFOV/ItemPurchaseBody4" index="3" unique_id=1614313111 node_paths=PackedStringArray("_defaultTarget")]
+_defaultTarget = NodePath("../../../PlayerBody/PlayerInventory")
+_toAdd = Array[Object]([SubResource("Resource_7nbd8")])
+
+[node name="ItemPurchaseBody5" parent="OnlyFOV" unique_id=2102709509 instance=ExtResource("2_luw6c")]
+position = Vector2(-304, -368)
+_popupText = PackedStringArray("Rifle Ammo", "Price: 40")
+
+[node name="ItemPurchaseSprite" parent="OnlyFOV/ItemPurchaseBody5" index="1" unique_id=158641875]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("15_h0ioq")
+
+[node name="PointsCharger" parent="OnlyFOV/ItemPurchaseBody5" index="2" unique_id=1200418131 node_paths=PackedStringArray("_pointsCounter")]
+_chargeAmount = 40
+_pointsCounter = NodePath("../../../PointsCounter")
+
+[node name="ItemAdder" parent="OnlyFOV/ItemPurchaseBody5" index="3" unique_id=1614313111 node_paths=PackedStringArray("_defaultTarget")]
+_defaultTarget = NodePath("../../../PlayerBody/PlayerInventory")
+_toAdd = Array[Object]([SubResource("Resource_wq2gj")])
+
+[node name="ItemPurchaseBody7" parent="OnlyFOV" unique_id=1033286928 instance=ExtResource("2_luw6c")]
+position = Vector2(-816, 0)
+_popupText = PackedStringArray("Revolver", "Price: 100")
+
+[node name="ItemPurchaseSprite" parent="OnlyFOV/ItemPurchaseBody7" index="1" unique_id=158641875]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("19_wm7j1")
+
+[node name="PointsCharger" parent="OnlyFOV/ItemPurchaseBody7" index="2" unique_id=1200418131 node_paths=PackedStringArray("_pointsCounter")]
+_chargeAmount = 100
+_pointsCounter = NodePath("../../../PointsCounter")
+
+[node name="ItemAdder" parent="OnlyFOV/ItemPurchaseBody7" index="3" unique_id=1614313111 node_paths=PackedStringArray("_defaultTarget")]
+_defaultTarget = NodePath("../../../PlayerBody/PlayerInventory")
+_toAdd = Array[Object]([SubResource("Resource_7m2s5")])
+
+[node name="ItemPurchaseBody8" parent="OnlyFOV" unique_id=699921073 instance=ExtResource("2_luw6c")]
+position = Vector2(-896, 0)
+_popupText = PackedStringArray("Revolver Ammo", "Price: 60")
+
+[node name="ItemPurchaseSprite" parent="OnlyFOV/ItemPurchaseBody8" index="1" unique_id=158641875]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("21_kpkiv")
+
+[node name="PointsCharger" parent="OnlyFOV/ItemPurchaseBody8" index="2" unique_id=1200418131 node_paths=PackedStringArray("_pointsCounter")]
+_chargeAmount = 60
+_pointsCounter = NodePath("../../../PointsCounter")
+
+[node name="ItemAdder" parent="OnlyFOV/ItemPurchaseBody8" index="3" unique_id=1614313111 node_paths=PackedStringArray("_defaultTarget")]
+_defaultTarget = NodePath("../../../PlayerBody/PlayerInventory")
+_toAdd = Array[Object]([SubResource("Resource_kpkiv")])
+
+[node name="RoundManager" type="Node2D" parent="." unique_id=1343458234 node_paths=PackedStringArray("_spawnPointsParent", "_player")]
+script = ExtResource("2_dbvd1")
+_playerSafetyRadius = 128.0
+_rounds = Dictionary[int, Object]({
+1: SubResource("Resource_q3csc")
+})
+_spawnPath = ExtResource("3_50hab")
+_spawnPointsParent = NodePath("../ActiveSpawns")
+_spawnCheck = SubResource("Resource_wd575")
+_playerBlackboardName = &"target_node"
+_player = NodePath("../PlayerBody")
+
+[node name="RoundBreakTimer" type="Timer" parent="RoundManager" unique_id=140641248]
+wait_time = 10.0
+one_shot = true
+
+[node name="ActiveSpawns" type="Node2D" parent="." unique_id=2123436401]
+
+[node name="SpawnPoint1" type="Marker2D" parent="ActiveSpawns" unique_id=127552575]
+position = Vector2(-160, -160)
+
+[node name="SpawnPoint2" type="Marker2D" parent="ActiveSpawns" unique_id=75192511]
+position = Vector2(-160, 160)
+
+[node name="SpawnPoint3" type="Marker2D" parent="ActiveSpawns" unique_id=442215008]
+position = Vector2(160, 160)
+
+[node name="SpawnPoint4" type="Marker2D" parent="ActiveSpawns" unique_id=2073055105]
+position = Vector2(160, -160)
+
+[node name="CourtyardSpawns" type="Node2D" parent="." unique_id=1797799399]
+
+[node name="Marker2D" type="Marker2D" parent="CourtyardSpawns" unique_id=1248827803]
+position = Vector2(-416, 32)
+
+[node name="Marker2D2" type="Marker2D" parent="CourtyardSpawns" unique_id=1637305921]
+position = Vector2(-352, 32)
+
+[node name="Marker2D3" type="Marker2D" parent="CourtyardSpawns" unique_id=103885962]
+position = Vector2(-416, -32)
+
+[node name="Marker2D4" type="Marker2D" parent="CourtyardSpawns" unique_id=1882005016]
+position = Vector2(-352, -32)
+
+[node name="Marker2D5" type="Marker2D" parent="CourtyardSpawns" unique_id=335128876]
+position = Vector2(-464, -240)
+
+[node name="Marker2D6" type="Marker2D" parent="CourtyardSpawns" unique_id=986039340]
+position = Vector2(-304, -240)
+
+[node name="LobbySpawns" type="Node2D" parent="." unique_id=317548198]
+
+[node name="Marker2D" type="Marker2D" parent="LobbySpawns" unique_id=1892626570]
+position = Vector2(304, -112)
+
+[node name="Marker2D2" type="Marker2D" parent="LobbySpawns" unique_id=884798010]
+position = Vector2(528, -112)
+
+[node name="Marker2D3" type="Marker2D" parent="LobbySpawns" unique_id=57983]
+position = Vector2(528, 112)
+
+[node name="Marker2D4" type="Marker2D" parent="LobbySpawns" unique_id=522438379]
+position = Vector2(304, 112)
+
+[node name="Marker2D5" type="Marker2D" parent="LobbySpawns" unique_id=2014979943]
+position = Vector2(416, 272)
+
+[node name="Marker2D6" type="Marker2D" parent="LobbySpawns" unique_id=1384714491]
+position = Vector2(416, -272)
+
+[node name="Marker2D7" type="Marker2D" parent="LobbySpawns" unique_id=634973031]
+position = Vector2(624, 272)
+
+[node name="Marker2D8" type="Marker2D" parent="LobbySpawns" unique_id=273244937]
+position = Vector2(624, -272)
+gizmo_extents = 32.0
+
+[node name="PointsCounter" type="Node" parent="." unique_id=872670056]
+script = ExtResource("9_wd575")
+_enemyPoints = Dictionary[PackedScene, int]({
+ExtResource("3_7eeeg"): 10
+})
+
+[node name="StartInventory" type="Node" parent="." unique_id=2077506925 node_paths=PackedStringArray("_defaultTarget")]
+script = ExtResource("9_luw6c")
+_defaultTarget = NodePath("../PlayerBody/PlayerInventory")
+_toAdd = Array[Object]([SubResource("Resource_3xxt4"), SubResource("Resource_nnyc0"), SubResource("Resource_wm7j1")])
+
+[node name="CourtyardSpawnsRelocator" type="Node" parent="." unique_id=642233729 node_paths=PackedStringArray("_oldParent", "_newParent")]
+script = ExtResource("18_4ew47")
+_oldParent = NodePath("../CourtyardSpawns")
+_newParent = NodePath("../ActiveSpawns")
+
+[node name="LobbySpawnRelocator" type="Node" parent="." unique_id=1330716689 node_paths=PackedStringArray("_oldParent", "_newParent")]
+script = ExtResource("18_4ew47")
+_oldParent = NodePath("../LobbySpawns")
+_newParent = NodePath("../ActiveSpawns")
+
+[node name="GlobalReferencesSource" type="Node" parent="." unique_id=724838618 node_paths=PackedStringArray("_tileMap")]
+script = ExtResource("28_h0ioq")
+_tileMap = NodePath("../AlwaysVisible/NavigationRegion2D/TileMapLayer")
+_globalReferences = ExtResource("29_x6rbm")
+metadata/_custom_type_script = "uid://msstpoqw8al8"
+
+[connection signal="ChargeSucceeded" from="AlwaysVisible/PointsLockedDoor/PointsCharger" to="CourtyardSpawnsRelocator" method="RelocateChildren"]
+[connection signal="InteractionStarted" from="AlwaysVisible/PointsLockedDoor/PickableBody" to="CourtyardSpawnsRelocator" method="RelocateChildren" unbinds=1]
+[connection signal="ChargeSucceeded" from="AlwaysVisible/PointsLockedDoor3/PointsCharger" to="CourtyardSpawnsRelocator" method="RelocateChildren"]
+[connection signal="InteractionStarted" from="AlwaysVisible/PointsLockedDoor2/PickableBody" to="LobbySpawnRelocator" method="RelocateChildren" unbinds=1]
+[connection signal="EnemyDied" from="RoundManager" to="PointsCounter" method="AddPointsForEnemy"]
+[connection signal="RoundEnded" from="RoundManager" to="RoundManager/RoundBreakTimer" method="start" binds= [0.0]]
+[connection signal="ready" from="RoundManager" to="RoundManager/RoundBreakTimer" method="start" binds= [0.0]]
+[connection signal="timeout" from="RoundManager/RoundBreakTimer" to="RoundManager" method="NextRound"]
+[connection signal="PointsChanged" from="PointsCounter" to="PlayerBody/PlayerViewportUILayer/ScoreLabel" method="SetTextWithPrefixAndInt"]
+[connection signal="ready" from="StartInventory" to="StartInventory" method="AddToDefault"]
+
+[editable path="AlwaysVisible/PointsLockedDoor"]
+[editable path="AlwaysVisible/PointsLockedDoor/DoorHingeJoint"]
+[editable path="AlwaysVisible/PointsLockedDoor/DoorHingeJoint2"]
+[editable path="AlwaysVisible/PointsLockedDoor3"]
+[editable path="AlwaysVisible/PointsLockedDoor3/DoorHingeJoint"]
+[editable path="AlwaysVisible/PointsLockedDoor3/DoorHingeJoint2"]
+[editable path="AlwaysVisible/PointsLockedDoor2"]
+[editable path="AlwaysVisible/PointsLockedDoor2/DoorHingeJoint"]
+[editable path="AlwaysVisible/PointsLockedDoor2/DoorHingeJoint2"]
+[editable path="PlayerBody"]
+[editable path="PlayerBody/PlayerViewportUILayer"]
+[editable path="PlayerBody/PlayerViewportUILayer/InGameDisplay/ListPopup"]
+[editable path="OnlyFOV/ItemPurchaseBody"]
+[editable path="OnlyFOV/ItemPurchaseBody6"]
+[editable path="OnlyFOV/ItemPurchaseBody2"]
+[editable path="OnlyFOV/ItemPurchaseBody3"]
+[editable path="OnlyFOV/ItemPurchaseBody4"]
+[editable path="OnlyFOV/ItemPurchaseBody5"]
+[editable path="OnlyFOV/ItemPurchaseBody7"]
+[editable path="OnlyFOV/ItemPurchaseBody8"]

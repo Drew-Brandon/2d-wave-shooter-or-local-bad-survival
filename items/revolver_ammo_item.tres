@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StackableItemType" format=3 uid="uid://cs3n7l4n0i0xo"]
+
+[ext_resource type="PackedScene" uid="uid://bq6e11iujfk13" path="res://scenes/prefabs/dropped_item_instances/dropped_item_body.tscn" id="1_c5vn4"]
+[ext_resource type="Script" uid="uid://xnyqa1m05toa" path="res://scripts/inventory/item_types/StackableItemType.cs" id="1_o1m5u"]
+[ext_resource type="Texture2D" uid="uid://sftgfsp5wqv7" path="res://textures/inventory/items/revolver_ammo_small.png" id="2_c5vn4"]
+
+[resource]
+script = ExtResource("1_o1m5u")
+_maxAmount = 20
+_displayName = &"Revolver Ammo"
+_icon = ExtResource("2_c5vn4")
+_dropScene = ExtResource("1_c5vn4")
+metadata/_custom_type_script = "uid://xnyqa1m05toa"

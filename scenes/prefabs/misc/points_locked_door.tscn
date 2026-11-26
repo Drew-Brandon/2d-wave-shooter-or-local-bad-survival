@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://b2sjv5m8pphwo"]
+
+[ext_resource type="PackedScene" uid="uid://mg20hgy2aiet" path="res://scenes/prefabs/props/door_hinge_joint.tscn" id="1_ae8ep"]
+[ext_resource type="Script" uid="uid://dqjnhxjvxer6u" path="res://scripts/survival_gamemode/points_system/PointsCharger.cs" id="2_slxvj"]
+[ext_resource type="Script" uid="uid://b7640ps67o7nv" path="res://scripts/interactables/InteractableButton.cs" id="3_slxvj"]
+[ext_resource type="Script" uid="uid://blhr4idq26v1e" path="res://scripts/cast_info_2d/RayCastInfo2D.cs" id="4_a0u44"]
+
+[sub_resource type="Resource" id="Resource_l376p"]
+script = ExtResource("4_a0u44")
+_collisionMask = 15
+metadata/_custom_type_script = "uid://blhr4idq26v1e"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0u44"]
+size = Vector2(64, 8)
+
+[node name="PointsLockedDoor" type="Node2D" unique_id=1811567120]
+
+[node name="DoorHingeJoint" parent="." unique_id=1093531598 instance=ExtResource("1_ae8ep")]
+position = Vector2(-32, 0)
+
+[node name="DoorBody" parent="DoorHingeJoint" index="1" unique_id=1895619761]
+freeze = true
+
+[node name="DoorHingeJoint2" parent="." unique_id=55314402 instance=ExtResource("1_ae8ep")]
+position = Vector2(32, 0)
+rotation = -3.1415927
+
+[node name="DoorBody" parent="DoorHingeJoint2" index="1" unique_id=1895619761]
+freeze = true
+
+[node name="PointsCharger" type="Node" parent="." unique_id=996667187]
+script = ExtResource("2_slxvj")
+
+[node name="PickableBody" type="StaticBody2D" parent="." unique_id=577001768]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("3_slxvj")
+_lineOfSightCast = SubResource("Resource_l376p")
+
+[node name="PickableCollision" type="CollisionShape2D" parent="PickableBody" unique_id=1554038759]
+shape = SubResource("RectangleShape2D_a0u44")
+
+[connection signal="ChargeSucceeded" from="PointsCharger" to="PickableBody" method="queue_free"]
+[connection signal="ChargeSucceeded" from="PointsCharger" to="DoorHingeJoint/DoorBody" method="set_freeze_enabled" binds= [false]]
+[connection signal="ChargeSucceeded" from="PointsCharger" to="DoorHingeJoint2/DoorBody" method="set_freeze_enabled" binds= [false]]
+[connection signal="InteractionStarted" from="PickableBody" to="PointsCharger" method="ChargePoints" unbinds=1]
+
+[editable path="DoorHingeJoint"]
+[editable path="DoorHingeJoint2"]
